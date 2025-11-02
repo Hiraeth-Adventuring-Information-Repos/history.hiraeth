@@ -1,0 +1,93 @@
+[
+  {
+    "id": 107,
+    "theme": "tablet",
+    "title": "The Great Flood",
+    "date": "The Great Cleansing",
+    "position": { "top": "15%", "left": "50%" },
+    "description": "A great flood is sent to cleanse the world. An elf named Utnapishtim is instructed to build an ark to save two of every animal. Goliaths and some giants survive in the mountains, while dragons remain unaffected.",
+    "rumors": [
+      "Utnapishtim is the *same* elf who guards Minos's prison. The gods reward their loyal servants.",
+      "It wasn't a 'flood.' The giants *stole* the oceans when they left, and the gods just... made new ones.",
+      "The 'ark' was a pocket dimension. The animals are *still* in there, and Utnapishtim just pulls out copies."
+    ]
+  },
+  {
+    "id": 106,
+    "theme": "tablet",
+    "title": "The Giants' Departure",
+    "date": "The Exodus",
+    "position": { "top": "25%", "left": "20%" },
+    "description": "Fearing a coming cataclysm (or perhaps a war with the gods), the giants used their mastery of magic and crystal to build great ships. They fled the Prime Material Plane, vanishing into the stars. Only the Goliaths and a few scattered clans remained.",
+    "rumors": [
+      "They didn't flee. They were *banished*.",
+      "The giants are still out there. 'The Stars Fall' was just the first of their ships returning.",
+      "They went to the *moon*. The whole moon is one giant city. Ask any elf."
+    ]
+  },
+  {
+    "id": 105,
+    "theme": "tablet",
+    "title": "Creation of Dwarves",
+    "date": "The Counterweight",
+    "position": { "top": "35%", "left": "80%" },
+    "description": "Seeing the giants' unchecked power, the god Evelesco forged the Dwarves from mountain stone and iron. They were created to be a counterweight, a stubborn, unyielding force to impede the giants' total dominance.",
+    "rumors": [
+      "Evelesco didn't create the dwarves. He just found them, hiding in the mountains, and gave them a purpose.",
+      "The 'god' Evelesco was actually a renegade giant, who created the dwarves out of pity for the 'little folk'.",
+      "Dwarves and giants are kin. Their 'war' was a lie told by the gods to keep them divided."
+    ]
+  },
+  {
+    "id": 104,
+    "theme": "tablet",
+    "title": "Giants and Magic",
+    "date": "The World Awakens",
+    "position": { "top": "50%", "left": "35%" },
+    "description": "The Giants, who emerged from the earth itself, were the first to discover the latent magic of the world. They became masters of earth, stone, and the primordial energies of creation.",
+    "rumors": [
+      "The giants didn't 'discover' magic. They *stole* it from the dragons.",
+      "The magic giants used was raw and dangerous. It's what poisoned the world and led to the creation of monsters.",
+      "The giants aren't from the earth. They are the descendants of the 'first world's' only survivors."
+    ]
+  },
+  {
+    "id": 103,
+    "theme": "tablet",
+    "title": "Creation of Dragons",
+    "date": "The First Beings",
+    "position": { "top": "65%", "left": "65%" },
+    "description": "The gods forged the Dragons as the world's first, perfect creations. Beings of immense power, tied to the fabric of the Prime Material Plane, they were to be the original stewards of the world.",
+    "rumors": [
+      "The dragons were a mistake. They were *too* perfect, and the gods became jealous.",
+      "Dragons were not the first. There was... something else... before them. Something the dragons were made to *fight*.",
+      "A dragon's heart is a piece of the world's core. When a dragon dies, the world dies a little, too."
+    ]
+  },
+  {
+    "id": 102,
+    "theme": "tablet",
+    "title": "Introduction of Free Will",
+    "date": "The First Choice",
+    "position": { "top": "80%", "left": "15%" },
+    "description": "To the mortals of the new world, a gift was given: Free Will. The power to choose, to defy fate, and to build a destiny independent of the gods. This agency is the source of all mortal strength, and all mortal folly.",
+    "rumors": [
+      "It wasn't a 'gift.' It was a 'curse.' It's what allows the Hells to exist.",
+      "Free Will is a lie. The gods just use it to blame us for their own mistakes.",
+      "Dragons don't have Free Will. They have *Duty*. That's why they're purer than we are."
+    ]
+  },
+  {
+    "id": 101,
+    "theme": "tablet",
+    "title": "Creation of the Universe",
+    "date": "The Dawn",
+    "position": { "top": "90%", "left": "50%" },
+    "description": "In the beginning, there was chaos. Then, a will. The universe was formed from this will, a first world created and then destroyed in a primordial instant. Our world is the echo of that first, failed creation.",
+    "rumors": [
+      "Fragments of that 'first world' still exist... like tumors on reality.",
+      "The gods didn't create the universe. They just found it, and claimed it.",
+      "The 'destruction' was no accident. The first world was 'wrong'."
+    ]
+  }
+]

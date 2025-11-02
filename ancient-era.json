@@ -1,0 +1,106 @@
+[
+  {
+    "id": 201,
+    "theme": "tablet",
+    "title": "Jailing of Minos",
+    "date": "c. -6,500 BEC",
+    "position": { "top": "15%", "left": "20%" },
+    "description": "The demigod Minos is tricked by an Ancient Evil and imprisoned. The gods grant the elf Utnapishtim eternal life to guard the Ancient Evil's prison.",
+    "rumors": [
+      "Utnapishtim isn't 'guarding' the prison. He's the *key* to it. If he dies, the Evil gets out.",
+      "Minos wasn't 'tricked.' He *serves* the Ancient Evil. The 'prison' is his fortress.",
+      "The 'Ancient Evil' is just a dragon the gods couldn't kill."
+    ]
+  },
+  {
+    "id": 202,
+    "theme": "tablet",
+    "title": "Dragons Rule as Gods",
+    "date": "c. -6,000 BEC",
+    "position": { "top": "25%", "left": "50%" },
+    "description": "In the absence of true gods, dragons rule over the mortal races as divine beings. This angers the gods, but they cannot intervene directly.",
+    "rumors": [
+      "The dragons were *better* gods. At least they were *here*.",
+      "The 'gods' were just *other* dragons. The 'War of the Gods' was just a big dragon civil war.",
+      "The hobbits *still* worship a dragon god. They just don't tell anyone."
+    ]
+  },
+  {
+    "id": 203,
+    "theme": "tablet",
+    "title": "Creation of Humanoids",
+    "date": "c. -6,000 BEC",
+    "position": { "top": "30%", "left": "80%" },
+    "description": "Humans, dragonborn, and kobolds are created, expanding the mortal races and creating new pawns for the dragons and gods.",
+    "rumors": [
+      "Kobolds are just... malformed dragonborn. A 'practice run' that the dragons discarded.",
+      "Humans weren't 'created.' They just... *happened*. A cosmic accident. That's why they're so chaotic.",
+      "Dragonborn were made by dragons, for dragons. They are the 'perfect' race."
+    ]
+  },
+  {
+    "id": 204,
+    "theme": "tablet",
+    "title": "Death of Arcana",
+    "date": "Oct 31st, -7,000 BEC",
+    "position": { "top": "45%", "left": "10%" },
+    "description": "The goddess of magic, Arcana, is killed by a powerful dragon named Maekrix. This event sends magic into chaos and bars most dragons from the Prime Material Plane.",
+    "rumors": [
+      "Arcana isn't dead. She just *shattered*. Her 'shards' are the source of all wild magic surges.",
+      "Maekrix didn't kill Arcana. He *ate* her. He's now the god of magic, in secret.",
+      "October 31st is a holy day for dragon-haters. And a very, very bad day for dragons."
+    ]
+  },
+  {
+    "id": 205,
+    "theme": "tablet",
+    "title": "First Witches' Council",
+    "date": "c. -7,000 BEC",
+    "position": { "top": "50%", "left": "30%" },
+    "description": "After Arcana's death, the powerful magic-users Eve and Lilith form the first Witches' Council of Delphi to try and stabilize the world's unraveling magic.",
+    "rumors": [
+      "Eve and Lilith are the same person. They just argue with themselves a lot.",
+      "The Witches' Council *caused* the 'Death of Arcana.' They wanted to control magic for themselves.",
+      "'Delphi' isn't a place. It's a state of mind. You can only go there in your dreams."
+    ]
+  },
+  {
+    "id": 206,
+    "theme": "tablet",
+    "title": "Winrich's Empire",
+    "date": "-6,800 to -6,450 BEC",
+    "position": { "top": "60%", "left": "60%" },
+    "description": "The powerful necromancer Winrich starts his empire in Icebeach. He is eventually defeated by 'SOMething Rex' and encased in a massive glacier. The goddess Morena becomes its steward.",
+    "rumors": [
+      "Winrich is still alive in that glacier. And *awake*. Morena is his jailor.",
+      "'SOMETHING Rex' was a T-Rex. A really, *really* big one.",
+      "The 'Frozen Rose' didn't just defeat Morena. They *freed* Winrich. They just don't know it yet."
+    ]
+  },
+  {
+    "id": 207,
+    "theme": "tablet",
+    "title": "Lyarna-Khesyara's Journey",
+    "date": "-6,650 to -6,250 BEC",
+    "position": { "top": "75%", "left": "40%" },
+    "description": "Lyarna-Khesyara becomes the first Pharaoh in Astrousia, inspiring dragons to flee there and set themselves up as gods.",
+    "rumors": [
+      "Lyarna-Khesyara *was* a dragon. In human form. She set up the whole 'God King' thing herself.",
+      "Her empire was built on a giant, floating pyramid. It's still up there, above the clouds.",
+      "She didn't die. She just... flew into the sun."
+    ]
+  },
+  {
+    "id": 208,
+    "theme": "tablet",
+    "title": "Tharnak the Great Dwarf",
+    "date": "c. -6,000 BEC",
+    "position": { "top": "80%", "left": "75%" },
+    "description": "Tharnak unifies the dwarf nations to fight a great evil from the Underdark. He is 'reforged' by the god Matrix.",
+    "rumors": [
+      "He wasn't 'reforged.' He's a *robot*. The god Matrix is an AI from the Giants.",
+      "The 'evil force' was just the first dwarves who got corrupted by the Underdark.",
+      "Tharnak is buried under the capital, and his hammer is waiting for a new king to claim it."
+    ]
+  }
+]
