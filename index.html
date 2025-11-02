@@ -14,6 +14,9 @@
 
     <style>
         /* --- Custom Styles --- */
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             /* EB Garamond is our primary font */
             font-family: 'EB Garamond', serif;
@@ -357,6 +360,22 @@
 </head>
 <body class="antialiased">
 
+    <!-- Sidebar Navigation -->
+    <button id="sidebar-toggle" class="fixed top-4 left-4 z-50 bg-gray-800 bg-opacity-50 text-white p-2 rounded-md hover:bg-opacity-75 transition-opacity">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+    </button>
+
+    <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-900 bg-opacity-90 backdrop-blur-sm text-white z-40 transform -translate-x-full transition-transform duration-300 ease-in-out">
+        <nav class="mt-16">
+            <a href="#modern-era" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Modern Era</a>
+            <a href="#unification-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Unification Age</a>
+            <a href="#mythic-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Mythic Age</a>
+            <a href="#classical-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Classical Age</a>
+            <a href="#ancient-era" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Ancient Era</a>
+            <a href="#antediluvian-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Antediluvian Age</a>
+        </nav>
+    </aside>
+
     <!-- Main Content Area -->
     <main>
         <!-- Page Header -->
@@ -371,10 +390,16 @@
         THEME: Bright Acropolis / Marble
         ========================================
         -->
-        <section id="modern-era" class="timeline-layer">
+        <section id="modern-era" class="timeline-layer" style="scroll-margin-top: -1px;">
             <div class="container mx-auto max-w-7xl">
                 <h2 class="text-5xl font-bold mb-4 text-center">The Modern Era</h2>
                 <p class="text-xl text-center text-gray-600 mb-12 italic">"History as written by the victors. Clear, precise, and absolute."</p>
+                <div class="text-center mb-12">
+                    <button class="preamble-toggle text-gray-500 hover:text-gray-800 transition-colors">More about this era...</button>
+                    <div class="preamble-content hidden mt-4 text-left max-w-3xl mx-auto">
+                        <p>This is a placeholder for the preamble of the Modern Era. It will contain more information about this period of history.</p>
+                    </div>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Dynamically Loaded -->
                 </div>
@@ -391,6 +416,12 @@
             <div class="container mx-auto max-w-7xl">
                 <h2 class="text-5xl font-bold mb-4 text-center">The Unification Age</h2>
                 <p class="text-xl text-center text-gray-300 mb-12 italic">"The age of treaties and mortals. When civilization began to write its own laws."</p>
+                <div class="text-center mb-12">
+                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors">More about this era...</button>
+                    <div class="preamble-content hidden mt-4 text-left max-w-3xl mx-auto">
+                        <p>This is a placeholder for the preamble of the Unification Age. It will contain more information about this period of history.</p>
+                    </div>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Dynamically Loaded -->
                 </div>
@@ -407,6 +438,12 @@
             <div class="container mx-auto max-w-7xl">
                 <h2 class="text-5xl font-bold mb-4 text-center">The Mythic Age</h2>
                 <p class="text-xl text-center text-gray-300 mb-12 italic">"The age of legends, prophecy, and magical cataclysms."</p>
+                <div class="text-center mb-12">
+                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors">More about this era...</button>
+                    <div class="preamble-content hidden mt-4 text-left max-w-3xl mx-auto">
+                        <p>This is a placeholder for the preamble of the Mythic Age. It will contain more information about this period of history.</p>
+                    </div>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Dynamically Loaded -->
                 </div>
@@ -423,6 +460,12 @@
             <div class="container mx-auto max-w-7xl">
                 <h2 class="text-5xl font-bold mb-4 text-center">The Classical Age</h2>
                 <p class="text-xl text-center text-gray-300 mb-12 italic">"The age of emerging empires, written magic, and wars in the dark."</p>
+                <div class="text-center mb-12">
+                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors">More about this era...</button>
+                    <div class="preamble-content hidden mt-4 text-left max-w-3xl mx-auto">
+                        <p>This is a placeholder for the preamble of the Classical Age. It will contain more information about this period of history.</p>
+                    </div>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Dynamically Loaded -->
                 </div>
@@ -439,6 +482,12 @@
             <div class="container mx-auto max-w-7xl">
                 <h2 class="text-5xl font-bold mb-4 text-center">The Ancient Era</h2>
                 <p class="text-xl text-center text-gray-300 mb-12 italic">"The age of myths. History told by the stars, not by mortals."</p>
+                <div class="text-center mb-12">
+                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors">More about this era...</button>
+                    <div class="preamble-content hidden mt-4 text-left max-w-3xl mx-auto">
+                        <p>This is a placeholder for the preamble of the Ancient Era. It will contain more information about this period of history.</p>
+                    </div>
+                </div>
                 <div class="star-chart-container">
                     <!-- Background "filler" stars -->
                     <div class="star" style="top: 10%; left: 10%; width: 2px; height: 2px; animation-delay: -1s;"></div>
@@ -460,7 +509,12 @@
             <div class="container mx-auto max-w-7xl">
                 <h2 class="text-5xl font-bold mb-4 text-center">The Antediluvian Age</h2>
                 <p class="text-xl text-center text-gray-300 mb-12 italic">"Myths whispered from the dawn of time. More feeling than fact."</p>
-
+                <div class="text-center mb-12">
+                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors">More about this era...</button>
+                    <div class="preamble-content hidden mt-4 text-left max-w-3xl mx-auto">
+                        <p>This is a placeholder for the preamble of the Antediluvian Age. It will contain more information about this period of history.</p>
+                    </div>
+                </div>
                 <div class="star-chart-container">
                     <!-- Background "filler" stars -->
                     <div class="star" style="top: 10%; left: 30%; width: 2px; height: 2px; animation-delay: -1.5s;"></div>
@@ -658,7 +712,32 @@
         }
 
         // --- INITIALIZATION ---
-        document.addEventListener('DOMContentLoaded', initializeTimeline);
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeTimeline();
+
+            // --- PREAMBLE TOGGLE SCRIPT ---
+            document.querySelectorAll('.preamble-toggle').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    content.classList.toggle('hidden');
+                });
+            });
+
+            // --- SIDEBAR SCRIPT ---
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebar-toggle');
+
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('-translate-x-full');
+            });
+
+            // Close sidebar when a link is clicked
+            sidebar.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    sidebar.classList.add('-translate-x-full');
+                });
+            });
+        });
     </script>
 
 </body>
