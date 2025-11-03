@@ -1,664 +1,403 @@
 [
-    {
-        "id": "the_great_flood",
-        "order_id": "00046",
-        "theme": "tablet",
-        "title": "The World's Rebuke",
-        "date": "End of the Ante-Diluvian Era",
-        "position": {
-            "top": "11%",
-            "left": "60%"
-        },
-        "short_description": "The gods, angered by the corruption of war, unleashed a great flood to reset the world, and then made a covenant to never do so again by water.",
-        "description": "Angered that their creation had been so thoroughly corrupted by war, the gods decided on a reset. They unleashed a Great Flood, a cataclysmic event that washed away the armies, the cities, and the old hatreds. After the waters receded, the gods were shaken by the devastation. `Logos` forced them into a divine pact. As the first sun (`Bethtox`) shone through the last storm (`Thala`), a rainbow appeared. Logos *named* it \"The Covenant,\" binding the gods to an oath: \"Never again by water.\"",
-        "tags": [
-            "cataclysm",
-            "divine",
-            "covenant"
-        ],
-        "rumors": [
-            "The flood wasn't caused by the gods, but was a natural side effect of the Giants leaving, which shifted the planet's balance.",
-            "One Elf, Utnopishtim, built a great ship and saved many, earning him a blessing of unnaturally long life from the gods.",
-            "The Covenant has a secret addendum: \"Never again by water... but by fire, next time.\" This is the \"End of Days\" contingency.",
-            "The Covenant is the only thing protecting the mortal races, and a few gods (like Eris and Evelesco) are actively trying to find a loophole."
-        ]
-    },
-    {
-        "id": "contest_of_seasons",
-        "order_id": "00012",
-        "theme": "tablet",
-        "title": "The Eternal Struggle",
-        "date": "Creation Age",
-        "position": {
-            "top": "59%",
-            "left": "80%"
-        },
-        "short_description": "A cosmic battle between the gods of winter and the sun was forced into a truce, creating the cycle of seasons.",
-        "description": "The world was in a state of perpetual spring until `Morena`, Goddess of Winter, claimed it, blanketing it in ice to test its strength. `Bethtox`, God of the Sun, challenged her for dominance, bringing his searing light to melt her creations. Their battle was so immense it threatened to tear the world apart. The other gods intervened, forcing a truce where neither could rule forever. Their \"battle\" became a cyclical contest, a turning of favor that mortals would come to know as the seasons.",
-        "tags": [
-            "divine",
-            "conflict",
-            "climate"
-        ],
-        "rumors": [
-            "The \"contest\" is not a battle, but a tragic love story; the seasons are Morena and Bethtox chasing each other across the sky, never able to be together.",
-            "Morena didn't just *bring* winter; she was grieving a loss, and her sorrow froze the world. Bethtox's arrival was an attempt to console her.",
-            "The seasons are unstable because the truce was brokered by a god who has since died, and it's slowly falling apart."
-        ]
-    },
-    {
-        "id": "creation_of_dragons",
-        "order_id": "00013",
-        "theme": "tablet",
-        "title": "The Two Progenitors",
-        "date": "Creation Age",
-        "position": {
-            "top": "56%",
-            "left": "40%"
-        },
-        "short_description": "The trickster god Voidos created two quasi-divine dragons, Bahamut and Tiamat, to embody his dual nature of order and chaos.",
-        "description": "Voidos, in his \"Trickster\" aspect, desired children that embodied his dual nature. His first two creations were quasi-divine: Bahamut, the Platinum, who embodied Voidos's orderly and creative \"Space\" aspect; and Tiamat, the Chromatic, who embodied his cruel and chaotic \"Trickster\" aspect. All other dragons (Metallic, Chromatic, and Gem) were created as their respective broods, naturally aligning with one of these two progenitors.",
-        "tags": [
-            "dragon",
-            "divine",
-            "creation"
-        ],
-        "rumors": [
-            "Tiamat and Bahamut are not \"children\" of Voidos, but two lesser gods he captured and bound to his will.",
-            "The Gem dragons are the *true* firstborn, and they serve as neutral observers in the coming war.",
-            "Bahamut and Tiamat were once one being, the \"Dragon God,\" which Voidos split in two for his own amusement."
-        ]
-    },
-    {
-        "id": "gift_of_voice",
-        "order_id": "00014",
-        "theme": "tablet",
-        "title": "The First Speech",
-        "date": "Creation Age",
-        "position": {
-            "top": "53%",
-            "left": "70%"
-        },
-        "short_description": "The god of knowledge granted the gift of speech to the dragons, making their language the most ancient and powerful.",
-        "description": "The newly-formed Dragons existed in silence, powerful but unable to communicate their thoughts. `Logos`, seeing this, granted them the ability to speak. Because they were the first mortal race to receive this gift, their language is considered the most ancient and powerful. It is said their very words can shape reality, a faint echo of Logos's own power.",
-        "tags": [
-            "dragon",
-            "divine",
-            "language"
-        ],
-        "rumors": [
-            "Dragons were not *given* language; they *stole* it from Logos, tearing the true names from his throat.",
-            "The Dragons' ability to speak is why they are so arrogant, as they believe they are the true children of the God of Knowledge."
-        ]
-    },
-    {
-        "id": "arrival_of_the_elves",
-        "order_id": "00015",
-        "theme": "tablet",
-        "title": "The Echoes of a Lost World",
-        "date": "Creation Age",
-        "position": {
-            "top": "50%",
-            "left": "25%"
-        },
-        "short_description": "The goddess of life, lonely for her lost children, created the first Elves in their image, with a deep connection to nature.",
-        "description": "Pythia, Goddess of Life, grew lonely. She missed the children of her previous world. In a quiet, sylvan glade, she shaped the first Elves in the image of her favorite, lost race. They were born into the world with a deep, calm connection to nature, embodying the grace and beauty of Pythia's fondest memories.",
-        "tags": [
-            "elven",
-            "divine",
-            "creation"
-        ],
-        "rumors": [
-            "The Elves are not \"new,\" but the actual souls of the lost race, reincarnated into new bodies.",
-            "Pythia's \"lost race\" was not destroyed; she stole them from her old world and brought them here, an act that is the true cause of the gods' exile."
-        ]
-    },
-    {
-        "id": "birth_of_loron",
-        "order_id": "00016",
-        "theme": "tablet",
-        "title": "The Tragic Union",
-        "date": "Creation Age (shortly after `arrival_of_the_elves`)",
-        "position": {
-            "top": "47%",
-            "left": "55%"
-        },
-        "short_description": "The tragic union of the gods of light and dark produced a daughter, the goddess of love and beauty, who was given the moon as her palace.",
-        "description": "The endless war between Light and Dark briefly cooled, and the two primal gods, `Bethtox` and `Simetra`, found a destructive, passionate love in their opposition. From this impossible union, `Loron` was born. The gods created the Moon as a neutral palace for their child, a place that was neither in the light nor in the dark. But the affair ended as violently as it began, and they became bitter enemies once more. `Loron`, goddess of love and beauty, was trapped in her palace, and her mother `Simetra` claimed the \"dark side of the moon\" as her domain, a mother scorned forever watching the daughter who, in her eyes, chose her father's light.",
-        "tags": [
-            "divine",
-            "creation",
-            "tragedy"
-        ],
-        "rumors": [
-            "Loron was not their child, but a \"peace treaty\" they created together, a being of both light and shadow, who they then fought over until she fled to the moon.",
-            "The Moon was not a *gift*; it was a *prison* created by Bethtox to keep Loron \"pure\" from her mother's influence.",
-            "Loron and Simetra are not mother-daughter, but sisters. The \"dark side\" is Simetra's, and the \"light side\" is Loron's, a realm given to her by her lover, Bethtox."
-        ]
-    },
-    {
-        "id": "the_first_dream",
-        "order_id": "00017",
-        "theme": "tablet",
-        "title": "The Dream Domain",
-        "date": "Creation Age (shortly after `arrival_of_the_elves`)",
-        "position": {
-            "top": "44%",
-            "left": "85%"
-        },
-        "short_description": "The wandering minds of the first sleeping mortals created the dream domain, which was claimed by various gods.",
-        "description": "Before mortals, the gods did not dream. When the first Elves slept, their minds, unbound by divine certainty, wandered. This new psychic energy did not create a new god, but it opened a new domain of influence. `Loron` (Love/Passion) claimed the realm of good dreams and dreams of love. `Simetra` (Secrets) claimed nightmares and dreams of the subconscious. `Logos` and Matrix found power in prophetic dreams, and `Eris` (Chaos) reveled in dreams of anxiety and confusion.",
-        "tags": [
-            "planar",
-            "divine",
-            "psychology"
-        ],
-        "rumors": [
-            "There is a \"God of Dreams\" who is not Loron or Simetra, but a hidden entity that all gods must bargain with to access the dreamscape.",
-            "Dreams are not \"influenced\" by gods; they are memories of the \"previous world\" bubbling up.",
-            "The `Ancient Evil`'s true prison is the collective mortal subconscious, and nightmares are its attempts to escape."
-        ]
-    },
-    {
-        "id": "forging_of_the_giants",
-        "order_id": "00018",
-        "theme": "tablet",
-        "title": "The Children of Destiny",
-        "date": "Creation Age",
-        "position": {
-            "top": "41%",
-            "left": "30%"
-        },
-        "short_description": "A new race of massive, thoughtful Giants appeared in the world, created by the god of forges and destiny to be the world's builders.",
-        "description": "A new race appeared in the world: the Giants. Massive and thoughtful, they were beings of stone and sky. Their origin is debated. Some say `Logos` created them as living repositories of knowledge. Others, more commonly, believe they were the first creation of `Matrix`, the God of Forges and Destiny, shaped to be the builders of the world.",
-        "tags": [
-            "giant",
-            "divine",
-            "creation"
-        ],
-        "rumors": [
-            "The Giants are the \"failed\" first draft of the Elves, discarded by Pythia and given life by Matrix.",
-            "The Giants were not created by any god; they were born when the mountains themselves woke up."
-        ]
-    },
-    {
-        "id": "birth_of_inspiration_and_memory",
-        "order_id": "00019",
-        "theme": "tablet",
-        "title": "The First Epic",
-        "date": "Creation Age (after `forging_of_the_giants`)",
-        "position": {
-            "top": "38%",
-            "left": "60%"
-        },
-        "short_description": "The Giants' study of the cosmos gave birth to the gods of inspiration and memory.",
-        "description": "The Giants were the first mortals to truly study the cosmos. As they gazed at `Etherea`'s stars, they felt a new, fleeting sensation\u2014a spark of \"what if?\". This is what mortals would later call *inspiration*, the first breath of the god `Eki`. To hold this new thought, that first Giant began the first oral tradition, a great epic poem of the stars, to pass to the next generation. The *act* of preserving that story against the flow of time (`Minos`'s domain) gave rise to `Zabyl`, the God of Memory.",
-        "tags": [
-            "giant",
-            "divine",
-            "creation"
-        ],
-        "rumors": [
-            "`Eki` and `Zabyl` are not \"gods,\" but divine concepts the Giants discovered and named, giving them power.",
-            "They are not new gods at all, but two of `Etherea`'s first angelic servants, who the Giants mistook for gods.",
-            "`Zabyl` (Memory) is the child of `Eki` (Inspiration) and `Minos` (Time)."
-        ]
-    },
-    {
-        "id": "first_murder",
-        "order_id": "00020",
-        "theme": "tablet",
-        "title": "The Blood Spawns the Stone",
-        "date": "Creation Age",
-        "position": {
-            "top": "35%",
-            "left": "20%"
-        },
-        "short_description": "The god of murder whispered dissent, leading to the world's first murder, and from the blood, a new race of Dwarves was forged.",
-        "description": "Peace among the Elves and Giants was shattered when `Evelesco`, the God of Murder, whispered dissent. An Elf and a Giant (or perhaps two Elves) met in violence, committing the world's first murder. As the blood soaked into the earth, Evalesco gathered it. He took the rage, the betrayal, and the stone and forged a new race: the Dwarves. He bound them to his\n  will, forcing them into the darkness of the Underdark as his personal servants, forever tied to the world's first sin.",
-        "tags": [
-            "dwarven",
-            "divine",
-            "creation"
-        ],
-        "rumors": [
-            "It wasn't an Elf or Giant; the first murder was a god killing another god, and the \"mortal\" story is a cover-up.",
-            "The Dwarves were not *created* by Evelesco, but were an existing race he captured and enslaved.",
-            "The victim's blood \"cried out from the ground,\" staining the very soul of the world. The Dwarves' creation was a *sickness* in the earth, a curse given form.",
-            "The victim of the first murder was not truly dead and walks the world as a nameless, vengeful spirit."
-        ]
-    },
-    {
-        "id": "forging_of_the_hells",
-        "order_id": "00021",
-        "theme": "tablet",
-        "title": "The Realm of Lawful Evil",
-        "date": "Creation Age (shortly after `first_murder`)",
-        "position": {
-            "top": "32%",
-            "left": "80%"
-        },
-        "short_description": "To contain the souls of the evil, a cabal of lawful gods forged the Hells as a plane of ordered punishment.",
-        "description": "The gods were horrified by the first murder, not just by the act, but by `Evelesco`'s chaotic claim over the soul. To prevent all evil from feeding chaos, a cabal of \"lawful\" gods\u2014`Worg` (Death), `Minos` (Time), and `Matrix` (Destiny)\u2014collaborated. They forged a new plane, the Hells, as a place of *ordered* punishment. It was a realm designed to process and contain souls defined by evil choices, creating a lawful counterpart to Evalesco's chaotic hunger.",
-        "tags": [
-            "planar",
-            "divine",
-            "law"
-        ],
-        "rumors": [
-            "The Hells were not \"new\"; they were a piece of the \"previous world\" that the gods salvaged as a prison.",
-            "`Lilith` (not yet a goddess) was the first mortal soul to enter the Hells, and she began her conquest immediately.",
-            "This act deeply angered Evalesco, who now sees Worg and Matrix as his true enemies."
-        ]
-    },
-    {
-        "id": "discovery_of_primal_magic",
-        "order_id": "00022",
-        "theme": "tablet",
-        "title": "The Runic Awakening",
-        "date": "Creation Age",
-        "position": {
-            "top": "29%",
-            "left": "50%"
-        },
-        "short_description": "Giants and Dragons became the first to master primal magic, a raw power drawn directly from the elements and the gods.",
-        "description": "Giants and Dragons become the first to learn and master primal magic, tapping into divine, druidic, and runic energies. This was not the arcane craft of the Weave (which did not yet exist), but a raw, primordial power drawn directly from the elements, the gods, and the world's lifeblood. The Dwarves also learned this magic, but their use of it was controlled and twisted by their master, `Evelesco`.",
-        "tags": [
-            "magic",
-            "giant",
-            "dragon"
-        ],
-        "rumors": [
-            "The Dragons learned magic first and taught the Giants, a fact the Giants vehemently deny.",
-            "Runic magic is so powerful because it's the *actual* language of the Giants, not just symbols.",
-            "The Dwarves' magic is more powerful than anyone knows, but they keep it hidden, waiting for the day to strike at Evalesco."
-        ]
-    },
-    {
-        "id": "giants_creation",
-        "order_id": "00023",
-        "theme": "tablet",
-        "title": "The Soulless Servants",
-        "date": "Creation Age",
-        "position": {
-            "top": "26%",
-            "left": "35%"
-        },
-        "short_description": "The Giants used their mastery of runic magic to create Golems as soulless servants.",
-        "description": "Through their mastery of runic magic, the Giants discovered the secret to creating a semblance of life. They forged Golems from stone and metal, animating them to act as servants, laborers, and pets. Whether these Golems possessed true souls or were merely puppets of their creators' will is a mystery lost to time.",
-        "tags": [
-            "giant",
-            "magic",
-            "creation"
-        ],
-        "rumors": [
-            "The Giants *did* discover the secret to creating souls, and the \"Golems\" were the first Goblins, who later rebelled and fled.",
-            "The magic to create Golems was a dark pact, and it is what drew the attention of the gods and led to the Giants' eventual departure."
-        ]
-    },
-    {
-        "id": "first_war",
-        "order_id": "00024",
-        "theme": "tablet",
-        "title": "The War of Strife",
-        "date": "Creation Age",
-        "position": {
-            "top": "23%",
-            "left": "65%"
-        },
-        "short_description": "The gods of murder and strife conspired to ignite the First War between the mortal races.",
-        "description": "Seeking to increase their own power by feeding on mortal conflict, the God of Murder, `Evelesco`, and the Goddess of Strife, `Eris`, conspired. They sowed discord among the Giants, Dwarves, and Elves, turning minor disputes into bitter hatred. This ignited the First War, a brutal conflict that engulfed the world and fed the dark gods with every drop of blood and betrayal.",
-        "tags": [
-            "conflict",
-            "divine",
-            "war"
-        ],
-        "rumors": [
-            "Eris and Evalesco did not start the war; they are simply the scapegoats for a war started by the \"good\" gods to cull the mortals' power.",
-            "The war was not between all three races, but was a secret war between the Elves and Dwarves, with the Giants acting as peacekeepers."
-        ]
-    },
-    {
-        "id": "first_sacrifice",
-        "order_id": "00025",
-        "theme": "tablet",
-        "title": "The Birth of Valor",
-        "date": "Creation Age (during the `first_war`)",
-        "position": {
-            "top": "20%",
-            "left": "25%"
-        },
-        "short_description": "The first selfless act of sacrifice in the midst of war gave birth to the goddess of heroism.",
-        "description": "The First War was defined by the selfish motives of `Evelesco` (Murder) and `Eris` (Strife). But in the midst of the chaos, a mortal (perhaps an Elf) willingly gave her life to save their comrades. This selfless act, the complete opposite of the war's driving forces, was so potent that it created a new divine spark. `Ianna` was born from this act, a new goddess for a new concept: heroism.",
-        "tags": [
-            "divine",
-            "creation",
-            "heroism"
-        ],
-        "rumors": [
-            "Ianna was not a *new* god, but a minor spirit of courage that was elevated to godhood by this first act of true valor.",
-            "The first \"hero\" was a Giant who died protecting an Elven village, an act that shamed both sides.",
-            "Evelesco and Eris despise Ianna, as her very existence is an antidote to their power."
-        ]
-    },
-    {
-        "id": "dwarven_rebellion",
-        "order_id": "00026",
-        "theme": "tablet",
-        "title": "The Dwarven Exodus",
-        "date": "Creation Age (after the `first_war`)",
-        "position": {
-            "top": "17%",
-            "left": "75%"
-        },
-        "short_description": "The god of the forge liberated the enslaved Dwarves, reforging their souls and leading them to freedom.",
-        "description": "After the First War, `Matrix`, God of the Forge, looked upon the enslaved Dwarves and saw a perversion of craft and creation. He descended into the Underdark, not as a creator, but as a liberator. He taught the Dwarves the divine art of the forge, arming them with purpose and steel. He \"reforged\" their very souls, cleansing the stain of their origin and giving them a new destiny. This led to a great rebellion, the Dwarven Exodus, where they fought their way to freedom, forever earning the hatred of `Evelesco` and the eternal devotion of the Dwarven people.",
-        "tags": [
-            "dwarven",
-            "divine",
-            "liberation"
-        ],
-        "rumors": [
-            "Matrix did not free all the Dwarves; many \"Duergar\" or \"dark dwarves\" chose to remain loyal to Evelesco, and a bitter civil war still rages in the deep.",
-            "The \"reforging\" was a literal act: Matrix built a great \"Soul Forge\" that burned away their corruption, but also their memories of the time before.",
-            "Matrix did not act alone, but was aided by a mortal hero whose name has been lost to history."
-        ]
-    },
-    {
-        "id": "giants_exodus",
-        "order_id": "00027",
-        "theme": "tablet",
-        "title": "The Departure of the Giants",
-        "date": "Creation Age",
-        "position": {
-            "top": "14%",
-            "left": "45%"
-        },
-        "short_description": "The Giants, foreseeing a cataclysmic flood, built great ships and left the world.",
-        "description": "The Giants, masters of runic divination, saw the future. They foresaw that the gods, disgusted with the First War *they* had started, planned to end it with a cataclysmic Great Flood. Seeing no way to win the war or survive the peace, the Giants retreated to their mountain strongholds and used their advanced runic technology to build great ships. They left the world, vanishing into the sky, leaving much of their magic and technology behind.",
-        "tags": [
-            "giant",
-            "exodus",
-            "prophecy"
-        ],
-        "rumors": [
-            "The Giants didn't *leave*; they were *banished* by the gods for refusing to stop the war.",
-            "The Giants are still here, sleeping deep within the mountains, and will one day awaken.",
-            "Their \"ships\" were not physical, but a powerful spell that transported their entire race to another dimension."
-        ]
-    },
-    {
-        "id": "the_feywild_reflection",
-        "order_id": "00003",
-        "theme": "tablet",
-        "title": "The Primal Reflection",
-        "date": "Proto-History (simultaneous with `forging_of_the_world`)",
-        "position": {
-            "top": "80%",
-            "left": "25%"
-        },
-        "short_description": "The raw, untamed emotion of creation bled a reflection of the material world, creating the vibrant and chaotic Feywild.",
-        "description": "The creation of the material world by Pythia was so overflowing with primal life and raw, untamed emotion that it \"bled\" a reflection of itself. The Prime Material became the world of matter, while this vibrant echo became a world of pure emotion and nature: the Feywild. This plane is the true home of Tanzo and Ludis, a place where their power as guardians of flora and fauna is absolute and undiluted.",
-        "tags": [
-            "planar",
-            "creation",
-            "feywild"
-        ],
-        "rumors": [
-            "The Feywild is not a reflection; it is the \"first draft\" of the world, and the material plane is the less-magical copy.",
-            "The Feywild is a sentient plane that *gave birth* to Tanzo and Ludis.",
-            "There are fey \"gods\" in the Feywild that are just as powerful as the main pantheon, but they simply do not care about the material plane."
-        ]
-    },
-    {
-        "id": "the_shadow_plane",
-        "order_id": "00004",
-        "theme": "tablet",
-        "title": "The Somber Echo",
-        "date": "Proto-History (simultaneous with `first_death`)",
-        "position": {
-            "top": "68%",
-            "left": "85%"
-        },
-        "short_description": "The first death cast a somber, muted reflection of the material plane, creating the Shadowfell, a realm of shadows and introspection.",
-        "description": "Just as vibrant life created the Feywild, the first death created its own echo. This first act of natural decay and the emergence of `Worg` cast a \"negative\" reflection of the material plane. This new plane was a somber, muted world of shadows and introspection, which `Simetra`, Goddess of Darkness and Secrets, quickly claimed as her domain. It is a place of quiet, hidden truths and the neutral finality of death, a planar counterpoint to the Feywild's vibrancy.",
-        "tags": [
-            "planar",
-            "creation",
-            "shadowfell"
-        ],
-        "rumors": [
-            "The Shadowfell is not an echo; it is the \"afterimage\" of the previous, dead world, clinging to Hiraeth.",
-            "Worg does not *rule* the Shadowfell; he merely *is* the Shadowfell.",
-            "Simetra *created* the plane as a perfect place to hide her secrets from Logos and Bethtox."
-        ]
-    },
-    {
-        "id": "first_sunrise",
-        "order_id": "00005",
-        "theme": "tablet",
-        "title": "The Dawn of Bethtox",
-        "date": "Proto-History",
-        "position": {
-            "top": "86%",
-            "left": "35%"
-        },
-        "short_description": "The first conflict between the gods of light and darkness established the cycle of day and night.",
-        "description": "As the new universe settled, the first children of creation emerged: `Bethtox`, the arrogant embodiment of light and warmth, and `Simetra`, the quiet embodiment of darkness and secrets. They were primal enemies, and their conflict was the first force to shape the cosmos. This conflict established the fundamental cycle of day and night.",
-        "tags": [
-            "divine",
-            "conflict",
-            "world-building"
-        ],
-        "rumors": [
-            "Bethtox and Simetra were not always enemies. In the beginning, they were lovers, and the twilight was the only time they could meet.",
-            "Bethtox did not *create* light; he merely gathered all the light that Simetra had been hiding.",
-            "The sun is not a god, but a gateway to a plane of pure fire, and Bethtox is the entity that guards it."
-        ]
-    },
-    {
-        "id": "forging_of_the_world",
-        "order_id": "00006",
-        "theme": "tablet",
-        "title": "The World Bloom",
-        "date": "Proto-History",
-        "position": {
-            "top": "83%",
-            "left": "65%"
-        },
-        "short_description": "The gods of Life and Space wove the elements to form the world, and from the first bloom of life, new gods of flora and fauna emerged.",
-        "description": "With a sun to provide light and warmth, `Pythia` (Life) and Voidos (Space) wove the elements of earth, fire, air, and water to form the world. Pythia seeded the new planet with life, creating vast forests and plants. From this first bloom of life, two new gods emerged fully formed: `Tanzo` (Fauna) and `Ludis` (Flora).",
-        "tags": [
-            "creation",
-            "divine",
-            "world-building"
-        ],
-        "rumors": [
-            "Tanzo and Ludis are not two gods, but two halves of a single being that was split apart.",
-            "The first plants were actually sentient, and Ludis was their collective will given a divine spark."
-        ]
-    },
-    {
-        "id": "birth_of_night",
-        "order_id": "00007",
-        "theme": "tablet",
-        "title": "The Starry Veil of Nyx",
-        "date": "Proto-History",
-        "position": {
-            "top": "77%",
-            "left": "75%"
-        },
-        "short_description": "The goddess Nyx was born to rule the night sky, scattering stars across her veil with the help of Etherea.",
-        "description": "The gods recognized that darkness came in many forms. While Simetra represented the primordial, secret-keeping dark, there was no god for the simple absence of light. From the union of `Minos` (Time) and `Pythia` (Life), the goddess `Nyx` was born. She claimed the endless void of the night sky as her domain, and with the help of `Etherea`, she scattered the stars across her veil.",
-        "tags": [
-            "divine",
-            "creation",
-            "cosmology"
-        ],
-        "rumors": [
-            "Nyx and Simetra are secretly the same goddess, playing a long game against Bethtox.",
-            "The stars are not lights, but tiny holes in the veil of night, showing the true, blinding light of creation beyond.",
-            "`Etherea` is not a separate being but is the \"true name\" of Nyx's own realm."
-        ]
-    },
-    {
-        "id": "sundering_of_the_sea",
-        "order_id": "00008",
-        "theme": "tablet",
-        "title": "The Two Faces of the Deep",
-        "date": "Proto-History",
-        "position": {
-            "top": "74%",
-            "left": "45%"
-        },
-        "short_description": "Two gods emerged from the primordial ocean, one claiming the chaotic depths and the other the nurturing shallows, forever sundering the sea.",
-        "description": "The world's vast, primordial ocean was a single, churning entity. From it, two gods emerged. `Thala` claimed the violent, chaotic aspects: the storms, the crushing pressure, and the lightless deeps. `Nostrum` took dominion over the nurturing side: the tide pools, the marine life, and the spirit of exploration. They sundered the sea, dividing it into two clear domains that blurrily overlap, creating a balance of terror and reverence for all who sail.",
-        "tags": [
-            "divine",
-            "creation",
-            "maritime"
-        ],
-        "rumors": [
-            "Thala and Nostrum were once a single goddess who was driven mad and split in two by a horrifying creature from the deep.",
-            "Nostrum is worshipped in reverence, but she is the more dangerous of the two, luring sailors to their doom with promises of discovery. Thala's storms are just warnings."
-        ]
-    },
-    {
-        "id": "first_death",
-        "order_id": "00009",
-        "theme": "tablet",
-        "title": "The Birth of the Cycle",
-        "date": "Proto-History",
-        "position": {
-            "top": "71%",
-            "left": "15%"
-        },
-        "short_description": "The first natural death of a living creature gave rise to the god of death and decay, establishing the cycle of life.",
-        "description": "For ages, life existed without end. But time and existence take their toll, and the first living creature\u2014a plant or perhaps an animal\u2014finally died of natural causes. This event established the concept of decay and the natural cycle of life. From this first death, the god `Worg` was born. As the god of death and decay, Worg is neither evil nor good; he is the neutral, inevitable force that keeps the cycle of life and death turning.",
-        "tags": [
-            "divine",
-            "creation",
-            "death"
-        ],
-        "rumors": [
-            "Worg did not *come* from the first death; he *caused* it, introducing mortality to the world against Pythia's will.",
-            "Some believe Worg is an evil god, but that he is lawfully bound by Minos (Time) to only act when a creature's time is due.",
-            "Worg is the secret child of Pythia (Life) and Simetra (Darkness)."
-        ]
-    },
-    {
-        "id": "gift_of_free_will",
-        "order_id": "00010",
-        "theme": "tablet",
-        "title": "The Unbound Choice",
-        "date": "Proto-History",
-        "position": {
-            "top": "65%",
-            "left": "50%"
-        },
-        "short_description": "The gods bestowed the gift of free will upon all living things, allowing for true choice and meaningful existence.",
-        "description": "The gods, remembering the mistakes of their previous world, made a universal decision. They decreed that the creatures of Hiraeth would not be mere puppets bound to fate. They collectively bestowed the gift of Free Will upon all living things, from the smallest animal to the greatest beings yet to come. This choice, they decided, was the only way for life to be truly meaningful.",
-        "tags": [
-            "philosophy",
-            "divine",
-            "sociology"
-        ],
-        "rumors": [
-            "Free Will was not a \"gift,\" but a \"curse\" invented by Logos to see what would happen.",
-            "One god voted against Free Will, and now works to undermine it at every turn.",
-            "\"Free Will\" is an illusion. `Matrix`, the god of destiny, already forged the fate of all things; the gods just gave mortals the *feeling* of choice."
-        ]
-    },
-    {
-        "id": "the_first_lie",
-        "order_id": "00011",
-        "theme": "tablet",
-        "title": "The Birth of Strife",
-        "date": "Proto-History (shortly after `gift_of_free_will`)",
-        "position": {
-            "top": "62%",
-            "left": "20%"
-        },
-        "short_description": "The first lie, spoken by a mortal, gave rise to the goddess of strife and discord.",
-        "description": "Free Will created the *potential* for untruth. It wasn't long before a mortal, empowered with choice, spoke the first lie to gain an advantage. This act\u2014a deliberate perversion of Logos's \"true names\"\u2014was a new form of creation. The chaotic energy from this choice coalesced, giving active, conscious power to `Eris`. Strife and disagreement were no longer just concepts; they now had a goddess.",
-        "tags": [
-            "divine",
-            "creation",
-            "sociology"
-        ],
-        "rumors": [
-            "Eris existed all along, and she was the one who *whispered* the idea of the first lie to a mortal.",
-            "The first lie was not spoken by a mortal, but by a god to another god.",
-            "Logos was so disgusted by this perversion of his \"truth\" that he refuses to even acknowledge Eris's existence."
-        ]
-    },
-    {
-        "id": "creation_of_hiraeth",
-        "order_id": "00001",
-        "theme": "tablet",
-        "title": "The First Weaving",
-        "date": "The Beginning",
-        "position": {
-            "top": "92%",
-            "left": "50%"
-        },
-        "short_description": "Three primordial gods wove together Space, Life, and Time to create the universe and the world of Hiraeth.",
-        "description": "In the unmeasurable beginning, the three great primordial gods\u2014Voidos, Pythia, and Minos\u2014collaborated to create a new reality. Drawing from the echoes of a lost, previous world, they wove together the fundamental elements of Space, Life, and Time. This act formed the universe and the plane that would come to be known as Hiraeth.",
-        "tags": [
-            "cosmology",
-            "creation",
-            "divine"
-        ],
-        "rumors": [
-            "The 'previous world' was the realm of the primordials' parents, and Hiraeth was forged from their 'father's' corpse after they defeated him. That 'corpse' is the `Ancient Evil`, and it's not dead... just imprisoned.",
-            "Hiraeth is not a new creation at all, but merely a forgotten, broken piece of the \"previous world\" that the gods are trying to repair.",
-            "Voidos, Pythia, and Minos are not gods, but survivors."
-        ]
-    },
-    {
-        "id": "logos_speaks",
-        "order_id": "00002",
-        "theme": "tablet",
-        "title": "The Naming of Reality",
-        "date": "The Beginning",
-        "position": {
-            "top": "89%",
-            "left": "80%"
-        },
-        "short_description": "The god Logos spoke the true names of concepts into existence, bringing order to the universe and binding the gods to cosmic law.",
-        "description": "As the new universe was still a chaotic soup of potential, the god Logos emerged. He did not discover knowledge; he *created* it. By speaking the true names of concepts\u2014light, matter, gravity, thought\u2014Logos bound them to existence. This act also bound the gods themselves, defining the limits of their domains and establishing a foundational \"covenant\" of cosmic law.",
-        "tags": [
-            "cosmology",
-            "divine",
-            "law"
-        ],
-        "rumors": [
-            "Logos is not a separate god, but the collective consciousness of Voidos, Pythia, and Minos given form.",
-            "Logos spoke a \"final name\" that, if ever discovered, could unravel all of creation.",
-            "The other gods resent Logos, as his \"Naming\" put a leash on their infinite power."
-        ]
-    },
-    {
-        "id": "the_primal_echo",
-        "order_id": "00000",
-        "theme": "tablet",
-        "title": "The Echo of the Previous World",
-        "date": "Before The Beginning",
-        "position": {
-            "top": "95%",
-            "left": "20%"
-        },
-        "short_description": "A formless, sentient force of chaos and entropy, the `Ancient Evil`, slumbered in the void before creation.",
-        "description": "Before the new universe was woven, something existed. And something *ended*. In the nothingness between creations, a primal echo of that ending lingered\u2014a formless, sentient force of chaos and entropy. This `Ancient Evil` slumbered in the void, waiting for new life to cast new shadows.",
-        "tags": [
-            "cosmology",
-            "primordial",
-            "evil"
-        ],
-        "rumors": [
-            "The Ancient Evil isn't an echo; it's the *reason* the previous world was destroyed.",
-            "Voidos, Pythia, and Minos did not *create* a new world; they *fled* to it, and the Ancient Evil followed them.",
-            "This entity is not truly \"evil,\" but a natural force of unmaking, just as Pythia is a force of making."
-        ]
-    }
+  {
+    "id": "the_primal_echo",
+    "theme": "tablet",
+    "title": "The Echo of the Previous World",
+    "date": "Before The Beginning",
+    "position": { "top": "95%", "left": "20%" },
+    "summary": "A formless, sentient force of chaos and entropy slumbers in the void between creations.",
+    "description": "Before the new universe was woven, something existed. And something *ended*. In the nothingness between creations, a primal echo of that ending lingered—a formless, sentient force of chaos and entropy. This `Ancient Evil` slumbered in the void, waiting for new life to cast new shadows.",
+    "rumors": [
+      "The Ancient Evil isn't an echo; it's the *reason* the previous world was destroyed.",
+      "Voidos, Pythia, and Minos did not *create* a new world; they *fled* to it, and the Ancient Evil followed them.",
+      "This entity is not truly \"evil,\" but a natural force of unmaking, just as Pythia is a force of making."
+    ]
+  },
+  {
+    "id": "creation_of_hiraeth",
+    "theme": "tablet",
+    "title": "The First Weaving",
+    "date": "The Beginning",
+    "position": { "top": "92%", "left": "50%" },
+    "summary": "Three primordial gods collaborate to create a new reality from the echoes of a lost world.",
+    "description": "In the unmeasurable beginning, the three great primordial gods—Voidos, Pythia, and Minos—collaborated to create a new reality. Drawing from the echoes of a lost, previous world, they wove together the fundamental elements of Space, Life, and Time. This act formed the universe and the plane that would come to be known as Hiraeth.",
+    "rumors": [
+      "The 'previous world' was the realm of the primordials' parents, and Hiraeth was forged from their 'father's' corpse after they defeated him. That 'corpse' is the `Ancient Evil`, and it's not dead... just imprisoned.",
+      "Hiraeth is not a new creation at all, but merely a forgotten, broken piece of the \"previous world\" that the gods are trying to repair.",
+      "Voidos, Pythia, and Minos are not gods, but survivors."
+    ]
+  },
+  {
+    "id": "logos_speaks",
+    "theme": "tablet",
+    "title": "The Naming of Reality",
+    "date": "The Beginning",
+    "position": { "top": "89%", "left": "80%" },
+    "summary": "The god Logos speaks the true names of concepts, binding them to existence and establishing cosmic law.",
+    "description": "As the new universe was still a chaotic soup of potential, the god Logos emerged. He did not discover knowledge; he *created* it. By speaking the true names of concepts—light, matter, gravity, thought—Logos bound them to existence. This act also bound the gods themselves, defining the limits of their domains and establishing a foundational \"covenant\" of cosmic law.",
+    "rumors": [
+      "Logos is not a separate god, but the collective consciousness of Voidos, Pythia, and Minos given form.",
+      "Logos spoke a \"final name\" that, if ever discovered, could unravel all of creation.",
+      "The other gods resent Logos, as his \"Naming\" put a leash on their infinite power."
+    ]
+  },
+  {
+    "id": "first_sunrise",
+    "theme": "tablet",
+    "title": "The Dawn of Bethtox",
+    "date": "Proto-History",
+    "position": { "top": "86%", "left": "35%" },
+    "summary": "The first children of creation, light and darkness, emerge and establish the cycle of day and night.",
+    "description": "As the new universe settled, the first children of creation emerged: `Bethtox`, the arrogant embodiment of light and warmth, and `Simetra`, the quiet embodiment of darkness and secrets. They were primal enemies, and their conflict was the first force to shape the cosmos. This conflict established the fundamental cycle of day and night.",
+    "rumors": [
+      "Bethtox and Simetra were not always enemies. In the beginning, they were lovers, and the twilight was the only time they could meet.",
+      "Bethtox did not *create* light; he merely gathered all the light that Simetra had been hiding.",
+      "The sun is not a god, but a gateway to a plane of pure fire, and Bethtox is the entity that guards it."
+    ]
+  },
+  {
+    "id": "forging_of_the_world",
+    "theme": "tablet",
+    "title": "The World Bloom",
+    "date": "Proto-History",
+    "position": { "top": "83%", "left": "65%" },
+    "summary": "Two gods weave the elements to form the world, seeding it with life and giving rise to new deities.",
+    "description": "With a sun to provide light and warmth, `Pythia` (Life) and Voidos (Space) wove the elements of earth, fire, air, and water to form the world. Pythia seeded the new planet with life, creating vast forests and plants. From this first bloom of life, two new gods emerged fully formed: `Tanzo` (Fauna) and `Ludis` (Flora).",
+    "rumors": [
+      "Tanzo and Ludis are not two gods, but two halves of a single being that was split apart.",
+      "The first plants were actually sentient, and Ludis was their collective will given a divine spark."
+    ]
+  },
+  {
+    "id": "the_feywild_reflection",
+    "theme": "tablet",
+    "title": "The Primal Reflection",
+    "date": "Proto-History (simultaneous with `forging_of_the_world`)",
+    "position": { "top": "80%", "left": "25%" },
+    "summary": "The creation of the material world creates a vibrant, emotional echo that becomes the Feywild.",
+    "description": "The creation of the material world by Pythia was so overflowing with primal life and raw, untamed emotion that it \"bled\" a reflection of itself. The Prime Material became the world of matter, while this vibrant echo became a world of pure emotion and nature: the Feywild. This plane is the true home of Tanzo and Ludis, a place where their power as guardians of flora and fauna is absolute and undiluted.",
+    "rumors": [
+      "The Feywild is not a reflection; it is the \"first draft\" of the world, and the material plane is the less-magical copy.",
+      "The Feywild is a sentient plane that *gave birth* to Tanzo and Ludis.",
+      "There are fey \"gods\" in the Feywild that are just as powerful as the main pantheon, but they simply do not care about the material plane."
+    ]
+  },
+  {
+    "id": "birth_of_night",
+    "theme": "tablet",
+    "title": "The Starry Veil of Nyx",
+    "date": "Proto-History",
+    "position": { "top": "77%", "left": "75%" },
+    "summary": "The goddess Nyx is born to claim the night sky, scattering stars across her veil.",
+    "description": "The gods recognized that darkness came in many forms. While Simetra represented the primordial, secret-keeping dark, there was no god for the simple absence of light. From the union of `Minos` (Time) and `Pythia` (Life), the goddess `Nyx` was born. She claimed the endless void of the night sky as her domain, and with the help of `Etherea`, she scattered the stars across her veil.",
+    "rumors": [
+      "Nyx and Simetra are secretly the same goddess, playing a long game against Bethtox.",
+      "The stars are not lights, but tiny holes in the veil of night, showing the true, blinding light of creation beyond.",
+      "`Etherea` is not a separate being but is the \"true name\" of Nyx's own realm."
+    ]
+  },
+  {
+    "id": "sundering_of_the_sea",
+    "theme": "tablet",
+    "title": "The Two Faces of the Deep",
+    "date": "Proto-History",
+    "position": { "top": "74%", "left": "45%" },
+    "summary": "The primordial ocean is sundered into two domains, one chaotic and one nurturing.",
+    "description": "The world's vast, primordial ocean was a single, churning entity. From it, two gods emerged. `Thala` claimed the violent, chaotic aspects: the storms, the crushing pressure, and the lightless deeps. `Nostrum` took dominion over the nurturing side: the tide pools, the marine life, and the spirit of exploration. They sundered the sea, dividing it into two clear domains that blurrily overlap, creating a balance of terror and reverence for all who sail.",
+    "rumors": [
+      "Thala and Nostrum were once a single goddess who was driven mad and split in two by a horrifying creature from the deep.",
+      "Nostrum is worshipped in reverence, but she is the more dangerous of the two, luring sailors to their doom with promises of discovery. Thala's storms are just warnings."
+    ]
+  },
+  {
+    "id": "first_death",
+    "theme": "tablet",
+    "title": "The Birth of the Cycle",
+    "date": "Proto-History",
+    "position": { "top": "71%", "left": "15%" },
+    "summary": "The first natural death of a living creature gives rise to the god of the life and death cycle.",
+    "description": "For ages, life existed without end. But time and existence take their toll, and the first living creature—a plant or perhaps an animal—finally died of natural causes. This event established the concept of decay and the natural cycle of life. From this first death, the god `Worg` was born. As the god of death and decay, Worg is neither evil nor good; he is the neutral, inevitable force that keeps the cycle of life and death turning.",
+    "rumors": [
+      "Worg did not *come* from the first death; he *caused* it, introducing mortality to the world against Pythia's will.",
+      "Some believe Worg is an evil god, but that he is lawfully bound by Minos (Time) to only act when a creature's time is due.",
+      "Worg is the secret child of Pythia (Life) and Simetra (Darkness)."
+    ]
+  },
+  {
+    "id": "the_shadow_plane",
+    "theme": "tablet",
+    "title": "The Somber Echo",
+    "date": "Proto-History (simultaneous with `first_death`)",
+    "position": { "top": "68%", "left": "85%" },
+    "summary": "The first death creates a somber, muted reflection of the material plane, the Shadowfell.",
+    "description": "Just as vibrant life created the Feywild, the first death created its own echo. This first act of natural decay and the emergence of `Worg` cast a \"negative\" reflection of the material plane. This new plane was a somber, muted world of shadows and introspection, which `Simetra`, Goddess of Darkness and Secrets, quickly claimed as her domain. It is a place of quiet, hidden truths and the neutral finality of death, a planar counterpoint to the Feywild's vibrancy.",
+    "rumors": [
+      "The Shadowfell is not an echo; it is the \"afterimage\" of the previous, dead world, clinging to Hiraeth.",
+      "Worg does not *rule* the Shadowfell; he merely *is* the Shadowfell.",
+      "Simetra *created* the plane as a perfect place to hide her secrets from Logos and Bethtox."
+    ]
+  },
+  {
+    "id": "gift_of_free_will",
+    "theme": "tablet",
+    "title": "The Unbound Choice",
+    "date": "Proto-History",
+    "position": { "top": "65%", "left": "50%" },
+    "summary": "The gods bestow the gift of free will upon all living things to make life meaningful.",
+    "description": "The gods, remembering the mistakes of their previous world, made a universal decision. They decreed that the creatures of Hiraeth would not be mere puppets bound to fate. They collectively bestowed the gift of Free Will upon all living things, from the smallest animal to the greatest beings yet to come. This choice, they decided, was the only way for life to be truly meaningful.",
+    "rumors": [
+      "Free Will was not a \"gift,\" but a \"curse\" invented by Logos to see what would happen.",
+      "One god voted against Free Will, and now works to undermine it at every turn.",
+      "\"Free Will\" is an illusion. `Matrix`, the god of destiny, already forged the fate of all things; the gods just gave mortals the *feeling* of choice."
+    ]
+  },
+  {
+    "id": "the_first_lie",
+    "theme": "tablet",
+    "title": "The Birth of Strife",
+    "date": "Proto-History (shortly after `gift_of_free_will`)",
+    "position": { "top": "62%", "left": "20%" },
+    "summary": "The first lie spoken by a mortal gives rise to a new goddess of strife and disagreement.",
+    "description": "Free Will created the *potential* for untruth. It wasn't long before a mortal, empowered with choice, spoke the first lie to gain an advantage. This act—a deliberate perversion of Logos's \"true names\"—was a new form of creation. The chaotic energy from this choice coalesced, giving active, conscious power to `Eris`. Strife and disagreement were no longer just concepts; they now had a goddess.",
+    "rumors": [
+      "Eris existed all along, and she was the one who *whispered* the idea of the first lie to a mortal.",
+      "The first lie was not spoken by a mortal, but by a god to another god.",
+      "Logos was so disgusted by this perversion of his \"truth\" that he refuses to even acknowledge Eris's existence."
+    ]
+  },
+  {
+    "id": "contest_of_seasons",
+    "theme": "tablet",
+    "title": "The Eternal Struggle",
+    "date": "Creation Age",
+    "position": { "top": "59%", "left": "80%" },
+    "summary": "A battle between the gods of winter and the sun establishes the cycle of the seasons.",
+    "description": "The world was in a state of perpetual spring until `Morena`, Goddess of Winter, claimed it, blanketing it in ice to test its strength. `Bethtox`, God of the Sun, challenged her for dominance, bringing his searing light to melt her creations. Their battle was so immense it threatened to tear the world apart. The other gods intervened, forcing a truce where neither could rule forever. Their \"battle\" became a cyclical contest, a turning of favor that mortals would come to know as the seasons.",
+    "rumors": [
+      "The \"contest\" is not a battle, but a tragic love story; the seasons are Morena and Bethtox chasing each other across the sky, never able to be together.",
+      "Morena didn't just *bring* winter; she was grieving a loss, and her sorrow froze the world. Bethtox's arrival was an attempt to console her.",
+      "The seasons are unstable because the truce was brokered by a god who has since died, and it's slowly falling apart."
+    ]
+  },
+  {
+    "id": "creation_of_dragons",
+    "theme": "tablet",
+    "title": "The Two Progenitors",
+    "date": "Creation Age",
+    "position": { "top": "56%", "left": "40%" },
+    "summary": "A trickster god creates two quasi-divine dragons to embody his dual nature of order and chaos.",
+    "description": "Voidos, in his \"Trickster\" aspect, desired children that embodied his dual nature. His first two creations were quasi-divine: Bahamut, the Platinum, who embodied Voidos's orderly and creative \"Space\" aspect; and Tiamat, the Chromatic, who embodied his cruel and chaotic \"Trickster\" aspect. All other dragons (Metallic, Chromatic, and Gem) were created as their respective broods, naturally aligning with one of these two progenitors.",
+    "rumors": [
+      "Tiamat and Bahamut are not \"children\" of Voidos, but two lesser gods he captured and bound to his will.",
+      "The Gem dragons are the *true* firstborn, and they serve as neutral observers in the coming war.",
+      "Bahamut and Tiamat were once one being, the \"Dragon God,\" which Voidos split in two for his own amusement."
+    ]
+  },
+  {
+    "id": "gift_of_voice",
+    "theme": "tablet",
+    "title": "The First Speech",
+    "date": "Creation Age",
+    "position": { "top": "53%", "left": "70%" },
+    "summary": "The god of knowledge grants the gift of speech to the dragons, giving them a powerful, ancient language.",
+    "description": "The newly-formed Dragons existed in silence, powerful but unable to communicate their thoughts. `Logos`, seeing this, granted them the ability to speak. Because they were the first mortal race to receive this gift, their language is considered the most ancient and powerful. It is said their very words can shape reality, a faint echo of Logos's own power.",
+    "rumors": [
+      "Dragons were not *given* language; they *stole* it from Logos, tearing the true names from his throat.",
+      "The Dragons' ability to speak is why they are so arrogant, as they believe they are the true children of the God of Knowledge."
+    ]
+  },
+  {
+    "id": "arrival_of_the_elves",
+    "theme": "tablet",
+    "title": "The Echoes of a Lost World",
+    "date": "Creation Age",
+    "position": { "top": "50%", "left": "25%" },
+    "summary": "The goddess of life creates the first Elves in the image of a lost race from a previous world.",
+    "description": "Pythia, Goddess of Life, grew lonely. She missed the children of her previous world. In a quiet, sylvan glade, she shaped the first Elves in the image of her favorite, lost race. They were born into the world with a deep, calm connection to nature, embodying the grace and beauty of Pythia's fondest memories.",
+    "rumors": [
+      "The Elves are not \"new,\" but the actual souls of the lost race, reincarnated into new bodies.",
+      "Pythia's \"lost race\" was not destroyed; she stole them from her old world and brought them here, an act that is the true cause of the gods' exile."
+    ]
+  },
+  {
+    "id": "birth_of_loron",
+    "theme": "tablet",
+    "title": "The Tragic Union",
+    "date": "Creation Age (shortly after `arrival_of_the_elves`)",
+    "position": { "top": "47%", "left": "55%" },
+    "summary": "The impossible union of light and dark gods results in a child, the goddess of love and beauty.",
+    "description": "The endless war between Light and Dark briefly cooled, and the two primal gods, `Bethtox` and `Simetra`, found a destructive, passionate love in their opposition. From this impossible union, `Loron` was born. The gods created the Moon as a neutral palace for their child, a place that was neither in the light nor in the dark. But the affair ended as violently as it began, and they became bitter enemies once more. `Loron`, goddess of love and beauty, was trapped in her palace, and her mother `Simetra` claimed the \"dark side of the moon\" as her domain, a mother scorned forever watching the daughter who, in her eyes, chose her father's light.",
+    "rumors": [
+      "Loron was not their child, but a \"peace treaty\" they created together, a being of both light and shadow, who they then fought over until she fled to the moon.",
+      "The Moon was not a *gift*; it was a *prison* created by Bethtox to keep Loron \"pure\" from her mother's influence.",
+      "Loron and Simetra are not mother-daughter, but sisters. The \"dark side\" is Simetra's, and the \"light side\" is Loron's, a realm given to her by her lover, Bethtox."
+    ]
+  },
+  {
+    "id": "the_first_dream",
+    "theme": "tablet",
+    "title": "The Dream Domain",
+    "date": "Creation Age (shortly after `arrival_of_the_elves`)",
+    "position": { "top": "44%", "left": "85%" },
+    "summary": "The first dreams of mortals open a new domain of influence for the gods.",
+    "description": "Before mortals, the gods did not dream. When the first Elves slept, their minds, unbound by divine certainty, wandered. This new psychic energy did not create a new god, but it opened a new domain of influence. `Loron` (Love/Passion) claimed the realm of good dreams and dreams of love. `Simetra` (Secrets) claimed nightmares and dreams of the subconscious. `Logos` and Matrix found power in prophetic dreams, and `Eris` (Chaos) reveled in dreams of anxiety and confusion.",
+    "rumors": [
+      "There is a \"God of Dreams\" who is not Loron or Simetra, but a hidden entity that all gods must bargain with to access the dreamscape.",
+      "Dreams are not \"influenced\" by gods; they are memories of the \"previous world\" bubbling up.",
+      "The `Ancient Evil`'s true prison is the collective mortal subconscious, and nightmares are its attempts to escape."
+    ]
+  },
+  {
+    "id": "forging_of_the_giants",
+    "theme": "tablet",
+    "title": "The Children of Destiny",
+    "date": "Creation Age",
+    "position": { "top": "41%", "left": "30%" },
+    "summary": "A race of massive, thoughtful Giants appears, believed to be the creation of the god of forges and destiny.",
+    "description": "A new race appeared in the world: the Giants. Massive and thoughtful, they were beings of stone and sky. Their origin is debated. Some say `Logos` created them as living repositories of knowledge. Others, more commonly, believe they were the first creation of `Matrix`, the God of Forges and Destiny, shaped to be the builders of the world.",
+    "rumors": [
+      "The Giants are the \"failed\" first draft of the Elves, discarded by Pythia and given life by Matrix.",
+      "The Giants were not created by any god; they were born when the mountains themselves woke up."
+    ]
+  },
+  {
+    "id": "birth_of_inspiration_and_memory",
+    "theme": "tablet",
+    "title": "The First Epic",
+    "date": "Creation Age (after `forging_of_the_giants`)",
+    "position": { "top": "38%", "left": "60%" },
+    "summary": "The first spark of inspiration and the act of preserving it give rise to two new gods.",
+    "description": "The Giants were the first mortals to truly study the cosmos. As they gazed at `Etherea`'s stars, they felt a new, fleeting sensation—a spark of \"what if?\". This is what mortals would later call *inspiration*, the first breath of the god `Eki`. To hold this new thought, that first Giant began the first oral tradition, a great epic poem of the stars, to pass to the next generation. The *act* of preserving that story against the flow of time (`Minos`'s domain) gave rise to `Zabyl`, the God of Memory.",
+    "rumors": [
+      "`Eki` and `Zabyl` are not \"gods,\" but divine concepts the Giants discovered and named, giving them power.",
+      "They are not new gods at all, but two of `Etherea`'s first angelic servants, who the Giants mistook for gods.",
+      "`Zabyl` (Memory) is the child of `Eki` (Inspiration) and `Minos` (Time)."
+    ]
+  },
+  {
+    "id": "first_murder",
+    "theme": "tablet",
+    "title": "The Blood Spawns the Stone",
+    "date": "Creation Age",
+    "position": { "top": "35%", "left": "20%" },
+    "summary": "The world's first murder leads to the creation of the Dwarves, a new race bound to the god of murder.",
+    "description": "Peace among the Elves and Giants was shattered when `Evelesco`, the God of Murder, whispered dissent. An Elf and a Giant (or perhaps two Elves) met in violence, committing the world's first murder. As the blood soaked into the earth, Evalesco gathered it. He took the rage, the betrayal, and the stone and forged a new race: the Dwarves. He bound them to his\n  will, forcing them into the darkness of the Underdark as his personal servants, forever tied to the world's first sin.",
+    "rumors": [
+      "It wasn't an Elf or Giant; the first murder was a god killing another god, and the \"mortal\" story is a cover-up.",
+      "The Dwarves were not *created* by Evelesco, but were an existing race he captured and enslaved.",
+      "The victim's blood \"cried out from the ground,\" staining the very soul of the world. The Dwarves' creation was a *sickness* in the earth, a curse given form.",
+      "The victim of the first murder was not truly dead and walks the world as a nameless, vengeful spirit."
+    ]
+  },
+  {
+    "id": "forging_of_the_hells",
+    "theme": "tablet",
+    "title": "The Realm of Lawful Evil",
+    "date": "Creation Age (shortly after `first_murder`)",
+    "position": { "top": "32%", "left": "80%" },
+    "summary": "A cabal of lawful gods forges the Hells as a plane of ordered punishment for evil souls.",
+    "description": "The gods were horrified by the first murder, not just by the act, but by `Evelesco`'s chaotic claim over the soul. To prevent all evil from feeding chaos, a cabal of \"lawful\" gods—`Worg` (Death), `Minos` (Time), and `Matrix` (Destiny)—collaborated. They forged a new plane, the Hells, as a place of *ordered* punishment. It was a realm designed to process and contain souls defined by evil choices, creating a lawful counterpart to Evalesco's chaotic hunger.",
+    "rumors": [
+      "The Hells were not \"new\"; they were a piece of the \"previous world\" that the gods salvaged as a prison.",
+      "`Lilith` (not yet a goddess) was the first mortal soul to enter the Hells, and she began her conquest immediately.",
+      "This act deeply angered Evalesco, who now sees Worg and Matrix as his true enemies."
+    ]
+  },
+  {
+    "id": "discovery_of_primal_magic",
+    "theme": "tablet",
+    "title": "The Runic Awakening",
+    "date": "Creation Age",
+    "position": { "top": "29%", "left": "50%" },
+    "summary": "Giants and Dragons become the first to master primal magic, drawing power from the elements and gods.",
+    "description": "Giants and Dragons become the first to learn and master primal magic, tapping into divine, druidic, and runic energies. This was not the arcane craft of the Weave (which did not yet exist), but a raw, primordial power drawn directly from the elements, the gods, and the world's lifeblood. The Dwarves also learned this magic, but their use of it was controlled and twisted by their master, `Evelesco`.",
+    "rumors": [
+      "The Dragons learned magic first and taught the Giants, a fact the Giants vehemently deny.",
+      "Runic magic is so powerful because it's the *actual* language of the Giants, not just symbols.",
+      "The Dwarves' magic is more powerful than anyone knows, but they keep it hidden, waiting for the day to strike at Evalesco."
+    ]
+  },
+  {
+    "id": "giants_creation",
+    "theme": "tablet",
+    "title": "The Soulless Servants",
+    "date": "Creation Age",
+    "position": { "top": "26%", "left": "35%" },
+    "summary": "The Giants use their mastery of runic magic to create Golems as servants and laborers.",
+    "description": "Through their mastery of runic magic, the Giants discovered the secret to creating a semblance of life. They forged Golems from stone and metal, animating them to act as servants, laborers, and pets. Whether these Golems possessed true souls or were merely puppets of their creators' will is a mystery lost to time.",
+    "rumors": [
+      "The Giants *did* discover the secret to creating souls, and the \"Golems\" were the first Goblins, who later rebelled and fled.",
+      "The magic to create Golems was a dark pact, and it is what drew the attention of the gods and led to the Giants' eventual departure."
+    ]
+  },
+  {
+    "id": "first_war",
+    "theme": "tablet",
+    "title": "The War of Strife",
+    "date": "Creation Age",
+    "position": { "top": "23%", "left": "65%" },
+    "summary": "The gods of murder and strife conspire to ignite the world's first war, feeding on the conflict.",
+    "description": "Seeking to increase their own power by feeding on mortal conflict, the God of Murder, `Evelesco`, and the Goddess of Strife, `Eris`, conspired. They sowed discord among the Giants, Dwarves, and Elves, turning minor disputes into bitter hatred. This ignited the First War, a brutal conflict that engulfed the world and fed the dark gods with every drop of blood and betrayal.",
+    "rumors": [
+      "Eris and Evalesco did not start the war; they are simply the scapegoats for a war started by the \"good\" gods to cull the mortals' power.",
+      "The war was not between all three races, but was a secret war between the Elves and Dwarves, with the Giants acting as peacekeepers."
+    ]
+  },
+  {
+    "id": "first_sacrifice",
+    "theme": "tablet",
+    "title": "The Birth of Valor",
+    "date": "Creation Age (during the `first_war`)",
+    "position": { "top": "20%", "left": "25%" },
+    "summary": "A mortal's selfless act of sacrifice during a chaotic war gives rise to a new goddess of heroism.",
+    "description": "The First War was defined by the selfish motives of `Evelesco` (Murder) and `Eris` (Strife). But in the midst of the chaos, a mortal (perhaps an Elf) willingly gave her life to save their comrades. This selfless act, the complete opposite of the war's driving forces, was so potent that it created a new divine spark. `Ianna` was born from this act, a new goddess for a new concept: heroism.",
+    "rumors": [
+      "Ianna was not a *new* god, but a minor spirit of courage that was elevated to godhood by this first act of true valor.",
+      "The first \"hero\" was a Giant who died protecting an Elven village, an act that shamed both sides.",
+      "Evelesco and Eris despise Ianna, as her very existence is an antidote to their power."
+    ]
+  },
+  {
+    "id": "dwarven_rebellion",
+    "theme": "tablet",
+    "title": "The Dwarven Exodus",
+    "date": "Creation Age (after the `first_war`)",
+    "position": { "top": "17%", "left": "75%" },
+    "summary": "The god of the forge liberates the enslaved Dwarves, reforging their souls and earning their eternal devotion.",
+    "description": "After the First War, `Matrix`, God of the Forge, looked upon the enslaved Dwarves and saw a perversion of craft and creation. He descended into the Underdark, not as a creator, but as a liberator. He taught the Dwarves the divine art of the forge, arming them with purpose and steel. He \"reforged\" their very souls, cleansing the stain of their origin and giving them a new destiny. This led to a great rebellion, the Dwarven Exodus, where they fought their way to freedom, forever earning the hatred of `Evelesco` and the eternal devotion of the Dwarven people.",
+    "rumors": [
+      "Matrix did not free all the Dwarves; many \"Duergar\" or \"dark dwarves\" chose to remain loyal to Evelesco, and a bitter civil war still rages in the deep.",
+      "The \"reforging\" was a literal act: Matrix built a great \"Soul Forge\" that burned away their corruption, but also their memories of the time before.",
+      "Matrix did not act alone, but was aided by a mortal hero whose name has been lost to history."
+    ]
+  },
+  {
+    "id": "giants_exodus",
+    "theme": "tablet",
+    "title": "The Departure of the Giants",
+    "date": "Creation Age",
+    "position": { "top": "14%", "left": "45%" },
+    "summary": "The Giants foresee a cataclysmic flood and use their advanced technology to leave the world.",
+    "description": "The Giants, masters of runic divination, saw the future. They foresaw that the gods, disgusted with the First War *they* had started, planned to end it with a cataclysmic Great Flood. Seeing no way to win the war or survive the peace, the Giants retreated to their mountain strongholds and used their advanced runic technology to build great ships. They left the world, vanishing into the sky, leaving much of their magic and technology behind.",
+    "rumors": [
+      "The Giants didn't *leave*; they were *banished* by the gods for refusing to stop the war.",
+      "The Giants are still here, sleeping deep within the mountains, and will one day awaken.",
+      "Their \"ships\" were not physical, but a powerful spell that transported their entire race to another dimension."
+    ]
+  },
+  {
+    "id": "the_great_flood",
+    "theme": "tablet",
+    "title": "The World's Rebuke",
+    "date": "End of the Ante-Diluvian Era",
+    "position": { "top": "11%", "left": "60%" },
+    "summary": "The gods unleash a great flood to end the world's first war, then make a pact never to do it again.",
+    "description": "Angered that their creation had been so thoroughly corrupted by war, the gods decided on a reset. They unleashed a Great Flood, a cataclysmic event that washed away the armies, the cities, and the old hatreds. After the waters receded, the gods were shaken by the devastation. `Logos` forced them into a divine pact. As the first sun (`Bethtox`) shone through the last storm (`Thala`), a rainbow appeared. Logos *named* it \"The Covenant,\" binding the gods to an oath: \"Never again by water.\"",
+    "rumors": [
+      "The flood wasn't caused by the gods, but was a natural side effect of the Giants leaving, which shifted the planet's balance.",
+      "One Elf, Utnopishtim, built a great ship and saved many, earning him a blessing of unnaturally long life from the gods.",
+      "The Covenant has a secret addendum: \"Never again by water... but by fire, next time.\" This is the \"End of Days\" contingency.",
+      "The Covenant is the only thing protecting the mortal races, and some gods (like Eris and Evelesco) are actively trying to find a loophole."
+    ]
+  }
 ]
