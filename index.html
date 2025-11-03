@@ -295,7 +295,7 @@
         /* Base style for all modal content */
         .modal-content-base {
             width: 100%;
-            max-width: xl; /* 672px */
+            max-width: 36rem; /* 576px, equivalent to Tailwind's max-w-xl */
             max-height: 90vh;
             overflow-y: auto;
             border-radius: 12px;
@@ -393,12 +393,6 @@
         <div class="p-4 mt-16">
             <input type="text" id="sidebar-search-input" placeholder="Search..." class="w-full px-3 py-2 rounded-md bg-gray-800 text-white border-gray-700 focus:outline-none focus:ring-1 focus:ring-purple-500">
         </div>
-        <div class="px-6 py-4">
-            <h3 class="text-lg font-semibold mb-2">Filter by Tag</h3>
-            <div id="tag-filters" class="space-y-2">
-                <!-- Tags will be dynamically populated here -->
-            </div>
-        </div>
         <nav>
             <h3 class="px-6 py-2 text-lg font-semibold">Eras</h3>
             <a href="#modern-era" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Modern Era</a>
@@ -408,6 +402,12 @@
             <a href="#ancient-era" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Ancient Era</a>
             <a href="#antediluvian-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Antediluvian Age</a>
         </nav>
+        <div class="px-6 py-4">
+            <h3 class="text-lg font-semibold mb-2">Filter by Tag</h3>
+            <div id="tag-filters" class="space-y-2">
+                <!-- Tags will be dynamically populated here -->
+            </div>
+        </div>
     </aside>
 
     <!-- Main Content Area -->
@@ -572,6 +572,7 @@
     <div id="modal-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 scale-95">
         <div id="modal-content" class="modal-content-base">
             
+            <button id="modal-back-btn" class="hidden absolute top-6 left-6 text-xl hover:underline">&larr; Back</button>
             <button id="modal-close-btn">&times;</button>
 
             <!-- Navigation Buttons -->
@@ -605,6 +606,58 @@
                 clearTimeout(timeout);
                 timeout = setTimeout(() => func.apply(context, args), delay);
             };
+        }
+
+        function parseDate(dateStr) {
+            if (!dateStr) return null;
+            let normalized = dateStr.toLowerCase().replace(/c\.\s*/, '').trim();
+
+            if (normalized.includes("billion years ago")) {
+                const num = parseFloat(normalized.replace(/[^0-9.]/g, ''));
+                return -num * 1000000000;
+            }
+            if (normalized.includes("million years ago")) {
+                const num = parseFloat(normalized.replace(/[^0-9.]/g, ''));
+                return -num * 1000000;
+            }
+            if (normalized.includes("years ago")) {
+                const num = parseFloat(normalized.replace(/[^0-9,]/g, ''));
+                return -num;
+            }
+            if (normalized.startsWith("year ")) {
+                const year = parseInt(normalized.replace('year ', ''));
+                return year;
+            }
+
+            const rangeMatch = normalized.match(/(\d+)-(\d+)\s*(bce|ce|ae)/);
+            if(rangeMatch){
+                const start = parseInt(rangeMatch[1]);
+                const end = parseInt(rangeMatch[2]);
+                const era = rangeMatch[3];
+                const avg = (start + end) / 2;
+                return era === 'bce' ? -avg : avg;
+            }
+
+            const singleDateMatch = normalized.match(/(\d+)\s*(bce|ce|ae)/);
+            if(singleDateMatch){
+                const year = parseInt(singleDateMatch[1]);
+                const era = singleDateMatch[2];
+                return era === 'bce' ? -year : year;
+            }
+
+            if (normalized === "present day") {
+                return new Date().getFullYear();
+            }
+
+            const centuryMatch = normalized.match(/(\d+)(st|nd|rd|th)\s+century\s*(bce|ce|ae)/);
+            if (centuryMatch) {
+                const century = parseInt(centuryMatch[1]);
+                const era = centuryMatch[3];
+                const year = (century - 1) * 100 + 50;
+                return era === 'bce' ? -year : year;
+            }
+
+            return null;
         }
 
         // Function to render the timeline based on current filters
@@ -658,7 +711,22 @@
 
             // Re-initialize triggers and listeners after rendering
             allEventTriggers = Array.from(document.querySelectorAll('.event-trigger'));
+
+            allEventTriggers.sort((a, b) => {
+                const eventA = timelineData[a.dataset.eventId];
+                const eventB = timelineData[b.dataset.eventId];
+                const dateA = parseDate(eventA.date);
+                const dateB = parseDate(eventB.date);
+
+                if (dateA === null && dateB === null) return 0;
+                if (dateA === null) return -1;
+                if (dateB === null) return 1;
+
+                return dateA - dateB;
+            });
+
             initializeModalListeners();
+            initializeSubEventListeners();
         }
 
 
@@ -672,7 +740,7 @@
             if (event.sub_events) {
                 subEventsHtml = '<ul class="mt-4 space-y-2">';
                 event.sub_events.forEach(sub => {
-                    subEventsHtml += `<li class="text-sm ${textColorClass}"><a href="?event=${event.id}&sub=${sub.id}" class="hover:underline">${sub.title}</a></li>`;
+                    subEventsHtml += `<li class="text-sm ${textColorClass}"><span class="sub-event-trigger hover:underline cursor-pointer" data-parent-event-id="${event.id}" data-sub-event-id="${sub.id}">${sub.title}</span></li>`;
                 });
                 subEventsHtml += '</ul>';
             }
@@ -792,6 +860,7 @@
         const modalContainer = document.getElementById('modal-container');
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalBackBtn = document.getElementById('modal-back-btn');
         let modalPrevBtn = document.getElementById('modal-prev-btn');
         let modalNextBtn = document.getElementById('modal-next-btn');
 
@@ -799,41 +868,53 @@
         const modalDate = document.getElementById('modal-date');
         const modalDescription = document.getElementById('modal-description');
         const modalRumor = document.getElementById('modal-rumor');
+
         function openModal(eventId, subEventId = null) {
-            const data = timelineData[eventId];
-            if (!data) {
+            const eventData = timelineData[eventId];
+            if (!eventData) {
                 console.error("No data found for eventId:", eventId);
                 return;
             }
 
-            currentEventIndex = allEventTriggers.findIndex(trigger => trigger.dataset.eventId === eventId);
-            modalPrevBtn.style.display = currentEventIndex > 0 ? 'block' : 'none';
-            modalNextBtn.style.display = currentEventIndex < allEventTriggers.length - 1 ? 'block' : 'none';
+            let dataToShow = eventData;
+            let parentEventId = null;
 
-            let description = data.description;
-            if (subEventId && data.sub_events) {
-                const subEvent = data.sub_events.find(sub => sub.id === subEventId);
+            if (subEventId && eventData.sub_events) {
+                const subEvent = eventData.sub_events.find(sub => sub.id === subEventId);
                 if (subEvent) {
-                    description = `<strong>${subEvent.title}</strong><br>${subEvent.description}`;
+                    dataToShow = subEvent;
+                    parentEventId = eventId;
                 }
             }
 
-            modalTitle.textContent = data.title;
-            modalDate.textContent = data.date;
-            modalDescription.innerHTML = description;
+            modalBackBtn.classList.toggle('hidden', !parentEventId);
+            if(parentEventId) {
+                modalBackBtn.onclick = () => openModal(parentEventId);
+            }
+
+
+            currentEventIndex = allEventTriggers.findIndex(trigger => trigger.dataset.eventId === eventId);
+            modalPrevBtn.style.display = currentEventIndex > 0 && !parentEventId ? 'block' : 'none';
+            modalNextBtn.style.display = currentEventIndex < allEventTriggers.length - 1 && !parentEventId ? 'block' : 'none';
+
+            modalTitle.textContent = dataToShow.title;
+            modalDate.textContent = dataToShow.date || eventData.date; // Fallback to parent date
+            modalDescription.innerHTML = dataToShow.description;
 
             const rumor = (() => {
-                if (!data.rumors || data.rumors.length === 0) {
+                const rumors = dataToShow.rumors || eventData.rumors;
+                if (!rumors || rumors.length === 0) {
                     return "No rumors surround this event. It is a plain and simple fact.";
                 }
-                const randomIndex = Math.floor(Math.random() * data.rumors.length);
-                return data.rumors[randomIndex];
+                const randomIndex = Math.floor(Math.random() * rumors.length);
+                return rumors[randomIndex];
             })();
             modalRumor.textContent = rumor;
 
             modalContent.className = 'modal-content-base'; // Reset classes
-            if (data.theme) {
-                modalContent.classList.add(`modal-theme-${data.theme}`);
+            const theme = dataToShow.theme || eventData.theme;
+            if (theme) {
+                modalContent.classList.add(`modal-theme-${theme}`);
             }
 
             // --- Navigation Button Styling ---
@@ -843,9 +924,11 @@
                 marble: '#777',
                 mosaic: '#5d4037'
             };
-            const buttonColor = themeColors[data.theme] || '#fff'; // Default to white
+            const buttonColor = themeColors[theme] || '#fff'; // Default to white
             modalPrevBtn.style.color = buttonColor;
             modalNextBtn.style.color = buttonColor;
+            modalBackBtn.style.color = buttonColor;
+
 
             modalBackdrop.classList.remove('hidden');
             modalContainer.classList.remove('hidden');
@@ -865,6 +948,21 @@
                 modalContainer.classList.add('hidden');
             }, 300);
         }
+
+        function initializeSubEventListeners() {
+            document.querySelectorAll('.sub-event-trigger').forEach(trigger => {
+                if (trigger.dataset.listenerAttached) return;
+
+                trigger.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent card's click listener from firing
+                    const parentId = trigger.dataset.parentEventId;
+                    const subId = trigger.dataset.subEventId;
+                    openModal(parentId, subId);
+                });
+                trigger.dataset.listenerAttached = 'true';
+            });
+        }
+
         function initializeModalListeners() {
             function checkUrlForEvent() {
                 const params = new URLSearchParams(window.location.search);
