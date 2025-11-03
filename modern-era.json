@@ -1,80 +1,133 @@
 [
-  {
-    "id": 1,
-    "theme": "scroll",
-    "date": "75 BEC",
-    "title": "Pirates!",
-    "summary": "A sudden surge in piracy disrupts trade routes along the coast.",
-    "description": "A sudden and dramatic surge in piracy disrupts major trade routes, threatening the stability of coastal nations and the Gilded Nations' wealth.",
-    "rumors": [
-      "They say the pirates aren't random at all... they're funded by a disgruntled noble from Arfordir.",
-      "I heard the 'pirates' are actually just illusions created by a sea witch who's angry at the trade guilds.",
-      "It's not pirates, it's a sea monster! Waking up after that two-year winter."
-    ]
-  },
-  {
-    "id": 2,
-    "theme": "scroll",
-    "date": "75 BEC",
-    "title": "Wyss Ascends",
-    "summary": "Wyss defeats the Cave Mother, claiming leadership over the first layer of Hell.",
-    "description": "The enigmatic figure known as Wyss successfully defeated the Cave Mother, a powerful chthonic entity. Wyss has now claimed leadership and control over the first layer of Hell.",
-    "rumors": [
-      "Wyss didn't *kill* the Cave Mother. They *merged* with it. That's why they're so powerful now.",
-      "The gods are silent because Wyss is doing their dirty work, cleaning up the Hells after Malchor vanished.",
-      "I heard Wyss is just a puppet for a greater, unknown power from the Far Realm."
-    ]
-  },
-  {
-    "id": 3,
-    "theme": "scroll",
-    "date": "73 BEC",
-    "title": "Shadowfell Attack on Delphi",
-    "summary": "The Witches' Council of Delphi repels a major incursion from the Shadowfell.",
-    "description": "A coordinated, large-scale attack on Delphi was launched by forces from the Shadowfell. The Witches' Council managed to repel the incursion, but the city was damaged and the veil between planes was weakened.",
-    "rumors": [
-      "The attack was a distraction. While the witches fought the shades, a single assassin stole something from the archives.",
-      "It wasn't the Shadowfell. It was a test by the *Atheneum* to see how strong the witches really are.",
-      "One of the witches *inside* Delphi opened the portal. They're hunting for a traitor now."
-    ]
-  },
-  {
-    "id": 4,
-    "theme": "scroll",
-    "date": "71 BEC",
-    "title": "The Endless Winter's End",
-    "summary": "A group known as the 'Frozen Rose' defeats the goddess Morena, ending a two-year-long winter.",
-    "description": "After two years of magical winter, a group of adventurers calling themselves the 'Frozen Rose' located and defeated the rogue goddess Morena. The snows have finally begun to thaw.",
-    "rumors": [
-      "They didn't 'defeat' Morena. They just reminded her of a lost love, and she let the world go.",
-      "The 'Frozen Rose' are frauds. The winter ended on its own schedule. They just took the credit.",
-      "The goddess Morena isn't defeated, she's just *trapped* inside a glacier. The one Winrich was in. What if she breaks out... with him?"
-    ]
-  },
-  {
-    "id": 5,
-    "theme": "scroll",
-    "date": "50 BEC",
-    "title": "Founding of the Atheneum",
-    "summary": "The Wizard's Council formally establishes the Atheneum on lands from the Last Elven State.",
-    "description": "Seeking to centralize and regulate magical study, the Wizard's Council re-formed as the Atheneum. They were granted lands from the former Last Elven State to build their academies.",
-    "rumors": [
-      "The Atheneum is just a way for the elves to control human magic. All the real power is still held by elven archmages.",
-      "They built the Atheneum on the ruins of the Crystal Spire. The place is haunted, and magic there is... strange.",
-      "The first act of the Atheneum was to lock away the knowledge of rune magic. They're afraid of the old ways."
-    ]
-  },
-  {
-    "id": 6,
-    "theme": "scroll",
-    "date": "-25 BEC",
-    "title": "The Stars Fall",
-    "summary": "As prophesied, the stars fall from the sky, a cataclysm that marks the true beginning of the new era.",
-    "description": "The Starfall Prophecy was fulfilled. In a cataclysmic event, the stars fell from the sky, impacting the world and reshaping coastlines, politics, and magic itself. This is the true start of the Modern Era.",
-    "rumors": [
-      "They weren't stars. They were the *ships* of the Giants, returning from space. And they crashed.",
-      "Each fallen star is a divine spark. Anyone who finds one can become a god. Or a monster.",
-      "The gods didn't *cause* the stars to fall. The planar barrier *failed*, and this was the result. They're just as scared as we are."
-    ]
-  }
+    {
+        "id": 6,
+        "order_id": "05000",
+        "theme": "scroll",
+        "date": "-25 BEC",
+        "title": "The Stars Fall",
+        "summary": "As prophesied, the stars fall from the sky, a cataclysm that marks the true beginning of the new era.",
+        "short_description": "The Starfall Prophecy is fulfilled as the stars fall from the sky, a cataclysm that reshapes the world and marks the true beginning of the Modern Era.",
+        "description": "The Starfall Prophecy was fulfilled. In a cataclysmic event, the stars fell from the sky, impacting the world and reshaping coastlines, politics, and magic itself. This is the true start of the Modern Era.",
+        "tags": [
+            "prophecy",
+            "cataclysm",
+            "divine"
+        ],
+        "rumors": [
+            "They weren't stars. They were the *ships* of the Giants, returning from space. And they crashed.",
+            "Each fallen star is a divine spark. Anyone who finds one can become a god. Or a monster.",
+            "The gods didn't *cause* the stars to fall. The planar barrier *failed*, and this was the result. They're just as scared as we are."
+        ]
+    },
+    {
+        "id": 5,
+        "order_id": "05001",
+        "theme": "scroll",
+        "date": "50 BEC",
+        "title": "Founding of the Atheneum",
+        "summary": "The Wizard's Council formally establishes the Atheneum on lands from the Last Elven State.",
+        "short_description": "The Wizard's Council re-forms as the Atheneum, centralizing and regulating magical study on lands granted by the Last Elven State.",
+        "description": "Seeking to centralize and regulate magical study, the Wizard's Council re-formed as the Atheneum. They were granted lands from the former Last Elven State to build their academies.",
+        "tags": [
+            "magic",
+            "politics",
+            "education"
+        ],
+        "rumors": [
+            "The Atheneum is just a way for the elves to control human magic. All the real power is still held by elven archmages.",
+            "They built the Atheneum on the ruins of the Crystal Spire. The place is haunted, and magic there is... strange.",
+            "The first act of the Atheneum was to lock away the knowledge of rune magic. They're afraid of the old ways."
+        ]
+    },
+    {
+        "id": 4,
+        "order_id": "05002",
+        "theme": "scroll",
+        "date": "71 BEC",
+        "title": "The Endless Winter's End",
+        "summary": "A group known as the 'Frozen Rose' defeats the goddess Morena, ending a two-year-long winter.",
+        "short_description": "A group of adventurers known as the 'Frozen Rose' defeats the rogue goddess Morena, ending a two-year-long magical winter.",
+        "description": "After two years of magical winter, a group of adventurers calling themselves the 'Frozen Rose' located and defeated the rogue goddess Morena. The snows have finally begun to thaw.",
+        "tags": [
+            "divine",
+            "climate",
+            "heroism"
+        ],
+        "rumors": [
+            "They didn't 'defeat' Morena. They just reminded her of a lost love, and she let the world go.",
+            "The 'Frozen Rose' are frauds. The winter ended on its own schedule. They just took the credit.",
+            "The goddess Morena isn't defeated, she's just *trapped* inside a glacier. The one Winrich was in. What if she breaks out... with him?"
+        ]
+    },
+    {
+        "id": 3,
+        "order_id": "05003",
+        "theme": "scroll",
+        "date": "73 BEC",
+        "title": "Shadowfell Attack on Delphi",
+        "summary": "The Witches' Council of Delphi repels a major incursion from the Shadowfell.",
+        "short_description": "The Witches' Council of Delphi repels a major, coordinated incursion from the Shadowfell, though the city is damaged.",
+        "description": "A coordinated, large-scale attack on Delphi was launched by forces from the Shadowfell. The Witches' Council managed to repel the incursion, but the city was damaged and the veil between planes was weakened.",
+        "tags": [
+            "magic",
+            "conflict",
+            "planar"
+        ],
+        "rumors": [
+            "The attack was a distraction. While the witches fought the shades, a single assassin stole something from the archives.",
+            "It wasn't the Shadowfell. It was a test by the *Atheneum* to see how strong the witches really are.",
+            "One of the witches *inside* Delphi opened the portal. They're hunting for a traitor now."
+        ]
+    },
+    {
+        "id": 1,
+        "order_id": "05004",
+        "theme": "scroll",
+        "date": "75 BEC",
+        "title": "Pirates!",
+        "summary": "A sudden surge in piracy disrupts trade routes along the coast.",
+        "short_description": "A sudden and dramatic surge in piracy disrupts major trade routes, threatening the stability of coastal nations.",
+        "description": "A sudden and dramatic surge in piracy disrupts major trade routes, threatening the stability of coastal nations and the Gilded Nations' wealth.",
+        "tags": [
+            "maritime",
+            "conflict",
+            "economy"
+        ],
+        "rumors": [
+            "They say the pirates aren't random at all... they're funded by a disgruntled noble from Arfordir.",
+            "I heard the 'pirates' are actually just illusions created by a sea witch who's angry at the trade guilds.",
+            "It's not pirates, it's a sea monster! Waking up after that two-year winter."
+        ],
+        "sub_events": [
+            {
+                "id": "1a",
+                "title": "The Sinking of the Gilded Lily",
+                "description": "The Gilded Lily, a flagship of the Merchant's Guild, is sunk off the coast of Arfordir, marking the first major incident in the piracy surge."
+            },
+            {
+                "id": "1b",
+                "title": "The Blockade of Port Authority",
+                "description": "A pirate fleet blockades Port Authority, the busiest port in the Gilded Nations, causing economic chaos."
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "order_id": "05006",
+        "theme": "scroll",
+        "date": "75 BEC",
+        "title": "Wyss Ascends",
+        "summary": "Wyss defeats the Cave Mother, claiming leadership over the first layer of Hell.",
+        "short_description": "The enigmatic figure known as Wyss defeats a powerful chthonic entity and claims leadership over the first layer of Hell.",
+        "description": "The enigmatic figure known as Wyss successfully defeated the Cave Mother, a powerful chthonic entity. Wyss has now claimed leadership and control over the first layer of Hell.",
+        "tags": [
+            "supernatural",
+            "politics"
+        ],
+        "rumors": [
+            "Wyss didn't *kill* the Cave Mother. They *merged* with it. That's why they're so powerful now.",
+            "The gods are silent because Wyss is doing their dirty work, cleaning up the Hells after Malchor vanished.",
+            "I heard Wyss is just a puppet for a greater, unknown power from the Far Realm."
+        ]
+    }
 ]
