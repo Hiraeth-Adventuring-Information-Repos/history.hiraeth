@@ -258,6 +258,30 @@
             transform: translateX(-50%) translateY(4px);
         }
 
+        .star-tooltip {
+            position: absolute;
+            bottom: 150%; /* Position above the star */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            width: 250px; /* Fixed width */
+            text-align: center;
+            font-size: 0.875rem; /* 14px */
+            white-space: normal; /* Allow text to wrap */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            pointer-events: none; /* Ignore mouse events */
+        }
+
+        .star.clickable:hover .star-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* Twinkle Animation */
         @keyframes twinkle {
             0% { opacity: 0.4; }
@@ -271,7 +295,7 @@
         /* Base style for all modal content */
         .modal-content-base {
             width: 100%;
-            max-width: 3xl; /* 768px */
+            max-width: 2xl; /* 672px */
             max-height: 90vh;
             overflow-y: auto;
             border-radius: 12px;
@@ -576,9 +600,11 @@
 
         // Function to create a star event HTML string for star-chart sections
         function createStarEvent(event) {
+            const summary = event.description.substring(0, 150) + '...';
             return `
                 <div class="event-trigger star clickable" data-event-id="${event.id}" data-theme="${event.theme}" style="top: ${event.position.top}; left: ${event.position.left};">
                     <span class="star-label">${event.title}</span>
+                    <span class="star-tooltip">${summary}</span>
                 </div>
             `;
         }
