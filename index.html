@@ -365,6 +365,9 @@
             transition: color 0.2s;
         }
 
+        #modal-back-btn {
+            z-index: 10;
+        }
         /* Rumor Box */
         .rumor-box {
             margin-top: 1.5rem;
@@ -572,7 +575,7 @@
     <div id="modal-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 scale-95">
         <div id="modal-content" class="modal-content-base">
             
-            <button id="modal-back-btn" class="hidden absolute top-6 left-6 text-xl hover:underline">&larr; Back</button>
+            <button id="modal-back-btn" class="hidden absolute top-12 left-4 text-xl hover:underline">&larr; Back</button>
             <button id="modal-close-btn">&times;</button>
 
             <!-- Navigation Buttons -->
@@ -608,8 +611,35 @@
             };
         }
 
+        function parseNonStandardDate(dateStr) {
+            const dateMap = {
+                "before the beginning": -Infinity,
+                "the beginning": -900000,
+                "proto-history": -800000,
+                "creation age": -700000,
+                "end of the ante-diluvian era": -600000,
+                "early dragon's age": -500000,
+                "the dragon's age": -400000,
+                "late dragon's age": -300000,
+                "end of the dragon's age": -200000,
+            };
+            const normalized = dateStr.toLowerCase().trim();
+            for (const key in dateMap) {
+                if (normalized.startsWith(key)) {
+                    return dateMap[key];
+                }
+            }
+            return null;
+        }
+
         function parseDate(dateStr) {
             if (!dateStr) return null;
+
+            const nonStandardDate = parseNonStandardDate(dateStr);
+            if (nonStandardDate !== null) {
+                return nonStandardDate;
+            }
+
             let normalized = dateStr.toLowerCase().replace(/c\.\s*/, '').trim();
 
             if (normalized.includes("billion years ago")) {
@@ -899,7 +929,20 @@
 
             modalTitle.textContent = dataToShow.title;
             modalDate.textContent = dataToShow.date || eventData.date; // Fallback to parent date
-            modalDescription.innerHTML = dataToShow.description;
+
+            let finalDescription = dataToShow.description;
+            if (!parentEventId && eventData.sub_events) {
+                finalDescription += '<h4 class="text-xl font-bold mt-6 mb-2">Sub-events:</h4><ul class="list-disc pl-5 space-y-2">';
+                eventData.sub_events.forEach(sub => {
+                    finalDescription += `<li><span class="sub-event-trigger hover:underline cursor-pointer" data-parent-event-id="${eventId}" data-sub-event-id="${sub.id}">${sub.title}</span></li>`;
+                });
+                finalDescription += '</ul>';
+            }
+            modalDescription.innerHTML = finalDescription;
+
+            if (!parentEventId && eventData.sub_events) {
+                initializeSubEventListeners();
+            }
 
             const rumor = (() => {
                 const rumors = dataToShow.rumors || eventData.rumors;
