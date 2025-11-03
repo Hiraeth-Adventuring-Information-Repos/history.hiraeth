@@ -258,6 +258,30 @@
             transform: translateX(-50%) translateY(4px);
         }
 
+        .star-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            white-space: normal;
+            width: 250px;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            pointer-events: none;
+        }
+
+        .star.clickable:hover .star-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* Twinkle Animation */
         @keyframes twinkle {
             0% { opacity: 0.4; }
@@ -652,8 +676,9 @@
         function createStarEvent(event) {
             const summary = event.summary || event.description.substring(0, 100) + '...';
             return `
-                <div class="event-trigger star clickable" data-event-id="${event.id}" data-theme="${event.theme}" style="top: ${event.position.top}; left: ${event.position.left};" title="${summary}">
+                <div class="event-trigger star clickable" data-event-id="${event.id}" data-theme="${event.theme}" style="top: ${event.position.top}; left: ${event.position.left};">
                     <span class="star-label">${event.title}</span>
+                    <span class="star-tooltip">${summary}</span>
                 </div>
             `;
         }
