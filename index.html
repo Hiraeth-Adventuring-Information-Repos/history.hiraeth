@@ -300,7 +300,7 @@
             overflow-y: auto;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            padding: 2.5rem;
+            padding: 2.5rem 4rem;
             position: relative;
         }
         
@@ -629,6 +629,9 @@
 
             <button id="modal-prev-btn" class="modal-nav-btn">&lsaquo;</button>
             <button id="modal-next-btn" class="modal-nav-btn">&rsaquo;</button>
+            <!-- Navigation Buttons -->
+            <button id="modal-prev-btn" class="absolute left-4 top-1/2 -translate-y-1/2 text-4xl hover:text-white transition-colors">&larr;</button>
+            <button id="modal-next-btn" class="absolute right-4 top-1/2 -translate-y-1/2 text-4xl hover:text-white transition-colors">&rarr;</button>
             
             <h3 id="modal-title" class="text-4xl font-bold mb-2">Event Title Goes Here</h3>
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
@@ -657,6 +660,8 @@
     <script>
         // --- DYNAMIC DATA LOADING & RENDERING ---
         const timelineData = {}; // Global object to hold all event data after fetching.
+        let allEventTriggers = []; // To be populated once after data loads.
+        let currentEventIndex = -1; // To track the currently open event.
 
         // Function to create an event card HTML string
         function createEventCard(event, eraClass) {
@@ -725,7 +730,8 @@
                     }
                 });
 
-                // After all content is injected, re-initialize the modal listeners
+                // After all content is injected, store the event triggers and initialize listeners
+                allEventTriggers = Array.from(document.querySelectorAll('.event-trigger'));
                 initializeModalListeners();
 
             } catch (error) {
@@ -775,6 +781,12 @@
                 return;
             }
 
+            // --- Navigation & State Update ---
+            currentEventIndex = allEventTriggers.findIndex(trigger => trigger.dataset.eventId === eventId);
+
+            modalPrevBtn.style.display = currentEventIndex > 0 ? 'block' : 'none';
+            modalNextBtn.style.display = currentEventIndex < allEventTriggers.length - 1 ? 'block' : 'none';
+
             modalTitle.textContent = data.title;
             modalDate.textContent = data.date;
             modalDescription.textContent = data.description;
@@ -795,6 +807,17 @@
                 modalContent.classList.add(`modal-theme-${data.theme}`);
                 shareBtn.classList.add(`modal-theme-${data.theme}`);
             }
+
+            // --- Navigation Button Styling ---
+            const themeColors = {
+                scroll: '#795548',
+                tablet: '#ccc',
+                marble: '#777',
+                mosaic: '#5d4037'
+            };
+            const buttonColor = themeColors[data.theme] || '#fff'; // Default to white
+            modalPrevBtn.style.color = buttonColor;
+            modalNextBtn.style.color = buttonColor;
 
             modalBackdrop.classList.remove('hidden');
             modalContainer.classList.remove('hidden');
@@ -833,9 +856,6 @@
         }
 
         function initializeModalListeners() {
-            allEventTriggers = Array.from(document.querySelectorAll('.event-trigger'));
-            const shareBtn = document.getElementById('modal-share-btn');
-
             function checkUrlForEvent() {
                 const params = new URLSearchParams(window.location.search);
                 const eventId = params.get('event');
@@ -857,9 +877,21 @@
             if (!modalBackdrop.dataset.listenerAttached) {
                 modalBackdrop.addEventListener('click', closeModal);
                 modalCloseBtn.addEventListener('click', closeModal);
-                modalPrevBtn.addEventListener('click', navigateToPrevEvent);
-                modalNextBtn.addEventListener('click', navigateToNextEvent);
-                shareBtn.addEventListener('click', shareEvent);
+
+                modalPrevBtn.addEventListener('click', () => {
+                    if (currentEventIndex > 0) {
+                        const prevEventId = allEventTriggers[currentEventIndex - 1].dataset.eventId;
+                        openModal(prevEventId);
+                    }
+                });
+
+                modalNextBtn.addEventListener('click', () => {
+                    if (currentEventIndex < allEventTriggers.length - 1) {
+                        const nextEventId = allEventTriggers[currentEventIndex + 1].dataset.eventId;
+                        openModal(nextEventId);
+                    }
+                });
+
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
                         closeModal();
