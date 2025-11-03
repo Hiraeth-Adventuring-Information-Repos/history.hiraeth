@@ -585,10 +585,10 @@
 
         // Function to create an event card HTML string
         function createEventCard(event, eraClass) {
-            const summary = event.summary || event.description.substring(0, 100) + '...';
+            const summary = event.short_description || event.summary || event.description.substring(0, 100) + '...';
             // Specific text color for 'modern' cards, others use the default from their CSS
             const textColorClass = eraClass === 'modern' ? 'text-gray-700' : '';
-            const pTag = eraClass !== 'unification' ? `<p class="${textColorClass}">${summary}</p>` : `<p>${event.summary}</p>`
+            const pTag = eraClass !== 'unification' ? `<p class="${textColorClass}">${summary}</p>` : `<p>${summary}</p>`
             return `
                 <div class="event-trigger event-card ${eraClass}" data-event-id="${event.id}" data-theme="${event.theme}">
                     <p class="event-date text-sm mb-2">${event.date}</p>
@@ -600,7 +600,7 @@
 
         // Function to create a star event HTML string for star-chart sections
         function createStarEvent(event) {
-            const summary = event.description.substring(0, 150) + '...';
+            const summary = event.short_description || event.description.substring(0, 150) + '...';
             return `
                 <div class="event-trigger star clickable" data-event-id="${event.id}" data-theme="${event.theme}" style="top: ${event.position.top}; left: ${event.position.left};">
                     <span class="star-label">${event.title}</span>

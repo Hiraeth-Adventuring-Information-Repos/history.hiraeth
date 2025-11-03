@@ -5,6 +5,7 @@
     "date": "-1,200 BEC",
     "title": "Shattering of the Crystal Spire",
     "summary": "A magical catastrophe leads to the collapse of a significant elven structure, causing elven distrust.",
+    "short_description": "A magical catastrophe, rumored to be an elven experiment gone wrong, leads to the collapse of the Crystal Spire and the end of the First Elven State.",
     "description": "A magical catastrophe, rumored to be an elven experiment gone wrong, leads to the collapse of the Crystal Spire. This causes a deep distrust among elven governments, ending the 'First Elven State'.",
     "rumors": [
       "It wasn't an 'experiment.' It was an *attack* by the first human wizards, who were jealous of elven power.",
@@ -18,6 +19,7 @@
     "date": "-1,500 BEC",
     "title": "Fourth Witches' Council",
     "summary": "The fourth Witches' Council of Delphi is formed in response to growing magical threats.",
+    "short_description": "The fourth Witches' Council of Delphi is formed to interpret and, if possible, prevent the catastrophic Starfall Prophecy.",
     "description": "The fourth Witches' Council of Delphi is formed, this time to interpret and, if possible, prevent the catastrophic Starfall Prophecy.",
     "rumors": [
       "The fourth council was a failure. They split into two factions: one to stop the prophecy, one to *ensure* it happened.",
@@ -31,6 +33,7 @@
     "date": "-1,500 BEC",
     "title": "The Starfall Prophecy",
     "summary": "Celestial beings foretell a war that will cause the stars themselves to fall upon the world.",
+    "short_description": "Celestial beings deliver a prophecy foretelling a great war that will end with the stars themselves falling from the sky.",
     "description": "Celestial beings, in a rare moment of direct contact, foretell a great war that will end with the stars themselves falling from the sky.",
     "rumors": [
       "The 'celestial beings' were just the Giants, trying to warn us from their new home.",
@@ -44,6 +47,7 @@
     "date": "-2,000 BEC",
     "title": "Codification of Divine Law",
     "summary": "The gods organize their followers, establishing the first formal temples and divine orders.",
+    "short_description": "The gods establish the first formal temples and divine orders, codifying the laws of their priesthoods.",
     "description": "The gods, seeing mortals organize, decide to do the same. They establish the first temples, divine orders, and lay down the laws of their priesthoods.",
     "rumors": [
       "The 'laws' were just the gods arguing over which of them got which portfolio.",
