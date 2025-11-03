@@ -341,6 +341,34 @@
             transition: color 0.2s;
         }
 
+        /* Modal Navigation */
+        .modal-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        #modal-prev-btn {
+            left: -60px;
+        }
+        #modal-next-btn {
+            right: -60px;
+        }
+
         /* Rumor Box */
         .rumor-box {
             margin-top: 1.5rem;
@@ -573,6 +601,9 @@
         <div id="modal-content" class="modal-content-base">
             
             <button id="modal-close-btn">&times;</button>
+
+            <button id="modal-prev-btn" class="modal-nav-btn">&lsaquo;</button>
+            <button id="modal-next-btn" class="modal-nav-btn">&rsaquo;</button>
             
             <h3 id="modal-title" class="text-4xl font-bold mb-2">Event Title Goes Here</h3>
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
@@ -619,10 +650,10 @@
 
         // Function to create a star event HTML string for star-chart sections
         function createStarEvent(event) {
-            const summary = event.summary || event.title;
+            const summary = event.summary || event.description.substring(0, 100) + '...';
             return `
-                <div class="event-trigger star clickable" data-event-id="${event.id}" data-theme="${event.theme}" style="top: ${event.position.top}; left: ${event.position.left};">
-                    <span class="star-label">${summary}</span>
+                <div class="event-trigger star clickable" data-event-id="${event.id}" data-theme="${event.theme}" style="top: ${event.position.top}; left: ${event.position.left};" title="${summary}">
+                    <span class="star-label">${event.title}</span>
                 </div>
             `;
         }
@@ -685,6 +716,8 @@
         const modalContainer = document.getElementById('modal-container');
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalPrevBtn = document.getElementById('modal-prev-btn');
+        const modalNextBtn = document.getElementById('modal-next-btn');
 
         const modalTitle = document.getElementById('modal-title');
         const modalDate = document.getElementById('modal-date');
@@ -692,6 +725,21 @@
         const modalRumor = document.getElementById('modal-rumor');
 
         let currentEventId = null;
+        let allEventTriggers = []; // To store all triggers in order
+
+        function navigateToNextEvent() {
+            const currentIndex = allEventTriggers.findIndex(trigger => trigger.dataset.eventId === currentEventId);
+            const nextIndex = (currentIndex + 1) % allEventTriggers.length;
+            const nextEventId = allEventTriggers[nextIndex].dataset.eventId;
+            openModal(nextEventId);
+        }
+
+        function navigateToPrevEvent() {
+            const currentIndex = allEventTriggers.findIndex(trigger => trigger.dataset.eventId === currentEventId);
+            const prevIndex = (currentIndex - 1 + allEventTriggers.length) % allEventTriggers.length;
+            const prevEventId = allEventTriggers[prevIndex].dataset.eventId;
+            openModal(prevEventId);
+        }
 
         function openModal(eventId) {
             currentEventId = eventId;
@@ -759,7 +807,7 @@
         }
 
         function initializeModalListeners() {
-            const eventTriggers = document.querySelectorAll('.event-trigger');
+            allEventTriggers = Array.from(document.querySelectorAll('.event-trigger'));
             const shareBtn = document.getElementById('modal-share-btn');
 
             function checkUrlForEvent() {
@@ -770,7 +818,7 @@
                 }
             }
 
-            eventTriggers.forEach(trigger => {
+            allEventTriggers.forEach(trigger => {
                 if (trigger.dataset.listenerAttached) return;
 
                 trigger.addEventListener('click', () => {
@@ -783,6 +831,8 @@
             if (!modalBackdrop.dataset.listenerAttached) {
                 modalBackdrop.addEventListener('click', closeModal);
                 modalCloseBtn.addEventListener('click', closeModal);
+                modalPrevBtn.addEventListener('click', navigateToPrevEvent);
+                modalNextBtn.addEventListener('click', navigateToNextEvent);
                 shareBtn.addEventListener('click', shareEvent);
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
