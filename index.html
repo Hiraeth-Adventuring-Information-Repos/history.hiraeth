@@ -389,8 +389,18 @@
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
     </button>
 
-    <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-900 bg-opacity-90 backdrop-blur-sm text-white z-40 transform -translate-x-full transition-transform duration-300 ease-in-out">
-        <nav class="mt-16">
+    <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-900 bg-opacity-90 backdrop-blur-sm text-white z-40 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
+        <div class="p-4 mt-16">
+            <input type="text" id="sidebar-search-input" placeholder="Search..." class="w-full px-3 py-2 rounded-md bg-gray-800 text-white border-gray-700 focus:outline-none focus:ring-1 focus:ring-purple-500">
+        </div>
+        <div class="px-6 py-4">
+            <h3 class="text-lg font-semibold mb-2">Filter by Tag</h3>
+            <div id="tag-filters" class="space-y-2">
+                <!-- Tags will be dynamically populated here -->
+            </div>
+        </div>
+        <nav>
+            <h3 class="px-6 py-2 text-lg font-semibold">Eras</h3>
             <a href="#modern-era" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Modern Era</a>
             <a href="#unification-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Unification Age</a>
             <a href="#mythic-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Mythic Age</a>
@@ -406,6 +416,9 @@
         <header class="text-center py-20 px-4" style="background: radial-gradient(ellipse at 50% 100%, #1a1a2e 0%, #0c0a1a 80%);">
             <h1 class="text-6xl md:text-7xl font-bold text-white mb-4">The Hiraeth Timeline</h1>
             <p class="text-2xl text-gray-300 italic">A Celestial Descent Through the Ages</p>
+            <div class="mt-8 max-w-xl mx-auto">
+                <input type="text" id="search-input" placeholder="Search events..." class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
         </header>
 
         <!-- 
@@ -582,18 +595,104 @@
         const timelineData = {}; // Global object to hold all event data after fetching.
         let allEventTriggers = []; // To be populated once after data loads.
         let currentEventIndex = -1; // To track the currently open event.
+        let allTags = new Set(); // To store all unique tags
+
+        // Debounce function to limit how often a function is called
+        function debounce(func, delay) {
+            let timeout;
+            return function(...args) {
+                const context = this;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), delay);
+            };
+        }
+
+        // Function to render the timeline based on current filters
+        function renderTimeline(searchTerm = '', selectedTags = []) {
+            const eras = [
+                { id: 'modern-era', file: 'modern-era.json', type: 'card', class: 'modern' },
+                { id: 'unification-age', file: 'unification-age.json', type: 'card', class: 'unification' },
+                { id: 'mythic-age', file: 'mythic-age.json', type: 'card', class: 'mythic' },
+                { id: 'classical-age', file: 'classical-age.json', type: 'card', class: 'classical' },
+                { id: 'ancient-era', file: 'ancient-era.json', type: 'star' },
+                { id: 'antediluvian-age', file: 'antediluvian-age.json', type: 'star' }
+            ];
+
+            eras.forEach(era => {
+                const container = era.type === 'card'
+                    ? document.querySelector(`#${era.id} .grid`)
+                    : document.querySelector(`#${era.id} .star-chart-container`);
+
+                if (container) {
+                    let htmlContent = '';
+                    const eraData = Object.values(timelineData).filter(event => event.era === era.id);
+
+                    const filteredData = eraData.filter(event => {
+                        const searchTermLower = searchTerm.toLowerCase();
+                        const matchesSearch = searchTerm === '' ||
+                            event.title.toLowerCase().includes(searchTermLower) ||
+                            event.description.toLowerCase().includes(searchTermLower) ||
+                            (event.summary && event.summary.toLowerCase().includes(searchTermLower));
+
+                        const matchesTags = selectedTags.length === 0 ||
+                            selectedTags.every(tag => event.tags && event.tags.includes(tag));
+
+                        return matchesSearch && matchesTags;
+                    });
+
+                    if (era.type === 'card') {
+                        filteredData.forEach(event => {
+                            htmlContent += createEventCard(event, era.class);
+                        });
+                        container.innerHTML = htmlContent;
+                    } else { // star
+                        // Clear only the clickable stars, not the filler ones
+                        container.querySelectorAll('.clickable').forEach(el => el.remove());
+                        filteredData.forEach(event => {
+                            htmlContent += createStarEvent(event);
+                        });
+                        container.insertAdjacentHTML('beforeend', htmlContent);
+                    }
+                }
+            });
+
+            // Re-initialize triggers and listeners after rendering
+            allEventTriggers = Array.from(document.querySelectorAll('.event-trigger'));
+            initializeModalListeners();
+        }
+
 
         // Function to create an event card HTML string
         function createEventCard(event, eraClass) {
             const summary = event.short_description || event.summary || event.description.substring(0, 100) + '...';
-            // Specific text color for 'modern' cards, others use the default from their CSS
             const textColorClass = eraClass === 'modern' ? 'text-gray-700' : '';
-            const pTag = eraClass !== 'unification' ? `<p class="${textColorClass}">${summary}</p>` : `<p>${summary}</p>`
+            const pTag = eraClass !== 'unification' ? `<p class="${textColorClass}">${summary}</p>` : `<p>${summary}</p>`;
+
+            let subEventsHtml = '';
+            if (event.sub_events) {
+                subEventsHtml = '<ul class="mt-4 space-y-2">';
+                event.sub_events.forEach(sub => {
+                    subEventsHtml += `<li class="text-sm ${textColorClass}"><a href="?event=${event.id}&sub=${sub.id}" class="hover:underline">${sub.title}</a></li>`;
+                });
+                subEventsHtml += '</ul>';
+            }
+
+            let tagsHtml = '';
+            if (event.tags) {
+                tagsHtml = '<div class="mt-4 flex flex-wrap gap-2">';
+                event.tags.forEach(tag => {
+                    tagsHtml += `<span class="bg-gray-700 text-white text-xs px-2 py-1 rounded-full">${tag}</span>`;
+                });
+                tagsHtml += '</div>';
+            }
+
             return `
                 <div class="event-trigger event-card ${eraClass}" data-event-id="${event.id}" data-theme="${event.theme}">
                     <p class="event-date text-sm mb-2">${event.date}</p>
                     <h3 class="event-title text-2xl font-bold mb-3">${event.title}</h3>
                     ${pTag}
+                    ${subEventsHtml}
+                    ${tagsHtml}
                 </div>
             `;
         }
@@ -607,6 +706,26 @@
                     <span class="star-tooltip">${summary}</span>
                 </div>
             `;
+        }
+
+        // Function to populate tag filters in the sidebar
+        function populateTagFilters() {
+            const container = document.getElementById('tag-filters');
+            let htmlContent = '';
+            allTags.forEach(tag => {
+                htmlContent += `
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="tag-checkbox bg-gray-700 border-gray-600 rounded" value="${tag}">
+                        <span>${tag}</span>
+                    </label>
+                `;
+            });
+            container.innerHTML = htmlContent;
+
+            // Add event listeners to new checkboxes
+            document.querySelectorAll('.tag-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', handleFilterChange);
+            });
         }
 
         // Main function to fetch data and build the timeline
@@ -625,34 +744,18 @@
 
                 responses.forEach((eraData, index) => {
                     const era = eras[index];
-
-                    if (era.type === 'card') {
-                        const container = document.querySelector(`#${era.id} .grid`);
-                        if (container) {
-                            let htmlContent = '';
-                            eraData.forEach(event => {
-                                timelineData[event.id] = event; // Populate global data
-                                htmlContent += createEventCard(event, era.class);
-                            });
-                            container.innerHTML = htmlContent; // Replace content
+                    eraData.forEach(event => {
+                        event.era = era.id; // Assign era id to each event for filtering
+                        timelineData[event.id] = event; // Populate global data
+                        if (event.tags) {
+                            event.tags.forEach(tag => allTags.add(tag));
                         }
-                    } else if (era.type === 'star') {
-                        const container = document.querySelector(`#${era.id} .star-chart-container`);
-                        if (container) {
-                            let htmlContent = '';
-                             eraData.forEach(event => {
-                                timelineData[event.id] = event; // Populate global data
-                                htmlContent += createStarEvent(event);
-                            });
-                            // Append to keep the filler stars
-                            container.insertAdjacentHTML('beforeend', htmlContent);
-                        }
-                    }
+                    });
                 });
 
-                // After all content is injected, store the event triggers and initialize listeners
-                allEventTriggers = Array.from(document.querySelectorAll('.event-trigger'));
-                initializeModalListeners();
+                populateTagFilters();
+                renderTimeline(); // Initial render
+                setupEventListeners(); // Setup search and filter listeners
 
             } catch (error) {
                 console.error("Failed to load timeline data:", error);
@@ -661,6 +764,27 @@
                     header.insertAdjacentHTML('afterend', '<p class="text-center text-red-500">Failed to load timeline data. Please try refreshing the page.</p>');
                 }
             }
+        }
+
+        function handleFilterChange() {
+            const searchTerm = document.getElementById('search-input').value;
+            const selectedTags = Array.from(document.querySelectorAll('.tag-checkbox:checked')).map(cb => cb.value);
+            renderTimeline(searchTerm, selectedTags);
+        }
+
+        function setupEventListeners() {
+            const searchInput = document.getElementById('search-input');
+            const sidebarSearchInput = document.getElementById('sidebar-search-input');
+            const debouncedRender = debounce(handleFilterChange, 300);
+
+            searchInput.addEventListener('input', () => {
+                sidebarSearchInput.value = searchInput.value;
+                debouncedRender();
+            });
+            sidebarSearchInput.addEventListener('input', () => {
+                searchInput.value = sidebarSearchInput.value;
+                debouncedRender();
+            });
         }
 
         // --- MODAL SCRIPT (Modified to be initializable) ---
@@ -675,22 +799,28 @@
         const modalDate = document.getElementById('modal-date');
         const modalDescription = document.getElementById('modal-description');
         const modalRumor = document.getElementById('modal-rumor');
-        function openModal(eventId) {
+        function openModal(eventId, subEventId = null) {
             const data = timelineData[eventId];
             if (!data) {
                 console.error("No data found for eventId:", eventId);
                 return;
             }
 
-            // --- Navigation & State Update ---
             currentEventIndex = allEventTriggers.findIndex(trigger => trigger.dataset.eventId === eventId);
-
             modalPrevBtn.style.display = currentEventIndex > 0 ? 'block' : 'none';
             modalNextBtn.style.display = currentEventIndex < allEventTriggers.length - 1 ? 'block' : 'none';
 
+            let description = data.description;
+            if (subEventId && data.sub_events) {
+                const subEvent = data.sub_events.find(sub => sub.id === subEventId);
+                if (subEvent) {
+                    description = `<strong>${subEvent.title}</strong><br>${subEvent.description}`;
+                }
+            }
+
             modalTitle.textContent = data.title;
             modalDate.textContent = data.date;
-            modalDescription.textContent = data.description;
+            modalDescription.innerHTML = description;
 
             const rumor = (() => {
                 if (!data.rumors || data.rumors.length === 0) {
@@ -739,8 +869,9 @@
             function checkUrlForEvent() {
                 const params = new URLSearchParams(window.location.search);
                 const eventId = params.get('event');
+                const subEventId = params.get('sub');
                 if (eventId && timelineData[eventId]) {
-                    openModal(eventId);
+                    openModal(eventId, subEventId);
                 }
             }
 

@@ -7,6 +7,7 @@
     "summary": "Expeditions to reclaim Astrousia from dragon overlords meet mixed success; dragons rebrand as 'God Kings'.",
     "short_description": "Expeditions to reclaim Astrousia from dragon overlords meet mixed success, leading the dragons to rebrand as 'God Kings'.",
     "description": "Expeditions to reclaim the lost continent of Astrousia from dragon overlords result in mixed success. The surviving dragons rebrand as 'God Kings' to avoid further conflicts.",
+    "tags": ["dragon", "conflict", "exploration"],
     "rumors": [
       "The dragons *let* them win. It's easier to be a 'God King' than a 'dragon overlord.' Less paperwork.",
       "Astrousia isn't a continent. It's the back of a sleeping, world-sized turtle.",
@@ -21,6 +22,7 @@
     "summary": "The Atheneum forms within the First Elven State to fend off the Becarras barbarians.",
     "short_description": "The Atheneum, a complex government, forms within the First Elven State to fend off barbarian hordes.",
     "description": "The Atheneum forms within the First Elven State, a complex government designed to fend off the 'Becarras barbarians' (early Beccin peoples).",
+    "tags": ["elven", "politics", "conflict"],
     "rumors": [
       "The 'barbarians' were just humans who wanted their land back from the elves.",
       "The 'Atheneum' was just a library. The 'government' part came later, when the librarians got ambitious.",
@@ -35,6 +37,7 @@
     "summary": "A surge in arcane research leads to the creation of the first magical schools and academies.",
     "short_description": "A surge in arcane research leads to the creation of the first magical schools and academies, making magic a true field of study.",
     "description": "A surge in arcane research, fueled by 'Written Magic,' leads to the creation of the first magical schools and academies. Magic becomes a true field of study.",
+    "tags": ["magic", "education", "innovation"],
     "rumors": [
       "This 'renaissance' is what woke up the Ancient Evil that tricked Minos.",
       "The 'first academy' was just a pyramid scheme. You paid a fortune, and they taught you 'Prestidigitation'.",
@@ -49,6 +52,7 @@
     "summary": "The first true human civilizations emerge from scattered tribes and establish stable governance.",
     "short_description": "The first true human civilizations emerge from scattered tribes, establishing stable governance and building the first walled cities.",
     "description": "The first true human civilizations emerge from scattered tribes. Weary of chaos, they establish stable governance and build the first walled cities.",
+    "tags": ["human", "politics", "civilization"],
     "rumors": [
       "The 'First Kingdom' was ruled by a vampire. He's still ruling it, just under a different name.",
       "It was the elves who taught humans how to build cities, and they've regretted it ever view.",
@@ -63,6 +67,7 @@
     "summary": "Wizards begin codifying spells, leading to the first spellbooks. Older rune magic fades.",
     "short_description": "Wizards begin codifying spells into written language, leading to the first spellbooks and the decline of older rune magic.",
     "description": "Wizards begin codifying spells into written language, leading to the first spellbooks. This new 'easy' magic causes older traditions, like rune magic, to fade.",
+    "tags": ["magic", "innovation", "culture"],
     "rumors": [
       "Written magic is *weaker* than rune magic. It's just faster. It's quantity over quality.",
       "The first 'spellbook' was just a dragon's diary, which a human found and misunderstood.",
@@ -77,6 +82,7 @@
     "summary": "Dwarves descend into the Underdark to fight rising evil forces, securing their kingdom.",
     "short_description": "Dwarves descend into the Underdark to fight rising evil forces, securing their underground kingdoms.",
     "description": "Dwarves descend into the Underdark to fight rising evil forces (likely drow and illithids), securing their underground kingdoms. This war forces some drow deeper, into the true dark.",
+    "tags": ["dwarven", "conflict", "underdark"],
     "rumors": [
       "The dwarves didn't *win*. They just made a *deal* with the Mind Flayers. 'You stay on your side, we stay on ours.'",
       "The dwarves descended to chase a vein of mythical ore. The 'war' was just what they told the surface-dwellers.",
@@ -91,6 +97,7 @@
     "summary": "The gods end their bounty, believing (incorrectly) that all vile dragons have been eradicated.",
     "short_description": "The gods end their bounty on vile dragons, believing them all to be eradicated, forcing the remaining ones into hiding.",
     "description": "The gods officially end their bounty on vile dragons, believing (incorrectly) that all of them have been eradicated. The remaining dragons go into hiding or flee to Astrousia.",
+    "tags": ["dragon", "divine", "politics"],
     "rumors": [
       "The gods knew they weren't all dead. They just got *bored* and didn't want to pay the bounty anymore.",
       "The bounty hunters became a problem themselves, so the gods just fired them all.",

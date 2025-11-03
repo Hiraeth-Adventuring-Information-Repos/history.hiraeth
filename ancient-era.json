@@ -7,6 +7,7 @@
     "position": { "top": "95%", "left": "20%" },
     "short_description": "A divine civil war between dragons led to the imprisonment of a primordial god and the exile of the victor.",
     "description": "The Dragon's Age began with a divine civil war. `Voidos` favored his \"daughter\" Tiamat, encouraging her cruel, chaotic nature. This horrified his \"son\" Bahamut, who saw this as a perversion of their father's \"orderly\" aspect. Bahamut and his Metallic dragons rebelled against Voidos and Tiamat's Chromatic horde. Desperate to defeat a primordial god, Bahamut made a tragic pact with the `Ancient Evil`. Together, they imprisoned Voidos in a black hole. The war was won, but Bahamut, shamed by his alliance and his patricide, retreated from the world in self-imposed exile.",
+    "tags": ["dragon", "divine", "conflict"],
     "rumors": [
       "Bahamut did not \"ally\" with the Ancient Evil; he *released* it, and it turned on Voidos on its own, an act Bahamut now regrets.",
       "Tiamat and Bahamut were not the leaders; they were just figureheads for a war between the Gem dragons (for balance) and all the others.",
@@ -21,6 +22,7 @@
     "position": { "top": "90%", "left": "50%" },
     "short_description": "The gods tasked a long-lived mortal to trap a powerful evil entity within a massive, labyrinthine ship.",
     "description": "After the jailing of Voidos, the gods realized the `Ancient Evil`—unleashed by the Dragon Civil War—was too powerful to be left free. They turned to the one mortal who had survived their flood: the long-lived Elf, Utnopishtim. They tasked him with fighting and containing the entity. He converted his massive ship, \"The Maze,\" into a prison, successfully luring the Ancient Evil inside and trapping it within its labyrinthine halls.",
+    "tags": ["divine", "planar", "imprisonment"],
     "rumors": [
       "Utnopishtim did not *trap* the Ancient Evil; he *merged* with it to contain it, and now sails the Astral Sea as a monstrous entity.",
       "\"The Maze\" is not a ship; it is a pocket dimension, and it is hidden somewhere on the material plane.",
@@ -35,6 +37,7 @@
     "position": { "top": "85%", "left": "80%" },
     "short_description": "The Goddess of the Hearth created Gnomes to bring warmth, community, and invention to a cold world.",
     "description": "In the wake of the flood and the divine wars, the world was a cold place. `Hesta`, the Goddess of the Hearth and Gnomes, desired a race that embodied community, warmth, and invention. She created the Gnomes, infusing them with curiosity and a love for hearth and home, as a small beacon of comfort in the new age.",
+    "tags": ["gnome", "divine", "creation"],
     "rumors": [
       "Gnomes are not a new race, but Elves who were \"shrunk\" by the flood.",
       "Hesta created Gnomes to be the world's storytellers, to ensure the tragedies of the Creation Age were never forgotten."
@@ -48,6 +51,7 @@
     "position": { "top": "80%", "left": "35%" },
     "short_description": "Tiamat and her chromatic dragons established a brutal, planet-spanning empire known as the Zarate.",
     "description": "Bahamut won the war but lost the peace. With Voidos imprisoned and the Metallic flight shattered and in exile, Tiamat escaped destruction. She and her Chromatic horde filled the power vacuum, establishing a brutal, planet-spanning empire. This was the \"Zarate,\" a reign of terror under the Chromatic Zars, with Tiamat herself as the Dragon Queen. This is why the Dragon's Age is remembered as an era of supreme evil.",
+    "tags": ["dragon", "empire", "conflict"],
     "rumors": [
       "The \"Zar\" title wasn't draconic; it was a Giant word for \"slave-master,\" which the dragons adopted as a mockery.",
       "Bahamut was not in \"exile\"; he was imprisoned *by Tiamat*, who then ruled unopposed.",
@@ -62,6 +66,7 @@
     "position": { "top": "75%", "left": "65%" },
     "short_description": "The dragons' greed poisoned the land, giving birth to a new goddess of corruption.",
     "description": "In their greed, Tiamat's Zars began to hoard wealth. They enslaved mortals to strip-mine the entire region of Tewhal. Using cruel primal magic, they melted mountains for gold, poisoning the land and rivers with toxic, alchemical slag. This vast, \"unnatural\" wasteland *became* sentient. `Aspasia` was born from this blight, a Chaotic Evil goddess who reveled in the corruption. Some dragons became her first worshippers, using her \"gift\" of poison to destroy their rivals' lands.",
+    "tags": ["dragon", "divine", "corruption"],
     "rumors": [
       "Aspasia is not a \"new\" god, but an old, dark elemental spirit that was awakened and corrupted by the dragons' greed.",
       "She is the \"daughter\" of Tiamat and the land of Tewhal itself.",
@@ -76,6 +81,7 @@
     "position": { "top": "70%", "left": "25%" },
     "short_description": "A deadly sickness in the slave pits of Tewhal gave rise to the Goddess of Pestilence.",
     "description": "In the magically-irradiated, overcrowded slave pits of Tewhal, a new sickness emerged. It was not a natural cycle of `Worg`. It was a wasting, lung-choking pestilence, known to the Elves by the ancient name *Morivindë* (the \"Dark Breath\" or \"Withering Cough\"). This concentrated wave of unnatural suffering and slow death gave rise to `Asthenia`, the Goddess of Pestilence.",
+    "tags": ["plague", "divine", "suffering"],
     "rumors": [
       "`Asthenia` is `Aspasia`'s \"sister,\" born of the same blight.",
       "A dragon-worshipper of `Evelesco` engineered the plague, but it escaped his control and `Asthenia` was born from it.",
@@ -90,6 +96,7 @@
     "position": { "top": "65%", "left": "75%" },
     "short_description": "A young god created Humans, an adaptable race with great potential, much to the mockery of other gods.",
     "description": "A young god named `Arcana`, seeing the world dominated by the powerful (and evil) dragons, decided to create something new. He created Humans, a race defined not by power or long life, but by their adaptability and potential. The other gods mocked this creation, seeing Humans as short-lived, weak, and without a niche. \"They just exist,\" they scoffed.",
+    "tags": ["human", "divine", "creation"],
     "rumors": [
       "Humans were Arcana's *second* creation; his first was a failure so complete he erased it from history.",
       "The other gods weren't mocking Humans; they were *afraid* of them, as their short lives and ambition made them dangerously unpredictable."
@@ -103,6 +110,7 @@
     "position": { "top": "60%", "left": "45%" },
     "short_description": "The creator god of humans descended to live among them, giving them culture and a new language of magic.",
     "description": "Dejected by the gods' mockery, `Arcana` descended to join his \"failed\" children. His depression turned to a melancholy defiance. \"If they are nothing,\" he reasoned, \"I will *make* them something.\" He lived among them, giving them art, music, and alcohol to express their complex new emotions. To bridge the gap between their minds and magic, he invented a new language of power, \"Arcana,\" a system of words and runes that would one day allow them to command the Weave.",
+    "tags": ["human", "divine", "magic"],
     "rumors": [
       "Arcana didn't descend out of depression; he was *exiled* by the other gods for creating Humans without permission.",
       "He had a mortal lover among the humans, and their child was the first sorcerer.",
@@ -117,6 +125,7 @@
     "position": { "top": "55%", "left": "15%" },
     "short_description": "The creator god of humans was martyred by a dragon, and his blood created the magical Weave.",
     "description": "One of Tiamat's high Zars, a powerful ancient dragon, saw `Arcana` as a font of knowledge and a potential threat. The dragon captured Arcana and brought him to an island in the lake atop Mount Primo, torturing him for his divine power. Arcana refused. His human followers from Delphi rose up to save him, but were too late. The dragon slew Arcana. The gods were shocked. As Arcana died, his divine blood soaked into the fabric of reality, creating the Weave. This new force was chaotic, but mortals found they could access it using the *language of Arcana* he had taught them.",
+    "tags": ["human", "divine", "magic"],
     "rumors": [
       "Arcana wasn't killed; he *chose* to die, sacrificing himself to give his \"children\" a gift the other gods denied them.",
       "The dragon didn't want knowledge; Tiamat ordered Arcana's execution, seeing his \"empowerment\" of mortals as a direct threat to her Zarate.",
@@ -131,6 +140,7 @@
     "position": { "top": "50%", "left": "85%" },
     "short_description": "A clever opossum stole divine fire to save mortals from a magical winter.",
     "description": "With `Arcana` dead, the divine spark he provided to mortals was gone. `Morena`, Goddess of Winter, in a fit of mourning (or perhaps opportunism), unleashed a winter so cold it threatened to wipe out his creations. Mortals huddled, freezing and grieving. One of `Arcana`'s favorite creatures, a clever opossum, saw their plight. In a final act of loyalty to its master, it journeyed to the heavens, stole a piece of divine fire from `Hesta`'s own hearth, and carried it back in its tail. The fire saved the mortals, but the opossum's tail was scorched bare forever.",
+    "tags": ["human", "myth", "divine"],
     "rumors": [
       "The opossum didn't steal fire from Hesta; it stole it from the hearth of the very dragon that killed Arcana, an act of pure revenge.",
       "It wasn't an opossum, but an early human shaman who shape-shifted into one.",
@@ -145,6 +155,7 @@
     "position": { "top": "45%", "left": "50%" },
     "short_description": "The Goddess of the Hearth created dogs and cats as a tribute to the fallen god of humanity.",
     "description": "In the wake of `Arcana`'s death, `Hesta`, Goddess of the Hearth, sought to create a living tribute to him. She took the wolves and panthers that Arcana had loved and gently shaped them into domesticated dogs and cats. She gave them to mortals as companions, a way to bring comfort and loyalty to the hearth in memory of the fallen god.",
+    "tags": ["animal", "divine", "creation"],
     "rumors": [
       "Dogs and cats are not *new* creatures, but spirits of loyalty and comfort given physical form by Hesta.",
       "They were created to be spies for Hesta, to watch over the mortals who now had the dangerous gift of arcane magic."
@@ -158,6 +169,7 @@
     "position": { "top": "40%", "left": "20%" },
     "short_description": "The gods declared a holy war on the dragon empire to avenge the death of one of their own.",
     "description": "The murder of `Arcana` by Tiamat's general was the last straw. The gods' grief and rage unified them. This was a direct assault on their family by Tiamat's empire. In a great act of vengeance, and to protect Arcana's legacy (his \"children\" and his \"blood,\" the Weave), the gods declared a holy war on the Zarate. They taught mortals divine magic, creating the first Clerics and Paladins to serve as their dragon-slaying armies.",
+    "tags": ["dragon", "divine", "conflict"],
     "rumors": [
       "The gods didn't care about Arcana; they just used his death as an excuse to remove Tiamat, whose empire was becoming as powerful as their own.",
       "Bahamut and his few remaining Metallics secretly returned, teaching the first Paladins how to fight their kin.",
@@ -172,6 +184,7 @@
     "position": { "top": "35%", "left": "80%" },
     "short_description": "The Dragon Queen Tiamat was defeated and imprisoned in the First Circle of Hell.",
     "description": "The war against the Zarate reached its climax. Tiamat, the Dragon Queen, was finally cornered and defeated by the combined might of the gods' new mortal champions (the first Paladins and Clerics) and divine intervention. As punishment for her tyranny, her part in the Dragon Civil War, and her role in `Arcana`'s death, the gods `Worg`, `Minos`, and `Matrix` (the original forgers of Hell) bound her with divine chains. She was cast down and imprisoned in the First Circle of Hell, a prisoner later ruled by the upstart `Lilith`.",
+    "tags": ["dragon", "divine", "imprisonment"],
     "rumors": [
       "Tiamat was not *defeated* by mortals; she was betrayed from within by a Chromatic dragon who wanted her throne.",
       "Bahamut himself delivered the final blow, but could not bring himself to kill his \"sister,\" and so begged the gods to imprison her instead.",
@@ -187,6 +200,7 @@
     "position": { "top": "30%", "left": "40%" },
     "short_description": "The first mortal magic-users formed a council to study and guard the newly-created Weave.",
     "description": "In Delphi, the town that tried to save `Arcana`, the first mortals mastered the new Weave. The most powerful of these mages, including the figures known as `Lilith`, `Eve`, `Isis`, `Hecate`, `Circe`, and `Guin`, formed the First Witches' Council. This council studied and guarded the new arcane magic, though it was fraught with philosophical and political division from the start.",
+    "tags": ["human", "magic", "politics"],
     "rumors": [
       "`Eve` and `Lilith` were the same person, split in two by a powerful spell.",
       "The \"council\" was a coven that made a pact with a fiend to unlock the Weave's full power.",
@@ -201,6 +215,7 @@
     "position": { "top": "25%", "left": "70%" },
     "short_description": "The First Witches' Council fractured into rival camps over philosophical differences about the nature of magic.",
     "description": "The First Witches' Council was not unified. All the \"Founders\" (Eve, Isis, Hecate, Circe, Guin) fractured into rival camps. The \"Founders\" (Eve, Isis, Hecate) saw magic as a *science* of power, knowledge, and control over life/death. This led to heresies:\n\n* `Circe`'s \"Heresy of the Veils\": She declared magic was *art* and *perception*, not science.\n\n* `Guin`'s \"Heresy of the Aegis\": She declared the Weave was a *wound* to be *contained* and *bound*, not recklessly used.\n\n* The schism was bitter, splitting the council. The true origin of their godhood is a mystery. Were they mortals who \"ascended\" through their powerful philosophies? Or were they always divine beings, whose arguments were simply the first mortal record of their divine natures?",
+    "tags": ["human", "magic", "philosophy"],
     "rumors": [
       "The \"schism\" was a lie. They all worked together to achieve godhood, and their \"rivalry\" is a front to ensure they control all aspects of magic.",
       "`Circe` did not \"ascend\"; she *became* her own perfect illusion and is now a being of pure thought.",
@@ -215,6 +230,7 @@
     "position": { "top": "20%", "left": "25%" },
     "short_description": "A banished witch and her devil lover rose to become the King and Queen of Hell.",
     "description": "`Lilith` was banished from the First Witches' Council for her dark practices and ambition, which even the other \"Founders\" feared. Cast out, she met a devil named Malkor. They fell in love, and Lilith's ambition and power fueled Malkor's own. Together, they rose through the ranks of Hell—the realm forged by the lawful gods—and became its King and Queen, twisting its purpose of \"orderly punishment\" into one of \"ambitious corruption.\" She now rules a realm that contains the former Dragon Queen, Tiamat, as its most powerful prisoner.",
+    "tags": ["human", "magic", "supernatural"],
     "rumors": [
       "Lilith was not *banished*; she *left*, seeing the Council as weak and limiting.",
       "Malkor was not a devil; he was a god (perhaps `Evelesco` in disguise) who seduced Lilith to his cause.",
@@ -229,6 +245,7 @@
     "position": { "top": "15%", "left": "55%" },
     "short_description": "The dragon empire was shattered, and the remaining dragons and their kin were scattered across the world.",
     "description": "The Dragon Purge was complete. With Tiamat chained and the Zarate shattered, the remaining Chromatic dragons were hunted to near extinction. Their servants, the Kobolds, were driven out and settled on what would become the Wolgari Nation islands. Even the Metallic dragons, leaderless and shamed, remained in exile. The Dragonborn, seen as the sad, cursed offspring of a vile race, were ostracized and fled to the mountains.",
+    "tags": ["dragon", "diaspora", "aftermath"],
     "rumors": [
       "The Drow (followers of `Skryxerthrykcis`) were created around this time, sent into the Underdark to combat the evil Dwarves of `Evelesco`.",
       "The \"fleeing\" dragons were just the weak ones. The most powerful ones are still on Fair, disguised as mortals.",
@@ -243,6 +260,7 @@
     "position": { "top": "10%", "left": "85%" },
     "short_description": "The child of the King and Queen of Hell died and became a new constellation and god of mystery.",
     "description": "Lilith and Malkor, King and Queen of Hell, had a child named `Pyxis`. The child was born and swiftly died—some say murdered by a rival, others say he was too pure for Hell. His soul did not remain in Hell but was sent up into the heavens, where it joined `Etherea`'s realm. Pyxis's soul became a new constellation, a small point of light from a dark place, and in time, a god of Time and Mystery.",
+    "tags": ["supernatural", "divine", "tragedy"],
     "rumors": [
       "Pixis did not *die*; he was *stolen* by the gods of light, who are raising him as their own weapon against Hell.",
       "Lilith herself killed Pixis, as she saw his \"purity\" as a weakness.",
