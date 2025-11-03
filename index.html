@@ -631,61 +631,67 @@
         }
 
         // --- MODAL SCRIPT (Modified to be initializable) ---
-        function initializeModalListeners() {
-            const modalBackdrop = document.getElementById('modal-backdrop');
-            const modalContainer = document.getElementById('modal-container');
-            const modalContent = document.getElementById('modal-content');
-            const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalContainer = document.getElementById('modal-container');
+        const modalContent = document.getElementById('modal-content');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
 
-            const modalTitle = document.getElementById('modal-title');
-            const modalDate = document.getElementById('modal-date');
-            const modalDescription = document.getElementById('modal-description');
-            const modalRumor = document.getElementById('modal-rumor');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDate = document.getElementById('modal-date');
+        const modalDescription = document.getElementById('modal-description');
+        const modalRumor = document.getElementById('modal-rumor');
+        function openModal(eventId) {
+            const data = timelineData[eventId];
+            if (!data) {
+                console.error("No data found for eventId:", eventId);
+                return;
+            }
 
-            const eventTriggers = document.querySelectorAll('.event-trigger');
+            modalTitle.textContent = data.title;
+            modalDate.textContent = data.date;
+            modalDescription.textContent = data.description;
 
-            function getRandomRumor(rumorsArray) {
-                if (!rumorsArray || rumorsArray.length === 0) {
+            const rumor = (() => {
+                if (!data.rumors || data.rumors.length === 0) {
                     return "No rumors surround this event. It is a plain and simple fact.";
                 }
-                const randomIndex = Math.floor(Math.random() * rumorsArray.length);
-                return rumorsArray[randomIndex];
+                const randomIndex = Math.floor(Math.random() * data.rumors.length);
+                return data.rumors[randomIndex];
+            })();
+            modalRumor.textContent = rumor;
+
+            modalContent.className = 'modal-content-base'; // Reset classes
+            if (data.theme) {
+                modalContent.classList.add(`modal-theme-${data.theme}`);
             }
 
-            function openModal(eventId, theme) {
-                const data = timelineData[eventId];
-                if (!data) {
-                    console.error("No data found for eventId:", eventId);
-                    return;
+            modalBackdrop.classList.remove('hidden');
+            modalContainer.classList.remove('hidden');
+            setTimeout(() => {
+                modalBackdrop.classList.add('opacity-100');
+                modalContainer.classList.add('opacity-100', 'scale-100');
+                modalContainer.classList.remove('opacity-0', 'scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            modalBackdrop.classList.remove('opacity-100');
+            modalContainer.classList.remove('opacity-100', 'scale-100');
+            modalContainer.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                modalBackdrop.classList.add('hidden');
+                modalContainer.classList.add('hidden');
+            }, 300);
+        }
+        function initializeModalListeners() {
+            const eventTriggers = document.querySelectorAll('.event-trigger');
+
+            function checkUrlForEvent() {
+                const params = new URLSearchParams(window.location.search);
+                const eventId = params.get('event');
+                if (eventId && timelineData[eventId]) {
+                    openModal(eventId);
                 }
-
-                modalTitle.textContent = data.title;
-                modalDate.textContent = data.date;
-                modalDescription.textContent = data.description;
-                modalRumor.textContent = getRandomRumor(data.rumors);
-
-                modalContent.className = 'modal-content-base'; // Reset classes
-                if (theme) {
-                    modalContent.classList.add(`modal-theme-${theme}`);
-                }
-
-                modalBackdrop.classList.remove('hidden');
-                modalContainer.classList.remove('hidden');
-                setTimeout(() => {
-                    modalBackdrop.classList.add('opacity-100');
-                    modalContainer.classList.add('opacity-100', 'scale-100');
-                    modalContainer.classList.remove('opacity-0', 'scale-95');
-                }, 10);
-            }
-
-            function closeModal() {
-                modalBackdrop.classList.remove('opacity-100');
-                modalContainer.classList.remove('opacity-100', 'scale-100');
-                modalContainer.classList.add('opacity-0', 'scale-95');
-                setTimeout(() => {
-                    modalBackdrop.classList.add('hidden');
-                    modalContainer.classList.add('hidden');
-                }, 300);
             }
 
             eventTriggers.forEach(trigger => {
@@ -693,8 +699,7 @@
 
                 trigger.addEventListener('click', () => {
                     const eventId = trigger.getAttribute('data-event-id');
-                    const theme = trigger.getAttribute('data-theme');
-                    openModal(eventId, theme);
+                    openModal(eventId);
                 });
                 trigger.dataset.listenerAttached = 'true';
             });
@@ -709,6 +714,8 @@
                 });
                 modalBackdrop.dataset.listenerAttached = 'true';
             }
+
+            checkUrlForEvent();
         }
 
         // --- INITIALIZATION ---
