@@ -1,6 +1,7 @@
 [
   {
     "id": "the_primal_echo",
+    "order_id": "00-000",
     "theme": "tablet",
     "title": "The Echo of the Previous World",
     "date": "Before The Beginning",
@@ -16,6 +17,7 @@
   },
   {
     "id": "creation_of_hiraeth",
+    "order_id": "00-001",
     "theme": "tablet",
     "title": "The First Weaving",
     "date": "The Beginning",
@@ -31,6 +33,7 @@
   },
   {
     "id": "logos_speaks",
+    "order_id": "00-002",
     "theme": "tablet",
     "title": "The Naming of Reality",
     "date": "The Beginning",
@@ -46,6 +49,7 @@
   },
   {
     "id": "first_sunrise",
+    "order_id": "00-003",
     "theme": "tablet",
     "title": "The Dawn of Bethtox",
     "date": "Proto-History",
@@ -61,6 +65,7 @@
   },
   {
     "id": "forging_of_the_world",
+    "order_id": "00-004",
     "theme": "tablet",
     "title": "The World Bloom",
     "date": "Proto-History",
@@ -75,6 +80,7 @@
   },
   {
     "id": "the_feywild_reflection",
+    "order_id": "00-005",
     "theme": "tablet",
     "title": "The Primal Reflection",
     "date": "Proto-History (simultaneous with `forging_of_the_world`)",
@@ -90,6 +96,7 @@
   },
   {
     "id": "birth_of_night",
+    "order_id": "00-006",
     "theme": "tablet",
     "title": "The Starry Veil of Nyx",
     "date": "Proto-History",
@@ -105,6 +112,7 @@
   },
   {
     "id": "sundering_of_the_sea",
+    "order_id": "00-007",
     "theme": "tablet",
     "title": "The Two Faces of the Deep",
     "date": "Proto-History",
@@ -119,6 +127,7 @@
   },
   {
     "id": "first_death",
+    "order_id": "00-008",
     "theme": "tablet",
     "title": "The Birth of the Cycle",
     "date": "Proto-History",
@@ -134,6 +143,7 @@
   },
   {
     "id": "the_shadow_plane",
+    "order_id": "00-009",
     "theme": "tablet",
     "title": "The Somber Echo",
     "date": "Proto-History (simultaneous with `first_death`)",
@@ -149,6 +159,7 @@
   },
   {
     "id": "gift_of_free_will",
+    "order_id": "00-010",
     "theme": "tablet",
     "title": "The Unbound Choice",
     "date": "Proto-History",
@@ -164,6 +175,7 @@
   },
   {
     "id": "the_first_lie",
+    "order_id": "00-011",
     "theme": "tablet",
     "title": "The Birth of Strife",
     "date": "Proto-History (shortly after `gift_of_free_will`)",
@@ -179,6 +191,7 @@
   },
   {
     "id": "contest_of_seasons",
+    "order_id": "00-012",
     "theme": "tablet",
     "title": "The Eternal Struggle",
     "date": "Creation Age",
@@ -194,6 +207,7 @@
   },
   {
     "id": "creation_of_dragons",
+    "order_id": "00-013",
     "theme": "tablet",
     "title": "The Two Progenitors",
     "date": "Creation Age",
@@ -209,6 +223,7 @@
   },
   {
     "id": "gift_of_voice",
+    "order_id": "00-014",
     "theme": "tablet",
     "title": "The First Speech",
     "date": "Creation Age",
@@ -223,6 +238,7 @@
   },
   {
     "id": "arrival_of_the_elves",
+    "order_id": "00-015",
     "theme": "tablet",
     "title": "The Echoes of a Lost World",
     "date": "Creation Age",
@@ -237,6 +253,7 @@
   },
   {
     "id": "birth_of_loron",
+    "order_id": "00-016",
     "theme": "tablet",
     "title": "The Tragic Union",
     "date": "Creation Age (shortly after `arrival_of_the_elves`)",
@@ -252,6 +269,7 @@
   },
   {
     "id": "the_first_dream",
+    "order_id": "00-017",
     "theme": "tablet",
     "title": "The Dream Domain",
     "date": "Creation Age (shortly after `arrival_of_the_elves`)",
@@ -267,6 +285,7 @@
   },
   {
     "id": "forging_of_the_giants",
+    "order_id": "00-018",
     "theme": "tablet",
     "title": "The Children of Destiny",
     "date": "Creation Age",
@@ -281,6 +300,7 @@
   },
   {
     "id": "birth_of_inspiration_and_memory",
+    "order_id": "00-019",
     "theme": "tablet",
     "title": "The First Epic",
     "date": "Creation Age (after `forging_of_the_giants`)",
@@ -296,6 +316,7 @@
   },
   {
     "id": "first_murder",
+    "order_id": "00-020",
     "theme": "tablet",
     "title": "The Blood Spawns the Stone",
     "date": "Creation Age",
@@ -312,6 +333,7 @@
   },
   {
     "id": "forging_of_the_hells",
+    "order_id": "00-021",
     "theme": "tablet",
     "title": "The Realm of Lawful Evil",
     "date": "Creation Age (shortly after `first_murder`)",
@@ -327,6 +349,7 @@
   },
   {
     "id": "discovery_of_primal_magic",
+    "order_id": "00-022",
     "theme": "tablet",
     "title": "The Runic Awakening",
     "date": "Creation Age",
@@ -342,6 +365,7 @@
   },
   {
     "id": "giants_creation",
+    "order_id": "00-023",
     "theme": "tablet",
     "title": "The Soulless Servants",
     "date": "Creation Age",
@@ -356,6 +380,7 @@
   },
   {
     "id": "first_war",
+    "order_id": "00-024",
     "theme": "tablet",
     "title": "The War of Strife",
     "date": "Creation Age",
@@ -370,6 +395,7 @@
   },
   {
     "id": "first_sacrifice",
+    "order_id": "00-025",
     "theme": "tablet",
     "title": "The Birth of Valor",
     "date": "Creation Age (during the `first_war`)",
@@ -385,6 +411,7 @@
   },
   {
     "id": "dwarven_rebellion",
+    "order_id": "00-026",
     "theme": "tablet",
     "title": "The Dwarven Exodus",
     "date": "Creation Age (after the `first_war`)",
@@ -400,6 +427,7 @@
   },
   {
     "id": "giants_exodus",
+    "order_id": "00-027",
     "theme": "tablet",
     "title": "The Departure of the Giants",
     "date": "Creation Age",
@@ -415,6 +443,7 @@
   },
   {
     "id": "the_great_flood",
+    "order_id": "00-028",
     "theme": "tablet",
     "title": "The World's Rebuke",
     "date": "End of the Ante-Diluvian Era",

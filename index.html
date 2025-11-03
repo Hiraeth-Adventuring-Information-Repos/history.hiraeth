@@ -363,10 +363,7 @@
             border: none;
             cursor: pointer;
             transition: color 0.2s;
-        }
-
-        #modal-back-btn {
-            z-index: 10;
+            z-index: 20;
         }
         /* Rumor Box */
         .rumor-box {
@@ -574,15 +571,18 @@
 
     <div id="modal-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 scale-95">
         <div id="modal-content" class="modal-content-base">
-            
-            <button id="modal-back-btn" class="hidden absolute top-12 left-4 text-xl hover:underline">&larr; Back</button>
             <button id="modal-close-btn">&times;</button>
+
+            <!-- Header container for back button and title -->
+            <div class="relative mb-2">
+                <button id="modal-back-btn" class="hidden absolute -left-16 top-0 text-xl hover:underline">&larr; Back</button>
+                <h3 id="modal-title" class="text-4xl font-bold">Event Title Goes Here</h3>
+            </div>
 
             <!-- Navigation Buttons -->
             <button id="modal-prev-btn" class="absolute left-4 top-1/2 -translate-y-1/2 text-4xl hover:text-white transition-colors">&larr;</button>
             <button id="modal-next-btn" class="absolute right-4 top-1/2 -translate-y-1/2 text-4xl hover:text-white transition-colors">&rarr;</button>
             
-            <h3 id="modal-title" class="text-4xl font-bold mb-2">Event Title Goes Here</h3>
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
 
@@ -609,85 +609,6 @@
                 clearTimeout(timeout);
                 timeout = setTimeout(() => func.apply(context, args), delay);
             };
-        }
-
-        function parseNonStandardDate(dateStr) {
-            const dateMap = {
-                "before the beginning": -Infinity,
-                "the beginning": -900000,
-                "proto-history": -800000,
-                "creation age": -700000,
-                "end of the ante-diluvian era": -600000,
-                "early dragon's age": -500000,
-                "the dragon's age": -400000,
-                "late dragon's age": -300000,
-                "end of the dragon's age": -200000,
-            };
-            const normalized = dateStr.toLowerCase().trim();
-            for (const key in dateMap) {
-                if (normalized.startsWith(key)) {
-                    return dateMap[key];
-                }
-            }
-            return null;
-        }
-
-        function parseDate(dateStr) {
-            if (!dateStr) return null;
-
-            const nonStandardDate = parseNonStandardDate(dateStr);
-            if (nonStandardDate !== null) {
-                return nonStandardDate;
-            }
-
-            let normalized = dateStr.toLowerCase().replace(/c\.\s*/, '').trim();
-
-            if (normalized.includes("billion years ago")) {
-                const num = parseFloat(normalized.replace(/[^0-9.]/g, ''));
-                return -num * 1000000000;
-            }
-            if (normalized.includes("million years ago")) {
-                const num = parseFloat(normalized.replace(/[^0-9.]/g, ''));
-                return -num * 1000000;
-            }
-            if (normalized.includes("years ago")) {
-                const num = parseFloat(normalized.replace(/[^0-9,]/g, ''));
-                return -num;
-            }
-            if (normalized.startsWith("year ")) {
-                const year = parseInt(normalized.replace('year ', ''));
-                return year;
-            }
-
-            const rangeMatch = normalized.match(/(\d+)-(\d+)\s*(bce|ce|ae)/);
-            if(rangeMatch){
-                const start = parseInt(rangeMatch[1]);
-                const end = parseInt(rangeMatch[2]);
-                const era = rangeMatch[3];
-                const avg = (start + end) / 2;
-                return era === 'bce' ? -avg : avg;
-            }
-
-            const singleDateMatch = normalized.match(/(\d+)\s*(bce|ce|ae)/);
-            if(singleDateMatch){
-                const year = parseInt(singleDateMatch[1]);
-                const era = singleDateMatch[2];
-                return era === 'bce' ? -year : year;
-            }
-
-            if (normalized === "present day") {
-                return new Date().getFullYear();
-            }
-
-            const centuryMatch = normalized.match(/(\d+)(st|nd|rd|th)\s+century\s*(bce|ce|ae)/);
-            if (centuryMatch) {
-                const century = parseInt(centuryMatch[1]);
-                const era = centuryMatch[3];
-                const year = (century - 1) * 100 + 50;
-                return era === 'bce' ? -year : year;
-            }
-
-            return null;
         }
 
         // Function to render the timeline based on current filters
@@ -745,14 +666,7 @@
             allEventTriggers.sort((a, b) => {
                 const eventA = timelineData[a.dataset.eventId];
                 const eventB = timelineData[b.dataset.eventId];
-                const dateA = parseDate(eventA.date);
-                const dateB = parseDate(eventB.date);
-
-                if (dateA === null && dateB === null) return 0;
-                if (dateA === null) return -1;
-                if (dateB === null) return 1;
-
-                return dateA - dateB;
+                return (eventA.order_id || '').localeCompare(eventB.order_id || '');
             });
 
             initializeModalListeners();

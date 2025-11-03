@@ -1,6 +1,7 @@
 [
   {
     "id": "dragon_rebellion",
+    "order_id": "01-000",
     "theme": "tablet",
     "title": "The Dragon Civil War",
     "date": "Early Dragon's Age",
@@ -16,6 +17,7 @@
   },
   {
     "id": "jailing_of_the_ancient_evil",
+    "order_id": "01-001",
     "theme": "tablet",
     "title": "The Eternal Maze",
     "date": "Early Dragon's Age",
@@ -31,6 +33,7 @@
   },
   {
     "id": "creation_of_gnomes",
+    "order_id": "01-002",
     "theme": "tablet",
     "title": "The Hearth's Children",
     "date": "Early Dragon's Age",
@@ -45,6 +48,7 @@
   },
   {
     "id": "dragon_ascendancy",
+    "order_id": "01-003",
     "theme": "tablet",
     "title": "The Zarate of Tiamat",
     "date": "The Dragon's Age",
@@ -60,6 +64,7 @@
   },
   {
     "id": "the_dragon's_blight",
+    "order_id": "01-004",
     "theme": "tablet",
     "title": "The Blight of Tewhal",
     "date": "The Dragon's Age (during `dragon_ascendancy`)",
@@ -75,6 +80,7 @@
   },
   {
     "id": "the_first_plague",
+    "order_id": "01-005",
     "theme": "tablet",
     "title": "The Withering Cough",
     "date": "The Dragon's Age (during `dragon_ascendancy`)",
@@ -90,6 +96,7 @@
   },
   {
     "id": "creation_of_humans",
+    "order_id": "01-006",
     "theme": "tablet",
     "title": "The Blank Slate",
     "date": "The Dragon's Age",
@@ -104,6 +111,7 @@
   },
   {
     "id": "descent_of_arcana",
+    "order_id": "01-007",
     "theme": "tablet",
     "title": "The God Who Walked",
     "date": "The Dragon's Age",
@@ -119,6 +127,7 @@
   },
   {
     "id": "martyrdom_of_arcana",
+    "order_id": "01-008",
     "theme": "tablet",
     "title": "The Birth of the Weave",
     "date": "The Dragon's Age",
@@ -134,6 +143,7 @@
   },
   {
     "id": "opossums_gift",
+    "order_id": "01-009",
     "theme": "tablet",
     "title": "The Theft of Fire",
     "date": "The Dragon's Age (immediately after `martyrdom_of_arcana`)",
@@ -149,6 +159,7 @@
   },
   {
     "id": "creation_of_domestics",
+    "order_id": "01-010",
     "theme": "tablet",
     "title": "The Hearth's Mourning",
     "date": "The Dragon's Age (after Arcana's death)",
@@ -163,6 +174,7 @@
   },
   {
     "id": "divine_intervention",
+    "order_id": "01-011",
     "theme": "tablet",
     "title": "The Dragon Purge",
     "date": "Late Dragon's Age",
@@ -178,6 +190,7 @@
   },
   {
     "id": "the_chaining_of_tiamat",
+    "order_id": "01-012",
     "theme": "tablet",
     "title": "The Queen's Fall",
     "date": "Late Dragon's Age",
@@ -194,6 +207,7 @@
   },
   {
     "id": "first_witches_council",
+    "order_id": "01-013",
     "theme": "tablet",
     "title": "The Council of Delphi",
     "date": "Late Dragon's Age",
@@ -209,6 +223,7 @@
   },
   {
     "id": "the_magic_schism",
+    "order_id": "01-014",
     "theme": "tablet",
     "title": "The Heresies of the Founders",
     "date": "Late Dragon's Age (during the `first_witches_council`)",
@@ -224,6 +239,7 @@
   },
   {
     "id": "rise_of_lilith",
+    "order_id": "01-015",
     "theme": "tablet",
     "title": "The Queen of Hell",
     "date": "Late Dragon's Age",
@@ -239,6 +255,7 @@
   },
   {
     "id": "draconic_diaspora",
+    "order_id": "01-016",
     "theme": "tablet",
     "title": "The Great Flight",
     "date": "Late Dragon's Age",
@@ -254,6 +271,7 @@
   },
   {
     "id": "slaying_of_pixis",
+    "order_id": "01-017",
     "theme": "tablet",
     "title": "The Starry Child",
     "date": "End of the Dragon's Age",
