@@ -619,9 +619,10 @@
 
         // Function to create a star event HTML string for star-chart sections
         function createStarEvent(event) {
+            const summary = event.summary || event.title;
             return `
                 <div class="event-trigger star clickable" data-event-id="${event.id}" data-theme="${event.theme}" style="top: ${event.position.top}; left: ${event.position.left};">
-                    <span class="star-label">${event.title}</span>
+                    <span class="star-label">${summary}</span>
                 </div>
             `;
         }
