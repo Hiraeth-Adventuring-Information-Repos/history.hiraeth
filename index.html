@@ -597,8 +597,9 @@
     <script>
         // --- DYNAMIC DATA LOADING & RENDERING ---
         const timelineData = {}; // Global object to hold all event data after fetching.
-        let allEventTriggers = []; // To be populated once after data loads.
-        let currentEventIndex = -1; // To track the currently open event.
+        let allEventTriggers = []; // Holds the visible, on-screen event triggers.
+        let sortedEventIds = []; // Holds ALL event IDs, sorted chronologically ONE TIME.
+        let currentEventIndex = -1; // To track the currently open event IN THE SORTED LIST.
         let allTags = new Set(); // To store all unique tags
 
         // Debounce function to limit how often a function is called
@@ -629,7 +630,10 @@
 
                 if (container) {
                     let htmlContent = '';
-                    const eraData = Object.values(timelineData).filter(event => event.era === era.id);
+                    // Get all events for the era, but SORT them by order_id to ensure they render correctly.
+                    const eraData = Object.values(timelineData)
+                        .filter(event => event.era === era.id)
+                        .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''));
 
                     const filteredData = eraData.filter(event => {
                         const searchTermLower = searchTerm.toLowerCase();
@@ -660,15 +664,9 @@
                 }
             });
 
-            // Re-initialize triggers and listeners after rendering
+            // Re-initialize LISTENERS on the now-visible triggers.
+            // DO NOT re-sort here, as it's the source of the navigation bug.
             allEventTriggers = Array.from(document.querySelectorAll('.event-trigger'));
-
-            allEventTriggers.sort((a, b) => {
-                const eventA = timelineData[a.dataset.eventId];
-                const eventB = timelineData[b.dataset.eventId];
-                return (eventA.order_id || '').localeCompare(eventB.order_id || '');
-            });
-
             initializeModalListeners();
             initializeSubEventListeners();
         }
@@ -765,6 +763,14 @@
                     });
                 });
 
+                // --- CRITICAL FIX ---
+                // Sort all events by their order_id ONCE and store the sorted IDs.
+                // This becomes the master list for navigation, immune to filtering.
+                sortedEventIds = Object.values(timelineData)
+                    .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''))
+                    .map(event => event.id);
+
+
                 populateTagFilters();
                 renderTimeline(); // Initial render
                 setupEventListeners(); // Setup search and filter listeners
@@ -837,9 +843,9 @@
             }
 
 
-            currentEventIndex = allEventTriggers.findIndex(trigger => trigger.dataset.eventId === eventId);
+            currentEventIndex = sortedEventIds.findIndex(id => id == eventId);
             modalPrevBtn.style.display = currentEventIndex > 0 && !parentEventId ? 'block' : 'none';
-            modalNextBtn.style.display = currentEventIndex < allEventTriggers.length - 1 && !parentEventId ? 'block' : 'none';
+            modalNextBtn.style.display = currentEventIndex < sortedEventIds.length - 1 && !parentEventId ? 'block' : 'none';
 
             modalTitle.textContent = dataToShow.title;
             modalDate.textContent = dataToShow.date || eventData.date; // Fallback to parent date
@@ -946,14 +952,14 @@
 
                 modalPrevBtn.addEventListener('click', () => {
                     if (currentEventIndex > 0) {
-                        const prevEventId = allEventTriggers[currentEventIndex - 1].dataset.eventId;
+                        const prevEventId = sortedEventIds[currentEventIndex - 1];
                         openModal(prevEventId);
                     }
                 });
 
                 modalNextBtn.addEventListener('click', () => {
-                    if (currentEventIndex < allEventTriggers.length - 1) {
-                        const nextEventId = allEventTriggers[currentEventIndex + 1].dataset.eventId;
+                    if (currentEventIndex < sortedEventIds.length - 1) {
+                        const nextEventId = sortedEventIds[currentEventIndex + 1];
                         openModal(nextEventId);
                     }
                 });

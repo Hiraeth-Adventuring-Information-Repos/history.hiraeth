@@ -1,110 +1,38 @@
 [
   {
-    "id": 508,
+    "id": 501,
     "order_id": "04-000",
     "theme": "marble",
-    "date": "-30 BEC",
-    "title": "Aurora Dwarf Civil War",
-    "summary": "A brutal civil war erupts among the Aurora Dwarves, the causes of which are still debated.",
-    "short_description": "A brutal civil war erupts among the Aurora Dwarves, with causes still debated to this day.",
-    "description": "A brutal civil war erupts among the Aurora Dwarves, the causes of which are still debated. Some say it was over gold, others say it was a dispute over magic.",
-    "tags": ["dwarven", "conflict", "mystery"],
+    "date": "-1,000 BEC",
+    "title": "Formation of the Argentum Compact",
+    "summary": "A coalition of kingdoms forms to establish peace and mutual defense.",
+    "short_description": "A grand coalition of human and elven kingdoms forms to establish peace and mutual defense, hoping to end the wars of the Mythic Age.",
+    "description": "A grand coalition of human and elven kingdoms forms to establish peace and mutual defense, hoping to end the wars of the Mythic Age.",
+    "tags": [
+      "politics",
+      "treaty",
+      "peace"
+    ],
     "rumors": [
-      "It wasn't a civil war. They were fighting a creature from the Underdark that had possessed their king.",
-      "They found a new metal, 'Aurorium,' that drives people mad. That's what started the war.",
-      "The war ended when one side detonated a magical bomb that turned the other side to stone. They're still down there."
-    ]
-  },
-  {
-    "id": 507,
-    "order_id": "04-001",
-    "theme": "marble",
-    "date": "c. -200 BEC",
-    "title": "Planar Barrier Established",
-    "summary": "A planar barrier is created to keep the gods out of the mortal plane.",
-    "short_description": "Following a divine war, a powerful planar barrier is created to prevent gods from directly interfering with the mortal plane.",
-    "description": "Following the War of the Gods, a powerful planar barrier is created to keep the gods (and other powerful entities) from directly interfering with the mortal plane.",
-    "tags": ["divine", "magic", "planar"],
-    "rumors": [
-      "The barrier is failing. That's what the 'Shadowfell Attack' was. A test.",
-      "The barrier doesn't keep gods *out*. It keeps something *in*.",
-      "Malchor, king of Hell, vanished right before the barrier went up. Coincidence? I think not."
-    ]
-  },
-  {
-    "id": 506,
-    "order_id": "04-002",
-    "theme": "marble",
-    "date": "c. -200 BEC",
-    "title": "The War of the Gods",
-    "summary": "A cataclysmic conflict between divine beings reshapes the world, leading to their banishment.",
-    "short_description": "A cataclysmic conflict between divine beings, fought through mortal proxies, reshapes the world and leads to their banishment.",
-    "description": "A cataclysmic conflict between the divine beings, fought through their mortal proxies, reshapes the world and kills millions. This war is what led to their banishment.",
-    "tags": ["divine", "conflict", "cataclysm"],
-    "rumors": [
-      "It wasn't a 'war.' It was a 'culling.' The gods tried to wipe out mortals for their hubris.",
-      "The war started because one god stole another god's wife. It was all just a petty squabble that got out of hand.",
-      "Mortals *won* the war. We're the ones who *created* the Planar Barrier to kick the gods out."
-    ]
-  },
-  {
-    "id": 505,
-    "order_id": "04-003",
-    "theme": "marble",
-    "date": "-200 BEC",
-    "title": "Treaty of the Nations",
-    "summary": "Major races sign a treaty formalizing the Argentum Compact, securing an era of peace.",
-    "short_description": "The major races sign a treaty formalizing the Argentum Compact, securing a brief era of peace, though some nations are notably excluded.",
-    "description": "The major races sign a treaty formalizing the Argentum Compact, securing a brief era of peace. The small nations that would later form Bec are notably excluded.",
-    "tags": ["politics", "treaty", "peace"],
-    "rumors": [
-      "The Beccin nations were excluded on purpose. The Elves saw their ambition and wanted to keep them weak.",
-      "The treaty was signed with dragon's blood, which is why it's held for so long... mostly.",
-      "A clause in the treaty, written in tiny print, gives the elves dominion over all magical forests."
-    ]
-  },
-  {
-    "id": 504,
-    "order_id": "04-004",
-    "theme": "marble",
-    "date": "c. -500 BEC",
-    "title": "The First Paladins",
-    "summary": "Holy warriors emerge to protect the realms and enforce the divine law of the gods.",
-    "short_description": "The first holy warriors bound by oath emerge to protect the realms and enforce the will of the gods.",
-    "description": "Following the Codification of Divine Law, the first holy warriors bound by oath emerge to protect the realms and enforce the will of the gods.",
-    "tags": ["divine", "heroism", "religion"],
-    "rumors": [
-      "The first 'paladin' was just a warrior who made a deal with an angel. The 'oath' part came later to make it sound noble.",
-      "Paladins are just puppets. The gods can revoke their power at any time. Don't trust them.",
-      "There are dark paladins, too. They just don't advertise."
-    ]
-  },
-  {
-    "id": 503,
-    "order_id": "04-005",
-    "theme": "marble",
-    "date": "c. -500 BEC",
-    "title": "Conquest of the Southern Reaches",
-    "summary": "Human kingdoms expand northwest, reclaiming lands to form Arfordir, Haroldford, and Roswin.",
-    "short_description": "Human kingdoms expand northwest, reclaiming lands from beasts and monsters to form the kingdoms of Arfordir, Haroldford, and Roswin.",
-    "description": "Human kingdoms in the west expand northwest, reclaiming lands from beasts and monsters to form the kingdoms of Arfordir, Haroldford, and Roswin.",
-    "tags": ["human", "expansion", "conflict"],
-    "rumors": [
-      "They didn't 'reclaim' lands. They *stole* them from the hobbit and firbolg clans who lived there.",
-      "The 'beasts and monsters' were just illusions created by a coven of hags to keep people out.",
-      "Arfordir was founded on a massive gold deposit, which is the only reason it's still relevant."
+      "The Compact was a dwarven idea, but the elves took credit for it.",
+      "The original compact included a pact with a 'good' dragon, but that part was struck from the records.",
+      "It's a trading guild masquerading as a political alliance. It's all about money."
     ]
   },
   {
     "id": 502,
-    "order_id": "04-006",
+    "order_id": "04-001",
     "theme": "marble",
     "date": "-750 BEC",
     "title": "The Wizard Conclave",
     "summary": "Wizards gather to create rules for the responsible use of magic, fearing another catastrophe.",
     "short_description": "Wizards gather to create rules for the responsible use of magic, fearing another catastrophe like the Shattering of the Crystal Spire.",
     "description": "Fearing another catastrophe like the Shattering of the Crystal Spire, wizards gather to create rules for the responsible use of magic. This body later becomes the Atheneum.",
-    "tags": ["magic", "politics", "education"],
+    "tags": [
+      "magic",
+      "politics",
+      "education"
+    ],
     "rumors": [
       "They didn't just 'create rules.' They banned whole schools of magic, like blood magic and true chronomancy.",
       "The Conclave was formed because one wizard *almost* became a god. They all ganged up to stop him.",
@@ -112,19 +40,123 @@
     ]
   },
   {
-    "id": 501,
+    "id": 503,
+    "order_id": "04-002",
+    "theme": "marble",
+    "date": "c. -500 BEC",
+    "title": "Conquest of the Southern Reaches",
+    "summary": "Human kingdoms expand northwest, reclaiming lands to form Arfordir, Haroldford, and Roswin.",
+    "short_description": "Human kingdoms expand northwest, reclaiming lands from beasts and monsters to form the kingdoms of Arfordir, Haroldford, and Roswin.",
+    "description": "Human kingdoms in the west expand northwest, reclaiming lands from beasts and monsters to form the kingdoms of Arfordir, Haroldford, and Roswin.",
+    "tags": [
+      "human",
+      "expansion",
+      "conflict"
+    ],
+    "rumors": [
+      "They didn't 'reclaim' lands. They *stole* them from the hobbit and firbolg clans who lived there.",
+      "The 'beasts and monsters' were just illusions created by a coven of hags to keep people out.",
+      "Arfordir was founded on a massive gold deposit, which is the only reason it's still relevant."
+    ]
+  },
+  {
+    "id": 504,
+    "order_id": "04-003",
+    "theme": "marble",
+    "date": "c. -500 BEC",
+    "title": "The First Paladins",
+    "summary": "Holy warriors emerge to protect the realms and enforce the divine law of the gods.",
+    "short_description": "The first holy warriors bound by oath emerge to protect the realms and enforce the will of the gods.",
+    "description": "Following the Codification of Divine Law, the first holy warriors bound by oath emerge to protect the realms and enforce the will of the gods.",
+    "tags": [
+      "divine",
+      "heroism",
+      "religion"
+    ],
+    "rumors": [
+      "The first 'paladin' was just a warrior who made a deal with an angel. The 'oath' part came later to make it sound noble.",
+      "Paladins are just puppets. The gods can revoke their power at any time. Don't trust them.",
+      "There are dark paladins, too. They just don't advertise."
+    ]
+  },
+  {
+    "id": 505,
+    "order_id": "04-004",
+    "theme": "marble",
+    "date": "-200 BEC",
+    "title": "Treaty of the Nations",
+    "summary": "Major races sign a treaty formalizing the Argentum Compact, securing an era of peace.",
+    "short_description": "The major races sign a treaty formalizing the Argentum Compact, securing a brief era of peace, though some nations are notably excluded.",
+    "description": "The major races sign a treaty formalizing the Argentum Compact, securing a brief era of peace. The small nations that would later form Bec are notably excluded.",
+    "tags": [
+      "politics",
+      "treaty",
+      "peace"
+    ],
+    "rumors": [
+      "The Beccin nations were excluded on purpose. The Elves saw their ambition and wanted to keep them weak.",
+      "The treaty was signed with dragon's blood, which is why it's held for so long... mostly.",
+      "A clause in the treaty, written in tiny print, gives the elves dominion over all magical forests."
+    ]
+  },
+  {
+    "id": 506,
+    "order_id": "04-005",
+    "theme": "marble",
+    "date": "c. -200 BEC",
+    "title": "The War of the Gods",
+    "summary": "A cataclysmic conflict between divine beings reshapes the world, leading to their banishment.",
+    "short_description": "A cataclysmic conflict between divine beings, fought through mortal proxies, reshapes the world and leads to their banishment.",
+    "description": "A cataclysmic conflict between the divine beings, fought through their mortal proxies, reshapes the world and kills millions. This war is what led to their banishment.",
+    "tags": [
+      "divine",
+      "conflict",
+      "cataclysm"
+    ],
+    "rumors": [
+      "It wasn't a 'war.' It was a 'culling.' The gods tried to wipe out mortals for their hubris.",
+      "The war started because one god stole another god's wife. It was all just a petty squabble that got out of hand.",
+      "Mortals *won* the war. We're the ones who *created* the Planar Barrier to kick the gods out."
+    ]
+  },
+  {
+    "id": 507,
+    "order_id": "04-006",
+    "theme": "marble",
+    "date": "c. -200 BEC",
+    "title": "Planar Barrier Established",
+    "summary": "A planar barrier is created to keep the gods out of the mortal plane.",
+    "short_description": "Following a divine war, a powerful planar barrier is created to prevent gods from directly interfering with the mortal plane.",
+    "description": "Following the War of the Gods, a powerful planar barrier is created to keep the gods (and other powerful entities) from directly interfering with the mortal plane.",
+    "tags": [
+      "divine",
+      "magic",
+      "planar"
+    ],
+    "rumors": [
+      "The barrier is failing. That's what the 'Shadowfell Attack' was. A test.",
+      "The barrier doesn't keep gods *out*. It keeps something *in*.",
+      "Malchor, king of Hell, vanished right before the barrier went up. Coincidence? I think not."
+    ]
+  },
+  {
+    "id": 508,
     "order_id": "04-007",
     "theme": "marble",
-    "date": "-1,000 BEC",
-    "title": "Formation of the Argentum Compact",
-    "summary": "A coalition of kingdoms forms to establish peace and mutual defense.",
-    "short_description": "A grand coalition of human and elven kingdoms forms to establish peace and mutual defense, hoping to end the wars of the Mythic Age.",
-    "description": "A grand coalition of human and elven kingdoms forms to establish peace and mutual defense, hoping to end the wars of the Mythic Age.",
-    "tags": ["politics", "treaty", "peace"],
+    "date": "-30 BEC",
+    "title": "Aurora Dwarf Civil War",
+    "summary": "A brutal civil war erupts among the Aurora Dwarves, the causes of which are still debated.",
+    "short_description": "A brutal civil war erupts among the Aurora Dwarves, with causes still debated to this day.",
+    "description": "A brutal civil war erupts among the Aurora Dwarves, the causes of which are still debated. Some say it was over gold, others say it was a dispute over magic.",
+    "tags": [
+      "dwarven",
+      "conflict",
+      "mystery"
+    ],
     "rumors": [
-      "The Compact was a dwarven idea, but the elves took credit for it.",
-      "The original compact included a pact with a 'good' dragon, but that part was struck from the records.",
-      "It's a trading guild masquerading as a political alliance. It's all about money."
+      "It wasn't a civil war. They were fighting a creature from the Underdark that had possessed their king.",
+      "They found a new metal, 'Aurorium,' that drives people mad. That's what started the war.",
+      "The war ended when one side detonated a magical bomb that turned the other side to stone. They're still down there."
     ]
   }
 ]
