@@ -633,7 +633,7 @@
                     // Get all events for the era, but SORT them by order_id to ensure they render correctly.
                     const eraData = Object.values(timelineData)
                         .filter(event => event.era === era.id)
-                        .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''));
+                        .sort((b, a) => (a.order_id || '').localeCompare(b.order_id || ''));
 
                     const filteredData = eraData.filter(event => {
                         const searchTermLower = searchTerm.toLowerCase();
