@@ -583,8 +583,6 @@
             </div>
 
             <!-- Navigation Buttons -->
-            <button id="modal-prev-btn" class="absolute left-4 top-1/2 -translate-y-1/2 text-4xl hover:text-white transition-colors">&larr;</button>
-            <button id="modal-next-btn" class="absolute right-4 top-1/2 -translate-y-1/2 text-4xl hover:text-white transition-colors">&rarr;</button>
             
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
@@ -814,8 +812,6 @@
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalBackBtn = document.getElementById('modal-back-btn');
-        let modalPrevBtn = document.getElementById('modal-prev-btn');
-        let modalNextBtn = document.getElementById('modal-next-btn');
 
         const modalTitle = document.getElementById('modal-title');
         const modalDate = document.getElementById('modal-date');
@@ -847,8 +843,6 @@
 
 
             currentEventIndex = sortedEventIds.findIndex(id => id == eventId);
-            modalPrevBtn.style.display = currentEventIndex > 0 && !parentEventId ? 'block' : 'none';
-            modalNextBtn.style.display = currentEventIndex < sortedEventIds.length - 1 && !parentEventId ? 'block' : 'none';
 
             modalTitle.textContent = dataToShow.title;
             modalDate.textContent = dataToShow.date || eventData.date; // Fallback to parent date
@@ -891,8 +885,6 @@
                 mosaic: '#5d4037'
             };
             const buttonColor = themeColors[theme] || '#fff'; // Default to white
-            modalPrevBtn.style.color = buttonColor;
-            modalNextBtn.style.color = buttonColor;
             modalBackBtn.style.color = buttonColor;
 
 
@@ -952,20 +944,6 @@
             if (!modalBackdrop.dataset.listenerAttached) {
                 modalBackdrop.addEventListener('click', closeModal);
                 modalCloseBtn.addEventListener('click', closeModal);
-
-                modalPrevBtn.addEventListener('click', () => {
-                    if (currentEventIndex > 0) {
-                        const prevEventId = sortedEventIds[currentEventIndex - 1];
-                        openModal(prevEventId);
-                    }
-                });
-
-                modalNextBtn.addEventListener('click', () => {
-                    if (currentEventIndex < sortedEventIds.length - 1) {
-                        const nextEventId = sortedEventIds[currentEventIndex + 1];
-                        openModal(nextEventId);
-                    }
-                });
 
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
