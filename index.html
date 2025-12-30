@@ -393,10 +393,7 @@
     </button>
 
     <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-900 bg-opacity-90 backdrop-blur-sm text-white z-40 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
-        <div class="p-4 mt-16">
-            <input type="text" id="sidebar-search-input" placeholder="Search..." class="w-full px-3 py-2 rounded-md bg-gray-800 text-white border-gray-700 focus:outline-none focus:ring-1 focus:ring-purple-500">
-        </div>
-        <nav>
+        <nav class="mt-16">
             <h3 class="px-6 py-2 text-lg font-semibold">Eras</h3>
             <a href="#modern-era" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Modern Era</a>
             <a href="#unification-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Unification Age</a>
@@ -405,12 +402,6 @@
             <a href="#ancient-era" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Ancient Era</a>
             <a href="#antediluvian-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Antediluvian Age</a>
         </nav>
-        <div class="px-6 py-4">
-            <h3 class="text-lg font-semibold mb-2">Filter by Tag</h3>
-            <div id="tag-filters" class="space-y-2">
-                <!-- Tags will be dynamically populated here -->
-            </div>
-        </div>
     </aside>
 
     <!-- Main Content Area -->
@@ -421,6 +412,9 @@
             <p class="text-2xl text-gray-300 italic">A Celestial Descent Through the Ages</p>
             <div class="mt-8 max-w-xl mx-auto">
                 <input type="text" id="search-input" placeholder="Search events..." class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <div id="tag-filters" class="mt-4 flex flex-wrap justify-center gap-2">
+                    <!-- Tags will be dynamically populated here -->
+                </div>
             </div>
         </header>
 
@@ -602,6 +596,7 @@
         let sortedEventIds = []; // Holds ALL event IDs, sorted chronologically ONE TIME.
         let currentEventIndex = -1; // To track the currently open event IN THE SORTED LIST.
         let allTags = new Set(); // To store all unique tags
+        let fuse; // Fuse.js instance for fuzzy search
 
         // Debounce function to limit how often a function is called
         function debounce(func, delay) {
@@ -624,6 +619,12 @@
                 { id: 'antediluvian-age', file: 'antediluvian-age.json', type: 'star' }
             ];
 
+            let searchResultsIds = null;
+            if (searchTerm && fuse) {
+                const results = fuse.search(searchTerm);
+                searchResultsIds = new Set(results.map(r => r.item.id));
+            }
+
             eras.forEach(era => {
                 const container = era.type === 'card'
                     ? document.querySelector(`#${era.id} .grid`)
@@ -637,11 +638,7 @@
                         .sort((b, a) => (a.order_id || '').localeCompare(b.order_id || ''));
 
                     const filteredData = eraData.filter(event => {
-                        const searchTermLower = searchTerm.toLowerCase();
-                        const matchesSearch = searchTerm === '' ||
-                            event.title.toLowerCase().includes(searchTermLower) ||
-                            event.description.toLowerCase().includes(searchTermLower) ||
-                            (event.summary && event.summary.toLowerCase().includes(searchTermLower));
+                        const matchesSearch = searchResultsIds === null || searchResultsIds.has(event.id);
 
                         const matchesTags = selectedTags.length === 0 ||
                             selectedTags.every(tag => event.tags && event.tags.includes(tag));
@@ -719,23 +716,33 @@
             `;
         }
 
-        // Function to populate tag filters in the sidebar
+        // Function to populate tag filters under the search bar
         function populateTagFilters() {
             const container = document.getElementById('tag-filters');
             let htmlContent = '';
             allTags.forEach(tag => {
                 htmlContent += `
-                    <label class="flex items-center space-x-2 cursor-pointer">
-                        <input type="checkbox" class="tag-checkbox bg-gray-700 border-gray-600 rounded" value="${tag}">
-                        <span>${tag}</span>
-                    </label>
+                    <button class="tag-chip px-3 py-1 rounded-full bg-gray-700 text-gray-300 hover:bg-gray-600 text-sm transition-colors border border-transparent" data-value="${tag}">
+                        ${tag}
+                    </button>
                 `;
             });
             container.innerHTML = htmlContent;
 
-            // Add event listeners to new checkboxes
-            document.querySelectorAll('.tag-checkbox').forEach(checkbox => {
-                checkbox.addEventListener('change', handleFilterChange);
+            // Add event listeners to new buttons
+            document.querySelectorAll('.tag-chip').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    btn.classList.toggle('selected');
+                    // Toggle visual state
+                    if(btn.classList.contains('selected')) {
+                        btn.classList.remove('bg-gray-700', 'text-gray-300');
+                        btn.classList.add('bg-purple-600', 'text-white', 'border-purple-400');
+                    } else {
+                        btn.classList.add('bg-gray-700', 'text-gray-300');
+                        btn.classList.remove('bg-purple-600', 'text-white', 'border-purple-400');
+                    }
+                    handleFilterChange();
+                });
             });
         }
 
@@ -767,10 +774,18 @@
                 // --- CRITICAL FIX ---
                 // Sort all events by their order_id ONCE and store the sorted IDs.
                 // This becomes the master list for navigation, immune to filtering.
-                sortedEventIds = Object.values(timelineData)
-                    .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''))
-                    .map(event => event.id);
+                const allEvents = Object.values(timelineData)
+                    .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''));
 
+                sortedEventIds = allEvents.map(event => event.id);
+
+                // Initialize Fuse.js
+                const fuseOptions = {
+                    keys: ['title', 'description', 'summary', 'tags', 'sub_events.title', 'sub_events.description'],
+                    threshold: 0.3, // 0.0 is exact match, 1.0 is match anything
+                    ignoreLocation: true
+                };
+                fuse = new Fuse(allEvents, fuseOptions);
 
                 populateTagFilters();
                 renderTimeline(); // Initial render
@@ -787,21 +802,15 @@
 
         function handleFilterChange() {
             const searchTerm = document.getElementById('search-input').value;
-            const selectedTags = Array.from(document.querySelectorAll('.tag-checkbox:checked')).map(cb => cb.value);
+            const selectedTags = Array.from(document.querySelectorAll('.tag-chip.selected')).map(btn => btn.dataset.value);
             renderTimeline(searchTerm, selectedTags);
         }
 
         function setupEventListeners() {
             const searchInput = document.getElementById('search-input');
-            const sidebarSearchInput = document.getElementById('sidebar-search-input');
             const debouncedRender = debounce(handleFilterChange, 300);
 
             searchInput.addEventListener('input', () => {
-                sidebarSearchInput.value = searchInput.value;
-                debouncedRender();
-            });
-            sidebarSearchInput.addEventListener('input', () => {
-                searchInput.value = sidebarSearchInput.value;
                 debouncedRender();
             });
         }
