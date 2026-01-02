@@ -27,11 +27,11 @@ async def run_verification():
 
             print("Waiting for timeline to load...")
             # Correctly wait for the first event trigger to be visible
-            await expect(page.locator('.event-trigger').first()).to_be_visible(timeout=15000)
+            await expect(page.locator('.event-trigger').first).to_be_visible(timeout=15000)
             print("Timeline loaded.")
 
             # Define the locators
-            aurora_card = page.locator('.event-trigger', has_text='Aurora Dwarf Civil War').first()
+            aurora_card = page.locator('.event-trigger', has_text='Aurora Dwarf Civil War').first
             modal_title = page.locator('#modal-title')
             next_btn = page.locator('#modal-next-btn')
             prev_btn = page.locator('#modal-prev-btn')
@@ -58,6 +58,8 @@ async def run_verification():
 
         except Exception as e:
             print(f"An error occurred during verification: {e}")
+            import traceback
+            traceback.print_exc()
         finally:
             await browser.close()
             server_process.kill()
