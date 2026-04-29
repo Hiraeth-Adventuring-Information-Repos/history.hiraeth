@@ -388,13 +388,13 @@
 <body class="antialiased">
 
     <!-- Sidebar Navigation -->
-    <button id="sidebar-toggle" class="fixed top-4 left-4 z-50 bg-gray-800 bg-opacity-50 text-white p-2 rounded-md hover:bg-opacity-75 transition-opacity">
+    <button id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar" class="fixed top-4 left-4 z-50 bg-gray-800 bg-opacity-50 text-white p-2 rounded-md hover:bg-opacity-75 transition-opacity focus-visible:ring-2 focus-visible:outline-none">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
     </button>
 
     <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-900 bg-opacity-90 backdrop-blur-sm text-white z-40 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
         <div class="p-4 mt-16">
-            <input type="text" id="sidebar-search-input" placeholder="Search..." class="w-full px-3 py-2 rounded-md bg-gray-800 text-white border-gray-700 focus:outline-none focus:ring-1 focus:ring-purple-500">
+            <input type="text" id="sidebar-search-input" aria-label="Search events in sidebar" placeholder="Search..." class="w-full px-3 py-2 rounded-md bg-gray-800 text-white border-gray-700 focus:outline-none focus:ring-1 focus:ring-purple-500">
         </div>
         <nav>
             <h3 class="px-6 py-2 text-lg font-semibold">Eras</h3>
@@ -420,7 +420,7 @@
             <h1 class="text-6xl md:text-7xl font-bold text-white mb-4">The Hiraeth Timeline</h1>
             <p class="text-2xl text-gray-300 italic">A Celestial Descent Through the Ages</p>
             <div class="mt-8 max-w-xl mx-auto">
-                <input type="text" id="search-input" placeholder="Search events..." class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <input type="text" id="search-input" aria-label="Search timeline events" placeholder="Search events..." class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
             </div>
         </header>
 
@@ -572,9 +572,9 @@
     -->
     <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-70 z-40 hidden opacity-0"></div>
 
-    <div id="modal-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 scale-95">
+    <div id="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-title" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 scale-95">
         <div id="modal-content" class="modal-content-base">
-            <button id="modal-close-btn">&times;</button>
+            <button id="modal-close-btn" aria-label="Close modal" class="focus-visible:ring-2 focus-visible:outline-none">&times;</button>
 
             <!-- Header container for back button and title -->
             <div class="relative mb-2">
@@ -973,13 +973,15 @@
             const sidebarToggle = document.getElementById('sidebar-toggle');
 
             sidebarToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
+                const isClosed = sidebar.classList.toggle('-translate-x-full');
+                sidebarToggle.setAttribute('aria-expanded', !isClosed);
             });
 
             // Close sidebar when a link is clicked
             sidebar.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     sidebar.classList.add('-translate-x-full');
+                    sidebarToggle.setAttribute('aria-expanded', 'false');
                 });
             });
         });
