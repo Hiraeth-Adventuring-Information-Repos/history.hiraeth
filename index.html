@@ -598,6 +598,8 @@
     <script>
         // --- DYNAMIC DATA LOADING & RENDERING ---
         const timelineData = {}; // Global object to hold all event data after fetching.
+        let eraDataMap = {}; // Global object to cache sorted event data per era
+        let cachedContainers = {}; // Global object to cache DOM containers for each era
         let allEventTriggers = []; // Holds the visible, on-screen event triggers.
         let sortedEventIds = []; // Holds ALL event IDs, sorted chronologically ONE TIME.
         let currentEventIndex = -1; // To track the currently open event IN THE SORTED LIST.
@@ -624,20 +626,23 @@
                 { id: 'antediluvian-age', file: 'antediluvian-age.json', type: 'star' }
             ];
 
+            const searchTermLower = searchTerm.toLowerCase();
+
             eras.forEach(era => {
-                const container = era.type === 'card'
-                    ? document.querySelector(`#${era.id} .grid`)
-                    : document.querySelector(`#${era.id} .star-chart-container`);
+                if (!cachedContainers[era.id]) {
+                    cachedContainers[era.id] = era.type === 'card'
+                        ? document.querySelector(`#${era.id} .grid`)
+                        : document.querySelector(`#${era.id} .star-chart-container`);
+                }
+                const container = cachedContainers[era.id];
 
                 if (container) {
                     let htmlContent = '';
-                    // Get all events for the era, but SORT them by order_id to ensure they render correctly.
-                    const eraData = Object.values(timelineData)
-                        .filter(event => event.era === era.id)
-                        .sort((b, a) => (a.order_id || '').localeCompare(b.order_id || ''));
+
+                    // Use pre-sorted data from eraDataMap
+                    const eraData = eraDataMap[era.id] || [];
 
                     const filteredData = eraData.filter(event => {
-                        const searchTermLower = searchTerm.toLowerCase();
                         const matchesSearch = searchTerm === '' ||
                             event.title.toLowerCase().includes(searchTermLower) ||
                             event.description.toLowerCase().includes(searchTermLower) ||
@@ -762,6 +767,13 @@
                             event.tags.forEach(tag => allTags.add(tag));
                         }
                     });
+                });
+
+                // Pre-sort events per era and cache them in eraDataMap to avoid O(N log N) sorting on every render
+                eras.forEach(era => {
+                    eraDataMap[era.id] = Object.values(timelineData)
+                        .filter(event => event.era === era.id)
+                        .sort((b, a) => (a.order_id || '').localeCompare(b.order_id || ''));
                 });
 
                 // --- CRITICAL FIX ---
