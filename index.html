@@ -368,6 +368,11 @@
             transition: color 0.2s;
             z-index: 20;
         }
+        #modal-close-btn:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 2px #8a63f5;
+            border-radius: 4px;
+        }
         /* Rumor Box */
         .rumor-box {
             margin-top: 1.5rem;
@@ -388,7 +393,7 @@
 <body class="antialiased">
 
     <!-- Sidebar Navigation -->
-    <button id="sidebar-toggle" class="fixed top-4 left-4 z-50 bg-gray-800 bg-opacity-50 text-white p-2 rounded-md hover:bg-opacity-75 transition-opacity">
+    <button id="sidebar-toggle" aria-label="Toggle navigation menu" class="fixed top-4 left-4 z-50 bg-gray-800 bg-opacity-50 text-white p-2 rounded-md hover:bg-opacity-75 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
     </button>
 
@@ -574,7 +579,7 @@
 
     <div id="modal-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 scale-95">
         <div id="modal-content" class="modal-content-base">
-            <button id="modal-close-btn">&times;</button>
+            <button id="modal-close-btn" aria-label="Close modal">&times;</button>
 
             <!-- Header container for back button and title -->
             <div class="relative mb-2">
