@@ -615,6 +615,7 @@
 
         // Function to render the timeline based on current filters
         function renderTimeline(searchTerm = '', selectedTags = []) {
+            const searchTermLower = searchTerm.toLowerCase();
             const eras = [
                 { id: 'modern-era', file: 'modern-era.json', type: 'card', class: 'modern' },
                 { id: 'unification-age', file: 'unification-age.json', type: 'card', class: 'unification' },
@@ -623,6 +624,9 @@
                 { id: 'ancient-era', file: 'ancient-era.json', type: 'star' },
                 { id: 'antediluvian-age', file: 'antediluvian-age.json', type: 'star' }
             ];
+
+            // ⚡ Bolt Optimization: Hoisted string operations
+            // We compute this once per render instead of on every single event iteration.
 
             eras.forEach(era => {
                 const container = era.type === 'card'
@@ -637,7 +641,6 @@
                         .sort((b, a) => (a.order_id || '').localeCompare(b.order_id || ''));
 
                     const filteredData = eraData.filter(event => {
-                        const searchTermLower = searchTerm.toLowerCase();
                         const matchesSearch = searchTerm === '' ||
                             event.title.toLowerCase().includes(searchTermLower) ||
                             event.description.toLowerCase().includes(searchTermLower) ||
