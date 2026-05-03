@@ -602,11 +602,21 @@
 
     <script>
         // --- DYNAMIC DATA LOADING & RENDERING ---
+        const erasConfig = [
+            { id: 'modern-era', file: 'modern-era.json', type: 'card', class: 'modern' },
+            { id: 'unification-age', file: 'unification-age.json', type: 'card', class: 'unification' },
+            { id: 'mythic-age', file: 'mythic-age.json', type: 'card', class: 'mythic' },
+            { id: 'classical-age', file: 'classical-age.json', type: 'card', class: 'classical' },
+            { id: 'ancient-era', file: 'ancient-era.json', type: 'star' },
+            { id: 'antediluvian-age', file: 'antediluvian-age.json', type: 'star' }
+        ];
         const timelineData = {}; // Global object to hold all event data after fetching.
         let allEventTriggers = []; // Holds the visible, on-screen event triggers.
         let sortedEventIds = []; // Holds ALL event IDs, sorted chronologically ONE TIME.
         let currentEventIndex = -1; // To track the currently open event IN THE SORTED LIST.
         let allTags = new Set(); // To store all unique tags
+        const eraDataMap = {}; // Cache pre-sorted event data per era
+        const cachedContainers = {}; // Cache DOM elements for era containers
 
         // Debounce function to limit how often a function is called
         function debounce(func, delay) {
@@ -621,29 +631,17 @@
         // Function to render the timeline based on current filters
         function renderTimeline(searchTerm = '', selectedTags = []) {
             const searchTermLower = searchTerm.toLowerCase();
-            const eras = [
-                { id: 'modern-era', file: 'modern-era.json', type: 'card', class: 'modern' },
-                { id: 'unification-age', file: 'unification-age.json', type: 'card', class: 'unification' },
-                { id: 'mythic-age', file: 'mythic-age.json', type: 'card', class: 'mythic' },
-                { id: 'classical-age', file: 'classical-age.json', type: 'card', class: 'classical' },
-                { id: 'ancient-era', file: 'ancient-era.json', type: 'star' },
-                { id: 'antediluvian-age', file: 'antediluvian-age.json', type: 'star' }
-            ];
 
             // ⚡ Bolt Optimization: Hoisted string operations
             // We compute this once per render instead of on every single event iteration.
 
-            eras.forEach(era => {
-                const container = era.type === 'card'
-                    ? document.querySelector(`#${era.id} .grid`)
-                    : document.querySelector(`#${era.id} .star-chart-container`);
+            erasConfig.forEach(era => {
+                const container = cachedContainers[era.id];
 
                 if (container) {
                     let htmlContent = '';
-                    // Get all events for the era, but SORT them by order_id to ensure they render correctly.
-                    const eraData = Object.values(timelineData)
-                        .filter(event => event.era === era.id)
-                        .sort((b, a) => (a.order_id || '').localeCompare(b.order_id || ''));
+                    // Get pre-sorted events for the era
+                    const eraData = eraDataMap[era.id] || [];
 
                     const filteredData = eraData.filter(event => {
                         const matchesSearch = searchTerm === '' ||
@@ -749,20 +747,11 @@
 
         // Main function to fetch data and build the timeline
         async function initializeTimeline() {
-            const eras = [
-                { id: 'modern-era', file: 'modern-era.json', type: 'card', class: 'modern' },
-                { id: 'unification-age', file: 'unification-age.json', type: 'card', class: 'unification' },
-                { id: 'mythic-age', file: 'mythic-age.json', type: 'card', class: 'mythic' },
-                { id: 'classical-age', file: 'classical-age.json', type: 'card', class: 'classical' },
-                { id: 'ancient-era', file: 'ancient-era.json', type: 'star' },
-                { id: 'antediluvian-age', file: 'antediluvian-age.json', type: 'star' }
-            ];
-
             try {
-                const responses = await Promise.all(eras.map(era => fetch(era.file).then(res => res.json())));
+                const responses = await Promise.all(erasConfig.map(era => fetch(era.file).then(res => res.json())));
 
                 responses.forEach((eraData, index) => {
-                    const era = eras[index];
+                    const era = erasConfig[index];
                     eraData.forEach(event => {
                         event.era = era.id; // Assign era id to each event for filtering
                         timelineData[event.id] = event; // Populate global data
@@ -770,6 +759,14 @@
                             event.tags.forEach(tag => allTags.add(tag));
                         }
                     });
+
+                    // Cache the pre-sorted era data
+                    eraDataMap[era.id] = eraData.sort((b, a) => (a.order_id || '').localeCompare(b.order_id || ''));
+
+                    // Cache the container DOM element
+                    cachedContainers[era.id] = era.type === 'card'
+                        ? document.querySelector(`#${era.id} .grid`)
+                        : document.querySelector(`#${era.id} .star-chart-container`);
                 });
 
                 // --- CRITICAL FIX ---
