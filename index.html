@@ -393,13 +393,13 @@
 <body class="antialiased">
 
     <!-- Sidebar Navigation -->
-    <button id="sidebar-toggle" aria-label="Toggle navigation menu" class="fixed top-4 left-4 z-50 bg-gray-800 bg-opacity-50 text-white p-2 rounded-md hover:bg-opacity-75 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900">
+    <button id="sidebar-toggle" aria-expanded="false" aria-label="Toggle navigation menu" class="fixed top-4 left-4 z-50 bg-gray-800 bg-opacity-50 text-white p-2 rounded-md hover:bg-opacity-75 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
     </button>
 
     <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-900 bg-opacity-90 backdrop-blur-sm text-white z-40 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
         <div class="p-4 mt-16">
-            <input type="text" id="sidebar-search-input" placeholder="Search..." class="w-full px-3 py-2 rounded-md bg-gray-800 text-white border-gray-700 focus:outline-none focus:ring-1 focus:ring-purple-500">
+            <input type="search" id="sidebar-search-input" aria-label="Search events" placeholder="Search..." class="w-full px-3 py-2 rounded-md bg-gray-800 text-white border-gray-700 focus:outline-none focus:ring-1 focus:ring-purple-500">
         </div>
         <nav>
             <h3 class="px-6 py-2 text-lg font-semibold">Eras</h3>
@@ -425,7 +425,7 @@
             <h1 class="text-6xl md:text-7xl font-bold text-white mb-4">The Hiraeth Timeline</h1>
             <p class="text-2xl text-gray-300 italic">A Celestial Descent Through the Ages</p>
             <div class="mt-8 max-w-xl mx-auto">
-                <input type="text" id="search-input" placeholder="Search events..." class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <input type="search" id="search-input" aria-label="Search events" placeholder="Search events..." class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
             </div>
         </header>
 
@@ -440,7 +440,7 @@
                 <h2 class="text-5xl font-bold mb-4 text-center">The Modern Era</h2>
                 <p class="text-xl text-center text-gray-600 mb-12 italic">"History as written by the victors. Clear, precise, and absolute."</p>
                 <div class="text-center mb-12">
-                    <button class="preamble-toggle text-gray-500 hover:text-gray-800 transition-colors">More about this era...</button>
+                    <button class="preamble-toggle text-gray-500 hover:text-gray-800 transition-colors" aria-expanded="false">More about this era...</button>
                     <div class="preamble-content hidden mt-4 text-left max-w-3xl mx-auto">
                         <p>This is a placeholder for the preamble of the Modern Era. It will contain more information about this period of history.</p>
                     </div>
@@ -462,7 +462,7 @@
                 <h2 class="text-5xl font-bold mb-4 text-center">The Unification Age</h2>
                 <p class="text-xl text-center text-gray-300 mb-12 italic">"The age of treaties and mortals. When civilization began to write its own laws."</p>
                 <div class="text-center mb-12">
-                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors">More about this era...</button>
+                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors" aria-expanded="false">More about this era...</button>
                     <div class="preamble-content hidden mt-4 text-left max-w-3xl mx-auto">
                         <p>This is a placeholder for the preamble of the Unification Age. It will contain more information about this period of history.</p>
                     </div>
@@ -484,7 +484,7 @@
                 <h2 class="text-5xl font-bold mb-4 text-center">The Mythic Age</h2>
                 <p class="text-xl text-center text-gray-300 mb-12 italic">"The age of legends, prophecy, and magical cataclysms."</p>
                 <div class="text-center mb-12">
-                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors">More about this era...</button>
+                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors" aria-expanded="false">More about this era...</button>
                     <div class="preamble-content hidden mt-4 text-left max-w-3xl mx-auto">
                         <p>This is a placeholder for the preamble of the Mythic Age. It will contain more information about this period of history.</p>
                     </div>
@@ -506,7 +506,7 @@
                 <h2 class="text-5xl font-bold mb-4 text-center">The Classical Age</h2>
                 <p class="text-xl text-center text-gray-300 mb-12 italic">"The age of emerging empires, written magic, and wars in the dark."</p>
                 <div class="text-center mb-12">
-                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors">More about this era...</button>
+                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors" aria-expanded="false">More about this era...</button>
                     <div class="preamble-content hidden mt-4 text-left max-w-3xl mx-auto">
                         <p>This is a placeholder for the preamble of the Classical Age. It will contain more information about this period of history.</p>
                     </div>
@@ -528,7 +528,7 @@
                 <h2 class="text-5xl font-bold mb-4 text-center">The Ancient Era</h2>
                 <p class="text-xl text-center text-gray-300 mb-12 italic">"The age of myths. History told by the stars, not by mortals."</p>
                 <div class="text-center mb-12">
-                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors">More about this era...</button>
+                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors" aria-expanded="false">More about this era...</button>
                     <div class="preamble-content hidden mt-4 text-left max-w-3xl mx-auto">
                         <p>This is a placeholder for the preamble of the Ancient Era. It will contain more information about this period of history.</p>
                     </div>
@@ -555,7 +555,7 @@
                 <h2 class="text-5xl font-bold mb-4 text-center">The Antediluvian Age</h2>
                 <p class="text-xl text-center text-gray-300 mb-12 italic">"Myths whispered from the dawn of time. More feeling than fact."</p>
                 <div class="text-center mb-12">
-                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors">More about this era...</button>
+                    <button class="preamble-toggle text-gray-400 hover:text-white transition-colors" aria-expanded="false">More about this era...</button>
                     <div class="preamble-content hidden mt-4 text-left max-w-3xl mx-auto">
                         <p>This is a placeholder for the preamble of the Antediluvian Age. It will contain more information about this period of history.</p>
                     </div>
@@ -991,7 +991,9 @@
             document.querySelectorAll('.preamble-toggle').forEach(button => {
                 button.addEventListener('click', () => {
                     const content = button.nextElementSibling;
-                    content.classList.toggle('hidden');
+                    const isHidden = content.classList.toggle('hidden');
+                    button.setAttribute('aria-expanded', !isHidden);
+                    button.textContent = isHidden ? 'More about this era...' : 'Less about this era...';
                 });
             });
 
@@ -1000,13 +1002,15 @@
             const sidebarToggle = document.getElementById('sidebar-toggle');
 
             sidebarToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
+                const isHidden = sidebar.classList.toggle('-translate-x-full');
+                sidebarToggle.setAttribute('aria-expanded', !isHidden);
             });
 
             // Close sidebar when a link is clicked
             sidebar.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     sidebar.classList.add('-translate-x-full');
+                    sidebarToggle.setAttribute('aria-expanded', 'false');
                 });
             });
         });
