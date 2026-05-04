@@ -644,10 +644,8 @@
                     const eraData = eraDataMap[era.id] || [];
 
                     const filteredData = eraData.filter(event => {
-                        const matchesSearch = searchTerm === '' ||
-                            event.title.toLowerCase().includes(searchTermLower) ||
-                            event.description.toLowerCase().includes(searchTermLower) ||
-                            (event.summary && event.summary.toLowerCase().includes(searchTermLower));
+                        // ⚡ Bolt Optimization: Use pre-computed searchable string instead of calling toLowerCase() 3x per event
+                        const matchesSearch = searchTerm === '' || event._searchableText.includes(searchTermLower);
 
                         const matchesTags = selectedTags.length === 0 ||
                             selectedTags.every(tag => event.tags && event.tags.includes(tag));
@@ -754,6 +752,14 @@
                     const era = erasConfig[index];
                     eraData.forEach(event => {
                         event.era = era.id; // Assign era id to each event for filtering
+
+                        // ⚡ Bolt Optimization: Pre-compute searchable text string to avoid multiple toLowerCase() calls during render
+                        event._searchableText = [
+                            event.title || '',
+                            event.description || '',
+                            event.summary || ''
+                        ].join(' ').toLowerCase();
+
                         timelineData[event.id] = event; // Populate global data
                         if (event.tags) {
                             event.tags.forEach(tag => allTags.add(tag));
