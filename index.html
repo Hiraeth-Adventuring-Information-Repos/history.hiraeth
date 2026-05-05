@@ -611,7 +611,6 @@
             { id: 'antediluvian-age', file: 'antediluvian-age.json', type: 'star' }
         ];
         const timelineData = {}; // Global object to hold all event data after fetching.
-        let allEventTriggers = []; // Holds the visible, on-screen event triggers.
         let sortedEventIds = []; // Holds ALL event IDs, sorted chronologically ONE TIME.
         let currentEventIndex = -1; // To track the currently open event IN THE SORTED LIST.
         let allTags = new Set(); // To store all unique tags
@@ -669,11 +668,6 @@
                 }
             });
 
-            // Re-initialize LISTENERS on the now-visible triggers.
-            // DO NOT re-sort here, as it's the source of the navigation bug.
-            allEventTriggers = Array.from(document.querySelectorAll('.event-trigger'));
-            initializeModalListeners();
-            initializeSubEventListeners();
         }
 
 
@@ -787,6 +781,9 @@
                 renderTimeline(); // Initial render
                 setupEventListeners(); // Setup search and filter listeners
 
+                // ⚡ Bolt Optimization: Setup delegated listeners once
+                setupDelegatedListeners();
+
             } catch (error) {
                 console.error("Failed to load timeline data:", error);
                 const header = document.querySelector('header');
@@ -868,10 +865,6 @@
             }
             modalDescription.innerHTML = finalDescription;
 
-            if (!parentEventId && eventData.sub_events) {
-                initializeSubEventListeners();
-            }
-
             const rumor = (() => {
                 const rumors = dataToShow.rumors || eventData.rumors;
                 if (!rumors || rumors.length === 0) {
@@ -918,69 +911,63 @@
             }, 300);
         }
 
-        function initializeSubEventListeners() {
-            document.querySelectorAll('.sub-event-trigger').forEach(trigger => {
-                if (trigger.dataset.listenerAttached) return;
-
-                trigger.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Prevent card's click listener from firing
-                    const parentId = trigger.dataset.parentEventId;
-                    const subId = trigger.dataset.subEventId;
+        // ⚡ Bolt Optimization: Event Delegation
+        function setupDelegatedListeners() {
+            // Handle clicks on timeline
+            document.addEventListener('click', (e) => {
+                const subTrigger = e.target.closest('.sub-event-trigger');
+                if (subTrigger) {
+                    e.stopPropagation();
+                    const parentId = subTrigger.dataset.parentEventId;
+                    const subId = subTrigger.dataset.subEventId;
                     openModal(parentId, subId);
-                });
-                trigger.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
+                    return;
+                }
+
+                const eventTrigger = e.target.closest('.event-trigger');
+                if (eventTrigger) {
+                    const eventId = eventTrigger.getAttribute('data-event-id');
+                    if (eventId) openModal(eventId);
+                }
+            });
+
+            // Handle keyboard navigation on timeline
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    const subTrigger = e.target.closest('.sub-event-trigger');
+                    if (subTrigger) {
                         e.preventDefault();
                         e.stopPropagation();
-                        const parentId = trigger.dataset.parentEventId;
-                        const subId = trigger.dataset.subEventId;
+                        const parentId = subTrigger.dataset.parentEventId;
+                        const subId = subTrigger.dataset.subEventId;
                         openModal(parentId, subId);
+                        return;
                     }
-                });
-                trigger.dataset.listenerAttached = 'true';
-            });
-        }
 
-        function initializeModalListeners() {
-            function checkUrlForEvent() {
-                const params = new URLSearchParams(window.location.search);
-                const eventId = params.get('event');
-                const subEventId = params.get('sub');
-                if (eventId && timelineData[eventId]) {
-                    openModal(eventId, subEventId);
-                }
-            }
-
-            allEventTriggers.forEach(trigger => {
-                if (trigger.dataset.listenerAttached) return;
-
-                trigger.addEventListener('click', () => {
-                    const eventId = trigger.getAttribute('data-event-id');
-                    openModal(eventId);
-                });
-                trigger.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
+                    const eventTrigger = e.target.closest('.event-trigger');
+                    if (eventTrigger) {
                         e.preventDefault();
-                        const eventId = trigger.getAttribute('data-event-id');
-                        openModal(eventId);
+                        const eventId = eventTrigger.getAttribute('data-event-id');
+                        if (eventId) openModal(eventId);
                     }
-                });
-                trigger.dataset.listenerAttached = 'true';
+                }
+
+                if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
+                    closeModal();
+                }
             });
 
-            if (!modalBackdrop.dataset.listenerAttached) {
-                modalBackdrop.addEventListener('click', closeModal);
-                modalCloseBtn.addEventListener('click', closeModal);
+            // Modal close listeners
+            modalBackdrop.addEventListener('click', closeModal);
+            modalCloseBtn.addEventListener('click', closeModal);
 
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
-                        closeModal();
-                    }
-                });
-                modalBackdrop.dataset.listenerAttached = 'true';
+            // Handle deep linking on init
+            const params = new URLSearchParams(window.location.search);
+            const eventId = params.get('event');
+            const subEventId = params.get('sub');
+            if (eventId && timelineData[eventId]) {
+                openModal(eventId, subEventId);
             }
-
-            checkUrlForEvent();
         }
 
         // --- INITIALIZATION ---

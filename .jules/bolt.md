@@ -7,3 +7,6 @@
 ## 2026-05-04 - Pre-computing searchable text
 **Learning:** During high-frequency renders (like search filtering), repeatedly executing string operations such as `.toLowerCase()` on multiple properties (title, description, summary) across many objects introduces a significant and measurable performance bottleneck. The DOM render itself was not the main culprit, but rather the repeated string manipulation during array filtering.
 **Action:** Pre-compute a single `_searchableText` string (e.g., combining and lowercasing the relevant fields) on initialization for static or rarely-changing data. Query against this pre-computed string during loops to bypass redundant string processing overhead.
+## 2024-05-18 - [Event Delegation for Dynamic Content]
+**Learning:** Attaching individual `click` and `keydown` event listeners to thousands of generated DOM elements (like timeline events and sub-events) and re-attaching them on every re-render (e.g., search filtering) causes significant memory overhead and CPU blocking.
+**Action:** Use event delegation by attaching a single event listener to the `document` (or a high-level container). Check `e.target.closest('.target-class')` to handle the event. This prevents redundant listener attachments during rapid re-renders and improves memory usage.
