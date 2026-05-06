@@ -22,7 +22,14 @@ async def run():
 
         # Take screenshot
         os.makedirs('/home/swebot/jules-scratch/verification', exist_ok=True)
-        await page.screenshot(path='/home/swebot/jules-scratch/verification/search_empty.png')
+        await page.screenshot(path='/home/swebot/jules-scratch/verification/search_empty_new.png')
+
+        # Click the clear search button
+        await page.click('#clear-search-btn')
+        await asyncio.sleep(1)
+
+        # Take screenshot after clearing
+        await page.screenshot(path='/home/swebot/jules-scratch/verification/search_cleared.png')
 
         await browser.close()
         server_process.kill()
