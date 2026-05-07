@@ -664,7 +664,6 @@
                 const container = cachedContainers[era.id];
 
                 if (container) {
-                    let htmlContent = '';
                     // Get pre-sorted events for the era
                     const eraData = eraDataMap[era.id] || [];
 
@@ -678,18 +677,13 @@
                         return matchesSearch && matchesTags;
                     });
 
+                    // ⚡ Bolt Optimization: Use pre-computed HTML strings to avoid redundant string concatenation and HTML regeneration
                     if (era.type === 'card') {
-                        filteredData.forEach(event => {
-                            htmlContent += createEventCard(event, era.class);
-                        });
-                        container.innerHTML = htmlContent;
+                        container.innerHTML = filteredData.map(event => event._cachedHtml).join('');
                     } else { // star
                         // Clear only the clickable stars, not the filler ones
                         container.querySelectorAll('.clickable').forEach(el => el.remove());
-                        filteredData.forEach(event => {
-                            htmlContent += createStarEvent(event);
-                        });
-                        container.insertAdjacentHTML('beforeend', htmlContent);
+                        container.insertAdjacentHTML('beforeend', filteredData.map(event => event._cachedHtml).join(''));
                     }
                     totalResults += filteredData.length;
                 }
@@ -789,6 +783,9 @@
                             event.description || '',
                             event.summary || ''
                         ].join(' ').toLowerCase();
+
+                        // ⚡ Bolt Optimization: Pre-compute HTML rendering to avoid regenerating on every render cycle
+                        event._cachedHtml = era.type === 'card' ? createEventCard(event, era.class) : createStarEvent(event);
 
                         timelineData[event.id] = event; // Populate global data
                         if (event.tags) {
