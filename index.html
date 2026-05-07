@@ -408,8 +408,8 @@
 <body class="antialiased">
 
     <!-- Sidebar Navigation -->
-    <button id="sidebar-toggle" aria-expanded="false" aria-label="Toggle navigation menu" class="fixed top-4 left-4 z-50 bg-gray-800 bg-opacity-50 text-white p-2 rounded-md hover:bg-opacity-75 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+    <button id="sidebar-toggle" aria-expanded="false" aria-label="Toggle navigation menu" title="Toggle navigation menu" class="fixed top-4 left-4 z-50 bg-gray-800 bg-opacity-50 text-white p-2 rounded-md hover:bg-opacity-75 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900">
+        <svg aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
     </button>
 
     <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-900 bg-opacity-90 backdrop-blur-sm text-white z-40 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
@@ -418,12 +418,12 @@
         </div>
         <nav>
             <h3 class="px-6 py-2 text-lg font-semibold">Eras</h3>
-            <a href="#modern-era" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Modern Era</a>
-            <a href="#unification-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Unification Age</a>
-            <a href="#mythic-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Mythic Age</a>
-            <a href="#classical-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Classical Age</a>
-            <a href="#ancient-era" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Ancient Era</a>
-            <a href="#antediluvian-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors">Antediluvian Age</a>
+            <a href="#modern-era" class="block py-3 px-6 hover:bg-gray-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple-500">Modern Era</a>
+            <a href="#unification-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple-500">Unification Age</a>
+            <a href="#mythic-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple-500">Mythic Age</a>
+            <a href="#classical-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple-500">Classical Age</a>
+            <a href="#ancient-era" class="block py-3 px-6 hover:bg-gray-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple-500">Ancient Era</a>
+            <a href="#antediluvian-age" class="block py-3 px-6 hover:bg-gray-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple-500">Antediluvian Age</a>
         </nav>
         <div class="px-6 py-4">
             <h3 class="text-lg font-semibold mb-2">Filter by Tag</h3>
@@ -753,8 +753,8 @@
             let htmlContent = '';
             allTags.forEach(tag => {
                 htmlContent += `
-                    <label class="flex items-center space-x-2 cursor-pointer">
-                        <input type="checkbox" class="tag-checkbox bg-gray-700 border-gray-600 rounded" value="${tag}">
+                    <label class="flex items-center space-x-2 cursor-pointer hover:text-purple-400 transition-colors">
+                        <input type="checkbox" class="tag-checkbox bg-gray-700 border-gray-600 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500" value="${tag}">
                         <span>${tag}</span>
                     </label>
                 `;
@@ -1052,6 +1052,15 @@
                     sidebar.classList.add('-translate-x-full');
                     sidebarToggle.setAttribute('aria-expanded', 'false');
                 });
+            });
+
+            // Close sidebar on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+                    sidebar.classList.add('-translate-x-full');
+                    sidebarToggle.setAttribute('aria-expanded', 'false');
+                    sidebarToggle.focus(); // Return focus to the toggle button
+                }
             });
         });
     </script>
