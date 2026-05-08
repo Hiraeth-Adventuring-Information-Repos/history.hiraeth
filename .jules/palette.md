@@ -1,3 +1,6 @@
 ## 2026-05-07 - [Off-Canvas Sidebar Keyboard Navigation]
 **Learning:** Adding an off-canvas sidebar menu without a programmatic keyboard escape hatch creates a functional focus trap or requires frustrating reverse-tabbing for keyboard users.
 **Action:** Always implement an `Escape` key listener for off-canvas elements. Crucially, when dismissing via Escape, programmatically return focus to the trigger button (`#sidebar-toggle`) to maintain a logical and continuous focus flow in the DOM.
+## 2026-05-08 - [Keyboard Focus Management for Modals and Hidden Elements]
+**Learning:** Hidden elements like sidebars and modals that lack explicit focus management cause screen readers and keyboard navigation to become trapped or to lose their context. For sidebars, simply translating them offscreen isn't enough; they remain focusable and create confusing ghost navigation points. For modals, focus is lost in the background document instead of transferring appropriately.
+**Action:** When working with hidden complex structures (like off-canvas sidebars), dynamically toggle the `inert` attribute to prevent any keyboard or screen reader interaction while hidden. When opening a modal, save the `document.activeElement` and use `focus()` to send the user directly into the modal (e.g. to a close button). Restore focus to the saved element upon modal close.
