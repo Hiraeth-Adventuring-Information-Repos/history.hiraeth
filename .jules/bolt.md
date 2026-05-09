@@ -13,3 +13,7 @@
 ## 2024-05-15 - [Pre-computing HTML rendering]
 **Learning:** Found that `createEventCard` and `createStarEvent` functions were being repeatedly called on every render cycle during search filtering, causing redundant string interpolations and string concatenations to regenerate HTML for each event even though the data does not change.
 **Action:** Pre-compute the HTML structure for each event once during the initial data loading phase and cache it on the event object (e.g. `event._cachedHtml`). Then, use this pre-computed HTML directly during the `renderTimeline` function via `.map().join('')`, significantly reducing the work done inside high-frequency render loops.
+
+## 2024-05-18 - Early Returns and Bypassing Loops
+**Learning:** Found a performance bottleneck in `renderTimeline` where the `.filter()` loop executed for every event even when the search and tags arrays were empty (e.g., initial render, clearing search). Additionally, the loop redundantly evaluated all filtering conditions using logical operators (`&&`, `||`) for every event instead of short-circuiting.
+**Action:** Skip `array.filter()` entirely if the input conditions are empty, and return the original array directly. Inside filtering loops, use early returns (`if (condition fails) return false;`) to exit the execution path immediately and save CPU cycles.

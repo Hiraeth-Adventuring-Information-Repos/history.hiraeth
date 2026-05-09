@@ -653,6 +653,8 @@
         // Function to render the timeline based on current filters
         function renderTimeline(searchTerm = '', selectedTags = []) {
             const searchTermLower = searchTerm.toLowerCase();
+            const hasSearch = searchTerm !== '';
+            const hasTags = selectedTags.length > 0;
 
             // ⚡ Bolt Optimization: Hoisted string operations
             // We compute this once per render instead of on every single event iteration.
@@ -666,15 +668,16 @@
                     // Get pre-sorted events for the era
                     const eraData = eraDataMap[era.id] || [];
 
-                    const filteredData = eraData.filter(event => {
-                        // ⚡ Bolt Optimization: Use pre-computed searchable string instead of calling toLowerCase() 3x per event
-                        const matchesSearch = searchTerm === '' || event._searchableText.includes(searchTermLower);
-
-                        const matchesTags = selectedTags.length === 0 ||
-                            selectedTags.every(tag => event.tags && event.tags.includes(tag));
-
-                        return matchesSearch && matchesTags;
-                    });
+                    // ⚡ Bolt Optimization: Skip filter entirely if no search/tags, and use early returns
+                    let filteredData = eraData;
+                    if (hasSearch || hasTags) {
+                        filteredData = eraData.filter(event => {
+                            // ⚡ Bolt Optimization: Use pre-computed searchable string and early returns
+                            if (hasSearch && !event._searchableText.includes(searchTermLower)) return false;
+                            if (hasTags && !selectedTags.every(tag => event.tags && event.tags.includes(tag))) return false;
+                            return true;
+                        });
+                    }
 
                     // ⚡ Bolt Optimization: Use pre-computed HTML strings to avoid redundant string concatenation and HTML regeneration
                     if (era.type === 'card') {
