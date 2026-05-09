@@ -599,7 +599,7 @@
     -->
     <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-70 z-40 hidden opacity-0"></div>
 
-    <div id="modal-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 scale-95">
+    <div id="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden opacity-0 scale-95">
         <div id="modal-content" class="modal-content-base">
             <button id="modal-close-btn" aria-label="Close modal">&times;</button>
 
@@ -1046,11 +1046,32 @@
             const sidebar = document.getElementById('sidebar');
             const sidebarToggle = document.getElementById('sidebar-toggle');
 
+            const sidebarSearchInput = document.getElementById('sidebar-search-input');
+
             sidebarToggle.addEventListener('click', () => {
                 const isHidden = sidebar.classList.toggle('-translate-x-full');
                 sidebarToggle.setAttribute('aria-expanded', !isHidden);
-                if (isHidden) sidebar.setAttribute('inert', '');
-                else sidebar.removeAttribute('inert');
+                if (isHidden) {
+                    sidebar.setAttribute('inert', '');
+                } else {
+                    sidebar.removeAttribute('inert');
+                    // Automatically focus the search input when sidebar opens for better keyboard UX
+                    if (sidebarSearchInput) {
+                        setTimeout(() => sidebarSearchInput.focus(), 300); // Wait for transition
+                    }
+                }
+            });
+
+            // Close sidebar when clicking outside of it
+            document.addEventListener('click', (e) => {
+                if (!sidebar.classList.contains('-translate-x-full') &&
+                    !sidebar.contains(e.target) &&
+                    e.target !== sidebarToggle &&
+                    !sidebarToggle.contains(e.target)) {
+                    sidebar.classList.add('-translate-x-full');
+                    sidebarToggle.setAttribute('aria-expanded', 'false');
+                    sidebar.setAttribute('inert', '');
+                }
             });
 
             // Close sidebar when a link is clicked
