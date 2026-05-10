@@ -680,12 +680,18 @@
                     }
 
                     // ⚡ Bolt Optimization: Use pre-computed HTML strings to avoid redundant string concatenation and HTML regeneration
-                    if (era.type === 'card') {
-                        container.innerHTML = filteredData.map(event => event._cachedHtml).join('');
-                    } else { // star
-                        // Clear only the clickable stars, not the filler ones
-                        container.querySelectorAll('.clickable').forEach(el => el.remove());
-                        container.insertAdjacentHTML('beforeend', filteredData.map(event => event._cachedHtml).join(''));
+                    const newHtml = filteredData.map(event => event._cachedHtml).join('');
+
+                    // ⚡ Bolt Optimization: Skip DOM update if the HTML hasn't changed
+                    if (container._lastHtml !== newHtml) {
+                        container._lastHtml = newHtml;
+                        if (era.type === 'card') {
+                            container.innerHTML = newHtml;
+                        } else { // star
+                            // Clear only the clickable stars, not the filler ones
+                            container.querySelectorAll('.clickable').forEach(el => el.remove());
+                            container.insertAdjacentHTML('beforeend', newHtml);
+                        }
                     }
                     totalResults += filteredData.length;
                 }
