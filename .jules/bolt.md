@@ -17,3 +17,7 @@
 ## 2024-05-18 - Early Returns and Bypassing Loops
 **Learning:** Found a performance bottleneck in `renderTimeline` where the `.filter()` loop executed for every event even when the search and tags arrays were empty (e.g., initial render, clearing search). Additionally, the loop redundantly evaluated all filtering conditions using logical operators (`&&`, `||`) for every event instead of short-circuiting.
 **Action:** Skip `array.filter()` entirely if the input conditions are empty, and return the original array directly. Inside filtering loops, use early returns (`if (condition fails) return false;`) to exit the execution path immediately and save CPU cycles.
+
+## 2024-05-19 - Skipping Redundant DOM Updates
+**Learning:** Found that `renderTimeline()` was updating the DOM (using `innerHTML` or `insertAdjacentHTML`) on every single render cycle, even when the resulting HTML string was identical to the previous render. DOM updates and the resulting browser layout/paint calculations are a significant performance hit.
+**Action:** Implemented caching of the generated HTML string directly on the container element (`container._lastHtml`). By checking `if (container._lastHtml !== newHtml)` before applying updates, redundant DOM manipulation is completely skipped when the visual state doesn't change, dramatically improving rendering performance during operations like identical filter outcomes.
