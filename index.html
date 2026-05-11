@@ -411,8 +411,9 @@
     </a>
 
     <!-- Sidebar Navigation -->
-    <button id="sidebar-toggle" aria-expanded="false" aria-label="Toggle navigation menu" title="Toggle navigation menu" class="fixed top-4 left-4 z-50 bg-gray-800 bg-opacity-50 text-white p-2 rounded-md hover:bg-opacity-75 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900">
-        <svg aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+    <button id="sidebar-toggle" aria-expanded="false" aria-controls="sidebar" aria-label="Toggle navigation menu" title="Toggle navigation menu" class="fixed top-4 left-4 z-50 bg-gray-800 bg-opacity-50 text-white p-2 rounded-md hover:bg-opacity-75 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900">
+        <svg id="icon-menu" aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        <svg id="icon-close" aria-hidden="true" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
 
     <aside id="sidebar" inert class="fixed top-0 left-0 w-64 h-full bg-gray-900 bg-opacity-90 backdrop-blur-sm text-white z-40 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
@@ -1059,21 +1060,35 @@
             // --- SIDEBAR SCRIPT ---
             const sidebar = document.getElementById('sidebar');
             const sidebarToggle = document.getElementById('sidebar-toggle');
+            const iconMenu = document.getElementById('icon-menu');
+            const iconClose = document.getElementById('icon-close');
 
             const sidebarSearchInput = document.getElementById('sidebar-search-input');
 
-            sidebarToggle.addEventListener('click', () => {
-                const isHidden = sidebar.classList.toggle('-translate-x-full');
-                sidebarToggle.setAttribute('aria-expanded', !isHidden);
+            function toggleSidebar(forceClose = false) {
+                const isHidden = forceClose ? true : sidebar.classList.contains('-translate-x-full') ? false : true;
+
                 if (isHidden) {
+                    sidebar.classList.add('-translate-x-full');
+                    sidebarToggle.setAttribute('aria-expanded', 'false');
                     sidebar.setAttribute('inert', '');
+                    iconMenu.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
                 } else {
+                    sidebar.classList.remove('-translate-x-full');
+                    sidebarToggle.setAttribute('aria-expanded', 'true');
                     sidebar.removeAttribute('inert');
+                    iconMenu.classList.add('hidden');
+                    iconClose.classList.remove('hidden');
                     // Automatically focus the search input when sidebar opens for better keyboard UX
                     if (sidebarSearchInput) {
                         setTimeout(() => sidebarSearchInput.focus(), 300); // Wait for transition
                     }
                 }
+            }
+
+            sidebarToggle.addEventListener('click', () => {
+                toggleSidebar();
             });
 
             // Close sidebar when clicking outside of it
@@ -1082,27 +1097,21 @@
                     !sidebar.contains(e.target) &&
                     e.target !== sidebarToggle &&
                     !sidebarToggle.contains(e.target)) {
-                    sidebar.classList.add('-translate-x-full');
-                    sidebarToggle.setAttribute('aria-expanded', 'false');
-                    sidebar.setAttribute('inert', '');
+                    toggleSidebar(true);
                 }
             });
 
             // Close sidebar when a link is clicked
             sidebar.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
-                    sidebar.classList.add('-translate-x-full');
-                    sidebarToggle.setAttribute('aria-expanded', 'false');
-                    sidebar.setAttribute('inert', '');
+                    toggleSidebar(true);
                 });
             });
 
             // Close sidebar on Escape key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
-                    sidebar.classList.add('-translate-x-full');
-                    sidebarToggle.setAttribute('aria-expanded', 'false');
-                    sidebar.setAttribute('inert', '');
+                    toggleSidebar(true);
                     sidebarToggle.focus(); // Return focus to the toggle button
                 }
             });
