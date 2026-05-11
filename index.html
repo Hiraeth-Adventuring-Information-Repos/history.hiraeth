@@ -685,7 +685,13 @@
                     }
 
                     // ⚡ Bolt Optimization: Use pre-computed HTML strings to avoid redundant string concatenation and HTML regeneration
-                    const newHtml = filteredData.map(event => event._cachedHtml).join('');
+                    let newHtml;
+                    if (!hasSearch && !hasTags) {
+                        // Bypass .map().join('') completely if no filters are applied
+                        newHtml = eraDataMap[era.id]._cachedFullHtml;
+                    } else {
+                        newHtml = filteredData.map(event => event._cachedHtml).join('');
+                    }
 
                     // ⚡ Bolt Optimization: Skip DOM update if the HTML hasn't changed
                     if (container._lastHtml !== newHtml) {
@@ -813,6 +819,9 @@
                     cachedContainers[era.id] = era.type === 'card'
                         ? document.querySelector(`#${era.id} .grid`)
                         : document.querySelector(`#${era.id} .star-chart-container`);
+
+                    // ⚡ Bolt Optimization: Pre-compute full era HTML to bypass map/join completely when no filters are active
+                    eraDataMap[era.id]._cachedFullHtml = eraData.map(event => event._cachedHtml).join('');
                 });
 
                 // --- CRITICAL FIX ---
