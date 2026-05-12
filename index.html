@@ -568,6 +568,7 @@
                     <div class="star" style="top: 40%; left: 70%; width: 3px; height: 3px; animation-delay: -2s;"></div>
                     <div class="star" style="top: 65%; left: 5%; width: 2px; height: 2px; animation-delay: -4s;"></div>
                     <div class="star" style="top: 90%; left: 50%; width: 5px; height: 5px; animation-delay: -0.5s;"></div>
+                    <div class="dynamic-stars"></div>
                 </div>
             </div>
         </section>
@@ -593,6 +594,7 @@
                     <div class="star" style="top: 10%; left: 30%; width: 2px; height: 2px; animation-delay: -1.5s;"></div>
                     <div class="star" style="top: 30%; left: 90%; width: 3px; height: 3px; animation-delay: -2.5s;"></div>
                     <div class="star" style="top: 55%; left: 10%; width: 2px; height: 2px; animation-delay: -3.5s;"></div>
+                    <div class="dynamic-stars"></div>
                 </div>
             </div>
         </section>
@@ -697,13 +699,9 @@
                     // ⚡ Bolt Optimization: Skip DOM update if the HTML hasn't changed
                     if (container._lastHtml !== newHtml) {
                         container._lastHtml = newHtml;
-                        if (era.type === 'card') {
-                            container.innerHTML = newHtml;
-                        } else { // star
-                            // Clear only the clickable stars, not the filler ones
-                            container.querySelectorAll('.clickable').forEach(el => el.remove());
-                            container.insertAdjacentHTML('beforeend', newHtml);
-                        }
+                        // ⚡ Bolt Optimization: Use a dedicated container and a single innerHTML assignment
+                        // instead of slow querySelectorAll and individual DOM element removals.
+                        container.innerHTML = newHtml;
                     }
                     totalResults += filteredData.length;
                 }
@@ -819,7 +817,7 @@
                     // Cache the container DOM element
                     cachedContainers[era.id] = era.type === 'card'
                         ? document.querySelector(`#${era.id} .grid`)
-                        : document.querySelector(`#${era.id} .star-chart-container`);
+                        : document.querySelector(`#${era.id} .dynamic-stars`);
 
                     // ⚡ Bolt Optimization: Pre-compute full era HTML to bypass map/join completely when no filters are active
                     eraDataMap[era.id]._cachedFullHtml = eraData.map(event => event._cachedHtml).join('');
