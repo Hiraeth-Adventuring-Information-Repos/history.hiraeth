@@ -647,6 +647,7 @@
         let allTags = new Set(); // To store all unique tags
         const eraDataMap = {}; // Cache pre-sorted event data per era
         const cachedContainers = {}; // Cache DOM elements for era containers
+        let cachedEmptyState = null; // Cache the empty search state DOM element
 
         // Debounce function to limit how often a function is called
         function debounce(func, delay) {
@@ -687,32 +688,45 @@
                         });
                     }
 
-                    // ⚡ Bolt Optimization: Use pre-computed HTML strings to avoid redundant string concatenation and HTML regeneration
-                    let newHtml;
-                    if (!hasSearch && !hasTags) {
-                        // Bypass .map().join('') completely if no filters are applied
-                        newHtml = eraDataMap[era.id]._cachedFullHtml;
-                    } else {
-                        newHtml = filteredData.map(event => event._cachedHtml).join('');
-                    }
+                    // ⚡ Bolt Optimization: Array Memoization to skip redundant HTML generation
+                    // Check if the exact same array elements are present
+                    const isSameArray = container._lastFilteredData &&
+                                        container._lastFilteredData.length === filteredData.length &&
+                                        filteredData.every((val, index) => val === container._lastFilteredData[index]);
 
-                    // ⚡ Bolt Optimization: Skip DOM update if the HTML hasn't changed
-                    if (container._lastHtml !== newHtml) {
-                        container._lastHtml = newHtml;
-                        // ⚡ Bolt Optimization: Use a dedicated container and a single innerHTML assignment
-                        // instead of slow querySelectorAll and individual DOM element removals.
-                        container.innerHTML = newHtml;
+                    if (!isSameArray) {
+                        container._lastFilteredData = filteredData;
+
+                        // ⚡ Bolt Optimization: Use pre-computed HTML strings to avoid redundant string concatenation and HTML regeneration
+                        let newHtml;
+                        if (!hasSearch && !hasTags) {
+                            // Bypass .map().join('') completely if no filters are applied
+                            newHtml = eraDataMap[era.id]._cachedFullHtml;
+                        } else {
+                            newHtml = filteredData.map(event => event._cachedHtml).join('');
+                        }
+
+                        // ⚡ Bolt Optimization: Skip DOM update if the HTML hasn't changed
+                        if (container._lastHtml !== newHtml) {
+                            container._lastHtml = newHtml;
+                            // ⚡ Bolt Optimization: Use a dedicated container and a single innerHTML assignment
+                            // instead of slow querySelectorAll and individual DOM element removals.
+                            container.innerHTML = newHtml;
+                        }
                     }
                     totalResults += filteredData.length;
                 }
             });
 
-            const emptyState = document.getElementById('search-empty-state');
-            if (emptyState) {
+            // ⚡ Bolt Optimization: Use hoisted empty state element to avoid querySelector on every search input
+            if (!cachedEmptyState) {
+                cachedEmptyState = document.getElementById('search-empty-state');
+            }
+            if (cachedEmptyState) {
                 if (totalResults === 0 && searchTerm !== '') {
-                    emptyState.classList.remove('hidden');
+                    cachedEmptyState.classList.remove('hidden');
                 } else {
-                    emptyState.classList.add('hidden');
+                    cachedEmptyState.classList.add('hidden');
                 }
             }
 
