@@ -998,6 +998,15 @@
             lastFocusedElement = document.activeElement;
             modalBackdrop.classList.remove('hidden');
             modalContainer.classList.remove('hidden');
+
+            // Trap focus in modal by making background inert
+            const mainContent = document.getElementById('main-content');
+            const sidebarToggle = document.getElementById('sidebar-toggle');
+            const skipLink = document.querySelector('a[href="#main-content"]');
+            if (mainContent) mainContent.setAttribute('inert', '');
+            if (sidebarToggle) sidebarToggle.setAttribute('inert', '');
+            if (skipLink) skipLink.setAttribute('inert', '');
+
             setTimeout(() => {
                 modalBackdrop.classList.add('opacity-100');
                 modalContainer.classList.add('opacity-100', 'scale-100');
@@ -1013,6 +1022,15 @@
             setTimeout(() => {
                 modalBackdrop.classList.add('hidden');
                 modalContainer.classList.add('hidden');
+
+                // Remove inert from background elements
+                const mainContent = document.getElementById('main-content');
+                const sidebarToggle = document.getElementById('sidebar-toggle');
+                const skipLink = document.querySelector('a[href="#main-content"]');
+                if (mainContent) mainContent.removeAttribute('inert');
+                if (sidebarToggle) sidebarToggle.removeAttribute('inert');
+                if (skipLink) skipLink.removeAttribute('inert');
+
                 if (lastFocusedElement) {
                     lastFocusedElement.focus();
                     lastFocusedElement = null;
