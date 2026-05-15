@@ -10,3 +10,6 @@
 ## 2026-05-10 - [Stateful Sidebar Toggle Pattern]
 **Learning:** Repetitive state-toggling logic for complex components like off-canvas sidebars (which involve multiple DOM changes, `aria` attributes, `inert`, icons, and focus management) is prone to desynchronization when triggered from different events (clicks, escapes, outside clicks).
 **Action:** Always encapsulate the entire state-change sequence into a single `toggleSidebar(forceClose = false)` function. This ensures that regardless of how the sidebar is manipulated, its visual state (classes, icons), accessibility state (`aria-expanded`, `inert`), and focus behaviors are kept perfectly synchronized.
+## 2026-05-15 - [Aria Controls for Disclosure Widgets]
+**Learning:** Disclosure widgets (like `.preamble-toggle` buttons revealing `.preamble-content`) need both `aria-expanded` and an `aria-controls` attribute linking them to their corresponding content panels via ID. Without `aria-controls`, screen readers do not understand which piece of hidden content the button will expand.
+**Action:** When implementing custom toggle elements, always give the controlled content a unique ID and add the corresponding `aria-controls="[id]"` property to the toggle button itself.
