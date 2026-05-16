@@ -134,8 +134,11 @@
             border-color: #d1d1d1;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
-        .event-card.modern:hover {
+        .event-card.modern:hover,
+        .event-card.modern:focus-visible {
             transform: translateY(-5px);
+        }
+        .event-card.modern:hover {
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
         .event-card.modern .event-date { color: #555; font-weight: 700; }
@@ -147,9 +150,12 @@
             border-color: #aaa;
             backdrop-filter: blur(3px);
         }
-        .event-card.unification:hover {
+        .event-card.unification:hover,
+        .event-card.unification:focus-visible {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.2);
+        }
+        .event-card.unification:hover {
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
         .event-card.unification .event-date { color: #ccc; }
@@ -162,10 +168,13 @@
             opacity: 0.8;
             border-radius: 4px 20px 8px 15px; /* Irregular shape */
         }
-        .event-card.mythic:hover {
+        .event-card.mythic:hover,
+        .event-card.mythic:focus-visible {
             opacity: 1;
             transform: scale(1.03);
             background: rgba(255, 255, 255, 0.1);
+        }
+        .event-card.mythic:hover {
             box-shadow: 0 8px 20px rgba(138, 99, 245, 0.2);
         }
         .event-card.mythic .event-date { color: #c0b0f0; }
@@ -179,7 +188,8 @@
             border-radius: 2px; /* Sharp edges */
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-        .event-card.classical:hover {
+        .event-card.classical:hover,
+        .event-card.classical:focus-visible {
             transform: scale(1.02);
             background: rgba(200, 200, 220, 0.2);
             border-color: #fff;
@@ -194,10 +204,13 @@
             box-shadow: 0 4px 12px rgba(74, 0, 224, 0.2);
             backdrop-filter: blur(5px);
         }
-        .event-card.ancient:hover {
+        .event-card.ancient:hover,
+        .event-card.ancient:focus-visible {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(74, 0, 224, 0.4);
             border-color: #8a63f5;
+        }
+        .event-card.ancient:hover {
+            box-shadow: 0 8px 20px rgba(74, 0, 224, 0.4);
         }
         .event-card.ancient .event-date { color: #aaa; font-style: italic; }
         .event-card.ancient .event-title { color: #f0f0f0; }
@@ -225,9 +238,12 @@
             /* Brighter shadow for clickable stars, added a third glow */
             box-shadow: 0 0 20px #fff, 0 0 40px #8a63f5, 0 0 10px #f0f;
         }
-        .star.clickable:hover {
+        .star.clickable:hover,
+        .star.clickable:focus-visible {
             animation-play-state: paused;
             transform: scale(2.5);
+        }
+        .star.clickable:hover {
             /* Brighter shadow on hover */
             box-shadow: 0 0 30px #f0f, 0 0 50px #8a63f5, 0 0 10px #fff;
         }
@@ -243,11 +259,12 @@
             opacity: 0.7;
             transition: all 0.3s ease;
         }
-        .star.clickable:hover .star-label {
+        .star.clickable:hover .star-label,
+        .star.clickable:focus-visible .star-label {
             opacity: 1;
             color: #fff;
             /*
-             * Counter-scale the font-size on hover.
+             * Counter-scale the font-size on hover/focus.
              * The parent div scales by 2.5x. We want a final font size of ~1.25rem (20px).
              * 20px / 2.5 = 8px, which is 0.5rem.
             */
@@ -278,7 +295,8 @@
             pointer-events: none; /* Ignore mouse events */
         }
 
-        .star.clickable:hover .star-tooltip {
+        .star.clickable:hover .star-tooltip,
+        .star.clickable:focus-visible .star-tooltip {
             opacity: 1;
             visibility: visible;
         }
@@ -743,7 +761,7 @@
             if (event.sub_events) {
                 subEventsHtml = '<ul class="mt-4 space-y-2">';
                 event.sub_events.forEach(sub => {
-                    subEventsHtml += `<li class="text-sm ${textColorClass}"><span class="sub-event-trigger hover:underline cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-1" tabindex="0" role="button" aria-label="View sub-event: ${sub.title.replace(/"/g, '&quot;')}" data-parent-event-id="${event.id}" data-sub-event-id="${sub.id}">${sub.title}</span></li>`;
+                    subEventsHtml += `<li class="text-sm ${textColorClass}"><span class="sub-event-trigger hover:underline focus-visible:underline cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-1" tabindex="0" role="button" aria-label="View sub-event: ${sub.title.replace(/"/g, '&quot;')}" data-parent-event-id="${event.id}" data-sub-event-id="${sub.id}">${sub.title}</span></li>`;
                 });
                 subEventsHtml += '</ul>';
             }
@@ -962,7 +980,7 @@
             if (!parentEventId && eventData.sub_events) {
                 finalDescription += '<h4 class="text-xl font-bold mt-6 mb-2">Sub-events:</h4><ul class="list-disc pl-5 space-y-2">';
                 eventData.sub_events.forEach(sub => {
-                    finalDescription += `<li><span class="sub-event-trigger hover:underline cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-1" tabindex="0" role="button" aria-label="View sub-event: ${sub.title.replace(/"/g, '&quot;')}" data-parent-event-id="${eventId}" data-sub-event-id="${sub.id}">${sub.title}</span></li>`;
+                    finalDescription += `<li><span class="sub-event-trigger hover:underline focus-visible:underline cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-1" tabindex="0" role="button" aria-label="View sub-event: ${sub.title.replace(/"/g, '&quot;')}" data-parent-event-id="${eventId}" data-sub-event-id="${sub.id}">${sub.title}</span></li>`;
                 });
                 finalDescription += '</ul>';
             }
