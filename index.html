@@ -663,9 +663,11 @@
         let currentEventIndex = -1; // To track the currently open event IN THE SORTED LIST.
         let lastFocusedElement = null; // Store element that opened the modal
         let allTags = new Set(); // To store all unique tags
+        let activeTagsSet = new Set(); // To track currently selected tag values
         const eraDataMap = {}; // Cache pre-sorted event data per era
         const cachedContainers = {}; // Cache DOM elements for era containers
         let cachedEmptyState = null; // Cache the empty search state DOM element
+        let cachedSearchInput = null; // Cache the search input element
 
         // Debounce function to limit how often a function is called
         function debounce(func, delay) {
@@ -708,9 +710,9 @@
 
                     // ⚡ Bolt Optimization: Array Memoization to skip redundant HTML generation
                     // Check if the exact same array elements are present
-                    const isSameArray = container._lastFilteredData &&
+                    const isSameArray = container._lastFilteredData === filteredData || (container._lastFilteredData &&
                                         container._lastFilteredData.length === filteredData.length &&
-                                        filteredData.every((val, index) => val === container._lastFilteredData[index]);
+                                        filteredData.every((val, index) => val === container._lastFilteredData[index]));
 
                     if (!isSameArray) {
                         container._lastFilteredData = filteredData;
@@ -813,7 +815,14 @@
 
             // Add event listeners to new checkboxes
             document.querySelectorAll('.tag-checkbox').forEach(checkbox => {
-                checkbox.addEventListener('change', handleFilterChange);
+                checkbox.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        activeTagsSet.add(e.target.value);
+                    } else {
+                        activeTagsSet.delete(e.target.value);
+                    }
+                    handleFilterChange();
+                });
             });
         }
 
@@ -877,8 +886,11 @@
         }
 
         function handleFilterChange() {
-            const searchTerm = document.getElementById('search-input').value;
-            const selectedTags = Array.from(document.querySelectorAll('.tag-checkbox:checked')).map(cb => cb.value);
+            if (!cachedSearchInput) {
+                cachedSearchInput = document.getElementById('search-input');
+            }
+            const searchTerm = cachedSearchInput.value;
+            const selectedTags = Array.from(activeTagsSet);
             renderTimeline(searchTerm, selectedTags);
         }
 
