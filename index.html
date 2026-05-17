@@ -469,9 +469,9 @@
             </div>
             <div id="search-empty-state" aria-live="polite" class="hidden mt-6 max-w-xl mx-auto p-6 bg-gray-800 bg-opacity-80 rounded-md border border-gray-700 text-gray-300 flex flex-col items-center justify-center text-center">
                 <svg class="w-12 h-12 text-gray-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                <p class="text-lg font-medium">No events found matching your search.</p>
-                <p class="text-sm mt-2 text-gray-400 mb-4">Try adjusting your terms or clearing the search to see all events.</p>
-                <button id="clear-search-btn" aria-label="Clear search terms" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 font-medium">Clear Search</button>
+                <p class="text-lg font-medium">No events found matching your filters.</p>
+                <p class="text-sm mt-2 text-gray-400 mb-4">Try adjusting your terms or clearing the filters to see all events.</p>
+                <button id="clear-search-btn" aria-label="Clear search terms and filters" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 font-medium">Clear Filters</button>
             </div>
         </header>
 
@@ -743,7 +743,7 @@
                 cachedEmptyState = document.getElementById('search-empty-state');
             }
             if (cachedEmptyState) {
-                if (totalResults === 0 && searchTerm !== '') {
+                if (totalResults === 0 && (hasSearch || hasTags)) {
                     cachedEmptyState.classList.remove('hidden');
                 } else {
                     cachedEmptyState.classList.add('hidden');
@@ -933,6 +933,8 @@
                 clearSearchBtn.addEventListener('click', () => {
                     searchInput.value = '';
                     sidebarSearchInput.value = '';
+                    activeTagsSet.clear();
+                    document.querySelectorAll('.tag-checkbox').forEach(cb => cb.checked = false);
                     handleFilterChange();
                     searchInput.focus();
                 });
