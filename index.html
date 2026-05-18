@@ -703,16 +703,29 @@
                         filteredData = eraData.filter(event => {
                             // ⚡ Bolt Optimization: Use pre-computed searchable string and early returns
                             if (hasSearch && !event._searchableText.includes(searchTermLower)) return false;
-                            if (hasTags && !selectedTags.every(tag => event.tags && event.tags.includes(tag))) return false;
+                            if (hasTags) {
+                                // ⚡ Bolt Optimization: Replace .every() with for loop to prevent callback overhead
+                                for (let i = 0; i < selectedTags.length; i++) {
+                                    if (!event.tags || !event.tags.includes(selectedTags[i])) return false;
+                                }
+                            }
                             return true;
                         });
                     }
 
                     // ⚡ Bolt Optimization: Array Memoization to skip redundant HTML generation
                     // Check if the exact same array elements are present
-                    const isSameArray = container._lastFilteredData === filteredData || (container._lastFilteredData &&
-                                        container._lastFilteredData.length === filteredData.length &&
-                                        filteredData.every((val, index) => val === container._lastFilteredData[index]));
+                    let isSameArray = container._lastFilteredData === filteredData;
+                    if (!isSameArray && container._lastFilteredData && container._lastFilteredData.length === filteredData.length) {
+                        isSameArray = true;
+                        // ⚡ Bolt Optimization: Replaced .every() with a for loop to avoid callback overhead
+                        for (let i = 0; i < filteredData.length; i++) {
+                            if (filteredData[i] !== container._lastFilteredData[i]) {
+                                isSameArray = false;
+                                break;
+                            }
+                        }
+                    }
 
                     if (!isSameArray) {
                         container._lastFilteredData = filteredData;
@@ -720,10 +733,15 @@
                         // ⚡ Bolt Optimization: Use pre-computed HTML strings to avoid redundant string concatenation and HTML regeneration
                         let newHtml;
                         if (!hasSearch && !hasTags) {
-                            // Bypass .map().join('') completely if no filters are applied
+                            // Bypass HTML generation completely if no filters are applied
                             newHtml = eraDataMap[era.id]._cachedFullHtml;
                         } else {
-                            newHtml = filteredData.map(event => event._cachedHtml).join('');
+                            // ⚡ Bolt Optimization: Replaced .map().join('') with for loop string concatenation
+                            // This prevents intermediate array allocation and callback overhead.
+                            newHtml = '';
+                            for (let i = 0; i < filteredData.length; i++) {
+                                newHtml += filteredData[i]._cachedHtml;
+                            }
                         }
 
                         // ⚡ Bolt Optimization: Skip DOM update if the HTML hasn't changed
