@@ -734,6 +734,17 @@
                             container.innerHTML = newHtml;
                         }
                     }
+
+                    // 🎨 Palette: Hide era sections completely when they have no results during filtering
+                    const section = document.getElementById(era.id);
+                    if (section) {
+                        if (filteredData.length === 0 && (hasSearch || hasTags)) {
+                            section.classList.add('hidden');
+                        } else {
+                            section.classList.remove('hidden');
+                        }
+                    }
+
                     totalResults += filteredData.length;
                 }
             });
