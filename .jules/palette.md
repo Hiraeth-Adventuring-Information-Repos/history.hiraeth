@@ -19,3 +19,6 @@
 ## 2026-05-17 - [Empty States and Clear Actions Must Account for All Filter Modalities]
 **Learning:** When adding new filtering modalities (like tags alongside text search), empty states and their corresponding "Clear" actions are easily missed. If an empty state only appears on empty text search, users applying overly specific tag combinations will be left with a blank screen and no guidance or easy way to reset.
 **Action:** When implementing or modifying an empty state, always review the logic to ensure it evaluates *all* active filter combinations (e.g., `hasSearch || hasTags`). Similarly, ensure any "Clear Filters" action resets the state of every filter modality in the DOM (e.g., clearing both input values and unchecking all active checkboxes).
+## 2026-05-20 - [Dynamic Search Results Announcer]
+**Learning:** When building dynamic search/filter features, visually hiding the results count is common to avoid clutter, but it leaves screen reader users unaware of the filtering results unless they manually explore the page to find updated content.
+**Action:** Always implement a dedicated `aria-live="polite"` region (e.g. `<div id="search-announcer" class="sr-only" aria-live="polite"></div>`) specifically for announcing search and filter result counts dynamically to screen readers.
