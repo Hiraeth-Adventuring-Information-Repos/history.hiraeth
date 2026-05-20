@@ -666,6 +666,7 @@
         let activeTagsSet = new Set(); // To track currently selected tag values
         const eraDataMap = {}; // Cache pre-sorted event data per era
         const cachedContainers = {}; // Cache DOM elements for era containers
+        const cachedSections = {}; // Cache DOM elements for era sections
         let cachedEmptyState = null; // Cache the empty search state DOM element
         let cachedSearchInput = null; // Cache the search input element
 
@@ -700,17 +701,27 @@
                     // ⚡ Bolt Optimization: Skip filter entirely if no search/tags, and use early returns
                     let filteredData = eraData;
                     if (hasSearch || hasTags) {
-                        filteredData = eraData.filter(event => {
+                        filteredData = [];
+                        for (let i = 0; i < eraData.length; i++) {
+                            const event = eraData[i];
                             // ⚡ Bolt Optimization: Use pre-computed searchable string and early returns
-                            if (hasSearch && !event._searchableText.includes(searchTermLower)) return false;
+                            if (hasSearch && !event._searchableText.includes(searchTermLower)) continue;
+
+                            let hasAllTags = true;
                             if (hasTags) {
                                 // ⚡ Bolt Optimization: Replace .every() with for loop to prevent callback overhead
-                                for (let i = 0; i < selectedTags.length; i++) {
-                                    if (!event.tags || !event.tags.includes(selectedTags[i])) return false;
+                                for (let j = 0; j < selectedTags.length; j++) {
+                                    if (!event.tags || !event.tags.includes(selectedTags[j])) {
+                                        hasAllTags = false;
+                                        break;
+                                    }
                                 }
                             }
-                            return true;
-                        });
+
+                            if (hasAllTags) {
+                                filteredData.push(event);
+                            }
+                        }
                     }
 
                     // ⚡ Bolt Optimization: Array Memoization to skip redundant HTML generation
@@ -754,7 +765,7 @@
                     }
 
                     // 🎨 Palette: Hide era sections completely when they have no results during filtering
-                    const section = document.getElementById(era.id);
+                    const section = cachedSections[era.id];
                     if (section) {
                         if (filteredData.length === 0 && (hasSearch || hasTags)) {
                             section.classList.add('hidden');
@@ -888,6 +899,9 @@
                     cachedContainers[era.id] = era.type === 'card'
                         ? document.querySelector(`#${era.id} .grid`)
                         : document.querySelector(`#${era.id} .dynamic-stars`);
+
+                    // Cache the section DOM element
+                    cachedSections[era.id] = document.getElementById(era.id);
 
                     // ⚡ Bolt Optimization: Pre-compute full era HTML to bypass map/join completely when no filters are active
                     eraDataMap[era.id]._cachedFullHtml = eraData.map(event => event._cachedHtml).join('');
