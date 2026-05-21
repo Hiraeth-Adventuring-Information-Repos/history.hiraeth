@@ -41,3 +41,6 @@
 ## 2026-05-15 - Array Iteration and Closures vs Native Loops
 **Learning:** Found that `Array.prototype.every` and `Array.prototype.map().join('')` introduce significant callback overhead and intermediate array allocation (which adds garbage collection pressure) in high-frequency rendering paths. In the `renderTimeline` function, using a standard `for` loop for array equality checks and string concatenation (`+=`) is up to 10x faster than `.map().join('')` and avoids unnecessary closures.
 **Action:** In critical render or high-frequency paths, replace native array methods that use callbacks (like `every`, `map`, `forEach`) with standard `for` loops, especially for operations like string accumulation where intermediate allocations are harmful.
+## 2026-05-21 - [Caching Era Section DOM Lookups]
+**Learning:** `renderTimeline` queried the DOM (`document.getElementById(era.id)`) on every render cycle just to hide/show sections. Since `renderTimeline` is called on every keystroke when searching, these O(DOM) lookups caused noticeable UI lag.
+**Action:** When a DOM element is toggled (but not destroyed/re-created), its reference should be cached during initialization (e.g., `cachedSections`) and reused within high-frequency functions to prevent traversing the DOM tree repeatedly.

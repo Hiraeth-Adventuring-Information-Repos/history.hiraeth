@@ -666,6 +666,7 @@
         let activeTagsSet = new Set(); // To track currently selected tag values
         const eraDataMap = {}; // Cache pre-sorted event data per era
         const cachedContainers = {}; // Cache DOM elements for era containers
+        const cachedSections = {}; // ⚡ Bolt Optimization: Cache era sections to avoid O(DOM) lookups
         let cachedEmptyState = null; // Cache the empty search state DOM element
         let cachedSearchInput = null; // Cache the search input element
 
@@ -753,8 +754,8 @@
                         }
                     }
 
-                    // 🎨 Palette: Hide era sections completely when they have no results during filtering
-                    const section = document.getElementById(era.id);
+                    // ⚡ Bolt Optimization: Use pre-cached section elements instead of repeated document.getElementById calls
+                    const section = cachedSections[era.id];
                     if (section) {
                         if (filteredData.length === 0 && (hasSearch || hasTags)) {
                             section.classList.add('hidden');
@@ -888,6 +889,9 @@
                     cachedContainers[era.id] = era.type === 'card'
                         ? document.querySelector(`#${era.id} .grid`)
                         : document.querySelector(`#${era.id} .dynamic-stars`);
+
+                    // ⚡ Bolt Optimization: Cache the era section DOM element to avoid O(DOM) lookups
+                    cachedSections[era.id] = document.getElementById(era.id);
 
                     // ⚡ Bolt Optimization: Pre-compute full era HTML to bypass map/join completely when no filters are active
                     eraDataMap[era.id]._cachedFullHtml = eraData.map(event => event._cachedHtml).join('');
