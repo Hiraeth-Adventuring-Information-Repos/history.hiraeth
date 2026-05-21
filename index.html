@@ -473,6 +473,7 @@
                 <p class="text-sm mt-2 text-gray-400 mb-4">Try adjusting your terms or clearing the filters to see all events.</p>
                 <button id="clear-search-btn" aria-label="Clear search terms and filters" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 font-medium">Clear Filters</button>
             </div>
+            <div id="search-announcer" class="sr-only" aria-live="polite"></div>
         </header>
 
         <!-- 
@@ -667,6 +668,7 @@
         const eraDataMap = {}; // Cache pre-sorted event data per era
         const cachedContainers = {}; // Cache DOM elements for era containers
         let cachedEmptyState = null; // Cache the empty search state DOM element
+        let cachedSearchAnnouncer = null; // Cache the search announcer DOM element
         let cachedSearchInput = null; // Cache the search input element
 
         // Debounce function to limit how often a function is called
@@ -779,6 +781,17 @@
                 }
             }
 
+            // Announce search results to screen readers
+            if (!cachedSearchAnnouncer) {
+                cachedSearchAnnouncer = document.getElementById('search-announcer');
+            }
+            if (cachedSearchAnnouncer) {
+                if (hasSearch || hasTags) {
+                    cachedSearchAnnouncer.textContent = `${totalResults} event${totalResults !== 1 ? 's' : ''} found.`;
+                } else {
+                    cachedSearchAnnouncer.textContent = '';
+                }
+            }
         }
 
 
