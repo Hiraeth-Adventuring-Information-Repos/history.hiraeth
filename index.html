@@ -690,7 +690,9 @@
 
             let totalResults = 0;
 
-            erasConfig.forEach(era => {
+            // ⚡ Bolt Optimization: Replaced erasConfig.forEach with a standard for loop to avoid callback overhead
+            for (let e = 0; e < erasConfig.length; e++) {
+                const era = erasConfig[e];
                 const container = cachedContainers[era.id];
 
                 if (container) {
@@ -700,17 +702,26 @@
                     // ⚡ Bolt Optimization: Skip filter entirely if no search/tags, and use early returns
                     let filteredData = eraData;
                     if (hasSearch || hasTags) {
-                        filteredData = eraData.filter(event => {
+                        // ⚡ Bolt Optimization: Replaced eraData.filter with a standard for loop to avoid callback overhead
+                        filteredData = [];
+                        for (let j = 0; j < eraData.length; j++) {
+                            const event = eraData[j];
+                            let matches = true;
                             // ⚡ Bolt Optimization: Use pre-computed searchable string and early returns
-                            if (hasSearch && !event._searchableText.includes(searchTermLower)) return false;
-                            if (hasTags) {
+                            if (hasSearch && !event._searchableText.includes(searchTermLower)) matches = false;
+                            if (matches && hasTags) {
                                 // ⚡ Bolt Optimization: Replace .every() with for loop to prevent callback overhead
                                 for (let i = 0; i < selectedTags.length; i++) {
-                                    if (!event.tags || !event.tags.includes(selectedTags[i])) return false;
+                                    if (!event.tags || !event.tags.includes(selectedTags[i])) {
+                                        matches = false;
+                                        break;
+                                    }
                                 }
                             }
-                            return true;
-                        });
+                            if (matches) {
+                                filteredData.push(event);
+                            }
+                        }
                     }
 
                     // ⚡ Bolt Optimization: Array Memoization to skip redundant HTML generation
@@ -765,7 +776,7 @@
 
                     totalResults += filteredData.length;
                 }
-            });
+            }
 
             // ⚡ Bolt Optimization: Use hoisted empty state element to avoid querySelector on every search input
             if (!cachedEmptyState) {
