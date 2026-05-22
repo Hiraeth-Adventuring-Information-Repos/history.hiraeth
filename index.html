@@ -473,6 +473,7 @@
                 <p class="text-sm mt-2 text-gray-400 mb-4">Try adjusting your terms or clearing the filters to see all events.</p>
                 <button id="clear-search-btn" aria-label="Clear search terms and filters" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 font-medium">Clear Filters</button>
             </div>
+            <div id="search-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
         </header>
 
         <!-- 
@@ -668,6 +669,7 @@
         const cachedContainers = {}; // Cache DOM elements for era containers
         const cachedSections = {}; // Cache DOM elements for era sections
         let cachedEmptyState = null; // Cache the empty search state DOM element
+        let cachedAnnouncer = null; // Cache the search announcer element
         let cachedSearchInput = null; // Cache the search input element
 
         // Debounce function to limit how often a function is called
@@ -787,6 +789,18 @@
                     cachedEmptyState.classList.remove('hidden');
                 } else {
                     cachedEmptyState.classList.add('hidden');
+                }
+            }
+
+            // 🎨 Palette: Announce search results to screen readers dynamically
+            if (!cachedAnnouncer) {
+                cachedAnnouncer = document.getElementById('search-announcer');
+            }
+            if (cachedAnnouncer) {
+                if (hasSearch || hasTags) {
+                    cachedAnnouncer.textContent = `${totalResults} event${totalResults !== 1 ? 's' : ''} found.`;
+                } else {
+                    cachedAnnouncer.textContent = '';
                 }
             }
 
