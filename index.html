@@ -683,10 +683,10 @@
         }
 
         // Function to render the timeline based on current filters
-        function renderTimeline(searchTerm = '', selectedTags = []) {
+        function renderTimeline(searchTerm = '', selectedTags = new Set()) {
             const searchTermLower = searchTerm.toLowerCase();
             const hasSearch = searchTerm !== '';
-            const hasTags = selectedTags.length > 0;
+            const hasTags = selectedTags.size > 0;
 
             // ⚡ Bolt Optimization: Hoisted string operations
             // We compute this once per render instead of on every single event iteration.
@@ -711,9 +711,9 @@
 
                             let hasAllTags = true;
                             if (hasTags) {
-                                // ⚡ Bolt Optimization: Replace .every() with for loop to prevent callback overhead
-                                for (let j = 0; j < selectedTags.length; j++) {
-                                    if (!event.tags || !event.tags.includes(selectedTags[j])) {
+                                // ⚡ Bolt Optimization: Replace O(N) array includes with O(1) Set.has
+                                for (const tag of selectedTags) {
+                                    if (!event._tagsSet.has(tag)) {
                                         hasAllTags = false;
                                         break;
                                     }
@@ -897,6 +897,9 @@
                             event.summary || ''
                         ].join(' ').toLowerCase();
 
+                        // ⚡ Bolt Optimization: Pre-compute tags as Set for O(1) lookup during filtering
+                        event._tagsSet = new Set(event.tags || []);
+
                         // ⚡ Bolt Optimization: Pre-compute HTML rendering to avoid regenerating on every render cycle
                         event._cachedHtml = era.type === 'card' ? createEventCard(event, era.class) : createStarEvent(event);
 
@@ -947,8 +950,8 @@
                 cachedSearchInput = document.getElementById('search-input');
             }
             const searchTerm = cachedSearchInput.value;
-            const selectedTags = Array.from(activeTagsSet);
-            renderTimeline(searchTerm, selectedTags);
+            // ⚡ Bolt Optimization: Pass the Set reference directly to avoid O(N) array allocation
+            renderTimeline(searchTerm, activeTagsSet);
         }
 
         function setupEventListeners() {
