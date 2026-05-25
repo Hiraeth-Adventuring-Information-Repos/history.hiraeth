@@ -712,8 +712,9 @@
                             let hasAllTags = true;
                             if (hasTags) {
                                 // ⚡ Bolt Optimization: Replace .every() with for loop to prevent callback overhead
+                                // and use pre-computed Set for O(1) lookups
                                 for (let j = 0; j < selectedTags.length; j++) {
-                                    if (!event.tags || !event.tags.includes(selectedTags[j])) {
+                                    if (!event._tagsSet.has(selectedTags[j])) {
                                         hasAllTags = false;
                                         break;
                                     }
@@ -896,6 +897,9 @@
                             event.description || '',
                             event.summary || ''
                         ].join(' ').toLowerCase();
+
+                        // ⚡ Bolt Optimization: Pre-compute Set of tags for O(1) lookups during filtering
+                        event._tagsSet = new Set(event.tags || []);
 
                         // ⚡ Bolt Optimization: Pre-compute HTML rendering to avoid regenerating on every render cycle
                         event._cachedHtml = era.type === 'card' ? createEventCard(event, era.class) : createStarEvent(event);
