@@ -712,8 +712,9 @@
                             let hasAllTags = true;
                             if (hasTags) {
                                 // ⚡ Bolt Optimization: Replace .every() with for loop to prevent callback overhead
+                                // ⚡ Bolt Optimization: Replace O(N) array includes() with O(1) Set has()
                                 for (let j = 0; j < selectedTags.length; j++) {
-                                    if (!event.tags || !event.tags.includes(selectedTags[j])) {
+                                    if (!event._tagsSet.has(selectedTags[j])) {
                                         hasAllTags = false;
                                         break;
                                     }
@@ -901,6 +902,10 @@
                         event._cachedHtml = era.type === 'card' ? createEventCard(event, era.class) : createStarEvent(event);
 
                         timelineData[event.id] = event; // Populate global data
+
+                        // ⚡ Bolt Optimization: Pre-compute tags as Set for O(1) lookup during high-frequency renders
+                        event._tagsSet = event.tags ? new Set(event.tags) : new Set();
+
                         if (event.tags) {
                             event.tags.forEach(tag => allTags.add(tag));
                         }
