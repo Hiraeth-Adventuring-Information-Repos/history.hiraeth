@@ -45,3 +45,6 @@
 ## 2024-05-18 - [Replacing filter with for loops and Caching Section DOM lookups]
 **Learning:** Found two major performance bottlenecks during high-frequency renders (like search inputs). First, `.filter()` inside `renderTimeline()` introduces unnecessary callback and closure overhead per event iteration. Second, `document.getElementById(era.id)` was being invoked per era per render, resulting in costly O(DOM) lookups over thousands of keystrokes.
 **Action:** Replace functional array methods like `.filter()` with standard `for` loops in critical render paths to save CPU cycles and avoid intermediate allocations. Additionally, pre-cache frequently accessed DOM elements like era sections into a global object during the initialization phase (`initializeTimeline()`) so they can be retrieved in O(1) time without blocking the main thread.
+## 2026-05-29 - [O(1) Tag Filtering]
+**Learning:** High-frequency rendering loops (like 'renderTimeline') get heavily penalized by nested array operations (like 'Array.prototype.includes()'). Converting arrays to 'Set' objects during data initialization allows for O(1) lookups during render cycles.
+**Action:** When filtering logic relies on checking existence within an array, pre-compute a 'Set' for the dataset during initialization to turn O(N) checks into O(1) checks during execution.
