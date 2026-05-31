@@ -45,3 +45,9 @@
 ## 2024-05-18 - [Replacing filter with for loops and Caching Section DOM lookups]
 **Learning:** Found two major performance bottlenecks during high-frequency renders (like search inputs). First, `.filter()` inside `renderTimeline()` introduces unnecessary callback and closure overhead per event iteration. Second, `document.getElementById(era.id)` was being invoked per era per render, resulting in costly O(DOM) lookups over thousands of keystrokes.
 **Action:** Replace functional array methods like `.filter()` with standard `for` loops in critical render paths to save CPU cycles and avoid intermediate allocations. Additionally, pre-cache frequently accessed DOM elements like era sections into a global object during the initialization phase (`initializeTimeline()`) so they can be retrieved in O(1) time without blocking the main thread.
+## 2026-05-31 - Pre-computing Sets for High-Frequency Filtering
+**Learning:** In highly optimized render loops using  or  events, replacing iterative array lookups () with pre-computed Set lookups () provides a measurable reduction in main-thread blocking time, particularly when filtering large datasets against multiple tags.
+**Action:** When filtering logic executes O(N*M) operations during user interaction, pre-compute lookup structures (like Sets or Maps) during the initial data fetch and caching phase to convert critical path lookups to O(1).
+## 2024-05-18 - Pre-computing Sets for High-Frequency Filtering
+**Learning:** In highly optimized render loops, replacing iterative array lookups (`.includes()`) with pre-computed Set lookups (`.has()`) provides a measurable reduction in main-thread blocking time, particularly when filtering large datasets against multiple tags.
+**Action:** When filtering logic executes O(N*M) operations during user interaction, pre-compute lookup structures (like Sets or Maps) during the initial data fetch and caching phase to convert critical path lookups to O(1).
