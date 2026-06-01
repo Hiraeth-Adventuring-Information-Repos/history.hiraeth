@@ -51,3 +51,10 @@
 ## 2024-05-18 - Pre-computing Sets for High-Frequency Filtering
 **Learning:** In highly optimized render loops, replacing iterative array lookups (`.includes()`) with pre-computed Set lookups (`.has()`) provides a measurable reduction in main-thread blocking time, particularly when filtering large datasets against multiple tags.
 **Action:** When filtering logic executes O(N*M) operations during user interaction, pre-compute lookup structures (like Sets or Maps) during the initial data fetch and caching phase to convert critical path lookups to O(1).
+## 2024-05-19 - Dynamic Array Allocation in High-Frequency Handlers
+**Learning:** Calling `Array.from(Set)` inside an event handler that fires on every keystroke (like `handleFilterChange`) causes unnecessary garbage collection and dynamic array allocation during every execution.
+**Action:** Track the array representation of the set globally and update it only when the underlying state changes (e.g. when a checkbox is toggled), avoiding the allocation on every search input keystroke.
+
+## 2024-05-19 - Standard For Loops over forEach in Render Paths
+**Learning:** Using `Array.prototype.forEach` introduces closure creation and callback overhead compared to standard `for` loops. In high-frequency rendering functions like `renderTimeline`, these micro-inefficiencies compound.
+**Action:** Replace `forEach` with standard `for` loops in critical, high-frequency execution paths to remove closure overhead and improve render times.

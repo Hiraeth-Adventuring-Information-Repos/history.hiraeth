@@ -665,6 +665,7 @@
         let lastFocusedElement = null; // Store element that opened the modal
         let allTags = new Set(); // To store all unique tags
         let activeTagsSet = new Set(); // To track currently selected tag values
+        let activeTagsArray = []; // To cache the array of selected tags for O(1) retrieval during search
         const eraDataMap = {}; // Cache pre-sorted event data per era
         const cachedContainers = {}; // Cache DOM elements for era containers
         const cachedSections = {}; // Cache DOM elements for era sections
@@ -693,7 +694,9 @@
 
             let totalResults = 0;
 
-            erasConfig.forEach(era => {
+            // ⚡ Bolt Optimization: Replace forEach with standard for loop to remove closure overhead
+            for (let k = 0; k < erasConfig.length; k++) {
+                const era = erasConfig[k];
                 const container = cachedContainers[era.id];
 
                 if (container) {
@@ -778,7 +781,7 @@
 
                     totalResults += filteredData.length;
                 }
-            });
+            }
 
             // ⚡ Bolt Optimization: Use hoisted empty state element to avoid querySelector on every search input
             if (!cachedEmptyState) {
@@ -875,6 +878,8 @@
                     } else {
                         activeTagsSet.delete(e.target.value);
                     }
+                    // ⚡ Bolt Optimization: Update the array representation of active tags here instead of on every keypress
+                    activeTagsArray = Array.from(activeTagsSet);
                     handleFilterChange();
                 });
             });
@@ -950,7 +955,8 @@
                 cachedSearchInput = document.getElementById('search-input');
             }
             const searchTerm = cachedSearchInput.value;
-            const selectedTags = Array.from(activeTagsSet);
+            // ⚡ Bolt Optimization: Use the pre-computed array instead of Array.from to prevent unnecessary allocation during debounce
+            const selectedTags = activeTagsArray;
             renderTimeline(searchTerm, selectedTags);
         }
 
@@ -994,6 +1000,8 @@
                     searchInput.value = '';
                     sidebarSearchInput.value = '';
                     activeTagsSet.clear();
+                    // ⚡ Bolt Optimization: Clear the cached tags array as well
+                    activeTagsArray = [];
                     document.querySelectorAll('.tag-checkbox').forEach(cb => cb.checked = false);
                     handleFilterChange();
                     searchInput.focus();
