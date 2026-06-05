@@ -51,3 +51,7 @@
 ## 2024-05-18 - Pre-computing Sets for High-Frequency Filtering
 **Learning:** In highly optimized render loops, replacing iterative array lookups (`.includes()`) with pre-computed Set lookups (`.has()`) provides a measurable reduction in main-thread blocking time, particularly when filtering large datasets against multiple tags.
 **Action:** When filtering logic executes O(N*M) operations during user interaction, pre-compute lookup structures (like Sets or Maps) during the initial data fetch and caching phase to convert critical path lookups to O(1).
+
+## 2024-05-20 - Cache Array.from(Set) conversion
+**Learning:** Found that `handleFilterChange`, which fires frequently via debounce on search input or filter changes, was performing `Array.from(activeTagsSet)` on every invocation. This dynamic array allocation inside a high-frequency event handler introduces unnecessary garbage collection overhead.
+**Action:** When working with sets that need to be converted to arrays in high-frequency paths, maintain a cached array version (e.g. `activeTagsArray`) and only update it when the underlying state changes (e.g. when a tag is selected or unselected). Use the cached array directly during frequent read operations to avoid dynamic allocation overhead.
