@@ -665,6 +665,7 @@
         let lastFocusedElement = null; // Store element that opened the modal
         let allTags = new Set(); // To store all unique tags
         let activeTagsSet = new Set(); // To track currently selected tag values
+        let activeTagsArray = []; // ⚡ Bolt Optimization: Cache dynamic array conversion
         const eraDataMap = {}; // Cache pre-sorted event data per era
         const cachedContainers = {}; // Cache DOM elements for era containers
         const cachedSections = {}; // Cache DOM elements for era sections
@@ -875,6 +876,7 @@
                     } else {
                         activeTagsSet.delete(e.target.value);
                     }
+                    activeTagsArray = Array.from(activeTagsSet); // Update cached array
                     handleFilterChange();
                 });
             });
@@ -950,7 +952,7 @@
                 cachedSearchInput = document.getElementById('search-input');
             }
             const searchTerm = cachedSearchInput.value;
-            const selectedTags = Array.from(activeTagsSet);
+            const selectedTags = activeTagsArray; // ⚡ Bolt Optimization: Use cached array
             renderTimeline(searchTerm, selectedTags);
         }
 
@@ -994,6 +996,7 @@
                     searchInput.value = '';
                     sidebarSearchInput.value = '';
                     activeTagsSet.clear();
+                    activeTagsArray = []; // Reset cached array
                     document.querySelectorAll('.tag-checkbox').forEach(cb => cb.checked = false);
                     handleFilterChange();
                     searchInput.focus();
