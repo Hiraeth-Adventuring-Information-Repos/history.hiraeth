@@ -23,3 +23,7 @@
 ## 2024-05-19 - Dynamic Search Announcer
 **Learning:** Screen reader users lose context during real-time filtering if there is no `aria-live` region updating them on the current number of results shown on the page. Only showing an empty state when 0 results are found leaves them guessing when there are 1 or more results.
 **Action:** Always include a visually hidden `aria-live="polite"` announcer for dynamic list filtering, updating it with the count of visible items.
+
+## 2026-06-07 - Add modal sequential navigation
+**Learning:** For collection-based detail views like timeline modals, providing "Next" and "Previous" buttons significantly improves exploratory navigation and UX by reducing the friction of repeatedly closing and opening the modal. Keyboard shortcuts (`ArrowLeft` / `ArrowRight`) should always accompany these visible controls. When chronological ordering is conceptually important to the UX but structurally partitioned in the data, the underlying arrays must be globally sorted once on the frontend to allow seamless navigation across logical boundaries (eras).
+**Action:** When implementing modal details for any list or grid view, proactively implement sequential navigation and arrow-key bindings. Ensure the "master list" order mirrors the visual layout.
