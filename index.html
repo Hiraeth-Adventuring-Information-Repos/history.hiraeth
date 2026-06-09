@@ -1213,13 +1213,15 @@
                 }
 
                 // Handle navigation buttons
-                if (e.target.id === 'modal-prev-btn' && !e.target.disabled) {
+                const prevBtn = e.target.closest('#modal-prev-btn');
+                if (prevBtn && !prevBtn.disabled) {
                     if (currentEventIndex > 0) {
                         openModal(sortedEventIds[currentEventIndex - 1]);
                     }
                 }
 
-                if (e.target.id === 'modal-next-btn' && !e.target.disabled) {
+                const nextBtn = e.target.closest('#modal-next-btn');
+                if (nextBtn && !nextBtn.disabled) {
                     if (currentEventIndex < sortedEventIds.length - 1) {
                         openModal(sortedEventIds[currentEventIndex + 1]);
                     }
