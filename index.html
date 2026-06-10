@@ -637,6 +637,14 @@
             </div>
 
             <!-- Navigation Buttons -->
+            <div id="modal-nav-container" class="flex justify-between mt-6 mb-6 pt-4 border-t border-gray-300 border-opacity-30">
+                <button id="modal-prev-btn" aria-label="Previous Event" class="text-lg font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 py-1 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                    &larr; Previous
+                </button>
+                <button id="modal-next-btn" aria-label="Next Event" class="text-lg font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 py-1 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                    Next &rarr;
+                </button>
+            </div>
             
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
@@ -925,10 +933,17 @@
                 });
 
                 // --- CRITICAL FIX ---
-                // Sort all events by their order_id ONCE and store the sorted IDs.
+                // Sort all events chronologically ONCE and store the sorted IDs.
                 // This becomes the master list for navigation, immune to filtering.
+                // Because order_id is namespaced per era, we must sort by era chronologically first,
+                // then by order_id. erasConfig is in reverse chronological order.
+                const eraOrder = [...erasConfig].reverse().map(e => e.id);
                 sortedEventIds = Object.values(timelineData)
-                    .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''))
+                    .sort((a, b) => {
+                        const eraDiff = eraOrder.indexOf(a.era) - eraOrder.indexOf(b.era);
+                        if (eraDiff !== 0) return eraDiff;
+                        return (a.order_id || '').localeCompare(b.order_id || '');
+                    })
                     .map(event => event.id);
 
 
@@ -963,9 +978,35 @@
             modalBackdrop.addEventListener('click', closeModal);
             modalCloseBtn.addEventListener('click', closeModal);
 
+            if (modalPrevBtn) {
+                modalPrevBtn.addEventListener('click', () => {
+                    if (currentEventIndex > 0) {
+                        openModal(sortedEventIds[currentEventIndex - 1]);
+                    }
+                });
+            }
+            if (modalNextBtn) {
+                modalNextBtn.addEventListener('click', () => {
+                    if (currentEventIndex < sortedEventIds.length - 1) {
+                        openModal(sortedEventIds[currentEventIndex + 1]);
+                    }
+                });
+            }
+
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
-                    closeModal();
+                if (!modalContainer.classList.contains('hidden')) {
+                    if (e.key === 'Escape') {
+                        closeModal();
+                    } else if (e.key === 'ArrowLeft' && currentEventIndex > 0) {
+                        // Ensure we are not in a sub-event where modalPrevBtn is hidden
+                        if (!modalPrevBtn.parentElement.classList.contains('hidden') && !modalPrevBtn.disabled) {
+                            openModal(sortedEventIds[currentEventIndex - 1]);
+                        }
+                    } else if (e.key === 'ArrowRight' && currentEventIndex < sortedEventIds.length - 1) {
+                        if (!modalNextBtn.parentElement.classList.contains('hidden') && !modalNextBtn.disabled) {
+                            openModal(sortedEventIds[currentEventIndex + 1]);
+                        }
+                    }
                 }
             });
 
@@ -1015,6 +1056,8 @@
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalBackBtn = document.getElementById('modal-back-btn');
+        const modalPrevBtn = document.getElementById('modal-prev-btn');
+        const modalNextBtn = document.getElementById('modal-next-btn');
 
         const modalTitle = document.getElementById('modal-title');
         const modalDate = document.getElementById('modal-date');
@@ -1044,8 +1087,18 @@
                 modalBackBtn.onclick = () => openModal(parentEventId);
             }
 
+            const navContainer = document.getElementById('modal-nav-container');
+            if (parentEventId) {
+                if (navContainer) navContainer.classList.add('hidden');
+            } else {
+                if (navContainer) navContainer.classList.remove('hidden');
+            }
+
 
             currentEventIndex = sortedEventIds.findIndex(id => id == eventId);
+
+            if (modalPrevBtn) modalPrevBtn.disabled = currentEventIndex <= 0;
+            if (modalNextBtn) modalNextBtn.disabled = currentEventIndex >= sortedEventIds.length - 1;
 
             modalTitle.textContent = dataToShow.title;
             modalDate.textContent = dataToShow.date || eventData.date; // Fallback to parent date

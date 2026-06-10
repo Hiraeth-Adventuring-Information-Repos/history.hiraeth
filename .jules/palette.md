@@ -23,3 +23,6 @@
 ## 2024-05-19 - Dynamic Search Announcer
 **Learning:** Screen reader users lose context during real-time filtering if there is no `aria-live` region updating them on the current number of results shown on the page. Only showing an empty state when 0 results are found leaves them guessing when there are 1 or more results.
 **Action:** Always include a visually hidden `aria-live="polite"` announcer for dynamic list filtering, updating it with the count of visible items.
+## 2024-05-20 - [Sequential Navigation for Detail Views]
+**Learning:** For collection-based UIs with detail views (like timeline modals), omitting sequential navigation (Next/Previous) forces users to repeatedly open and close views to explore adjacent items, disrupting exploratory reading.
+**Action:** Always surface sequential navigation (Next/Previous buttons) in detail views and complement it with expected keyboard shortcuts (e.g., `ArrowRight`/`ArrowLeft`) to support exploratory reading.
