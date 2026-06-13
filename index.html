@@ -637,6 +637,10 @@
             </div>
 
             <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center mb-4 text-sm font-semibold uppercase tracking-wider">
+                <button id="modal-prev-btn" aria-label="Previous event" class="hidden hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-1 transition-colors">&larr; Previous</button>
+                <button id="modal-next-btn" aria-label="Next event" class="hidden hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-1 transition-colors">Next &rarr;</button>
+            </div>
             
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
@@ -927,10 +931,21 @@
                 // --- CRITICAL FIX ---
                 // Sort all events by their order_id ONCE and store the sorted IDs.
                 // This becomes the master list for navigation, immune to filtering.
-                sortedEventIds = Object.values(timelineData)
-                    .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''))
-                    .map(event => event.id);
+                // Eras are listed from newest to oldest in erasConfig, so we need to reverse it
+                // to get chronologically correct order.
+                const reversedEras = [...erasConfig].reverse();
 
+                sortedEventIds = Object.values(timelineData)
+                    .sort((a, b) => {
+                        const eraIndexA = reversedEras.findIndex(era => era.id === a.era);
+                        const eraIndexB = reversedEras.findIndex(era => era.id === b.era);
+
+                        if (eraIndexA !== eraIndexB) {
+                            return eraIndexA - eraIndexB;
+                        }
+                        return (a.order_id || '').localeCompare(b.order_id || '');
+                    })
+                    .map(event => event.id);
 
                 populateTagFilters();
                 renderTimeline(); // Initial render
@@ -964,8 +979,14 @@
             modalCloseBtn.addEventListener('click', closeModal);
 
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
-                    closeModal();
+                if (!modalContainer.classList.contains('hidden')) {
+                    if (e.key === 'Escape') {
+                        closeModal();
+                    } else if (e.key === 'ArrowLeft' && modalPrevBtn && !modalPrevBtn.classList.contains('hidden')) {
+                        modalPrevBtn.click();
+                    } else if (e.key === 'ArrowRight' && modalNextBtn && !modalNextBtn.classList.contains('hidden')) {
+                        modalNextBtn.click();
+                    }
                 }
             });
 
@@ -1015,6 +1036,8 @@
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalBackBtn = document.getElementById('modal-back-btn');
+        const modalPrevBtn = document.getElementById('modal-prev-btn');
+        const modalNextBtn = document.getElementById('modal-next-btn');
 
         const modalTitle = document.getElementById('modal-title');
         const modalDate = document.getElementById('modal-date');
@@ -1086,6 +1109,28 @@
             const buttonColor = themeColors[theme] || '#fff'; // Default to white
             modalBackBtn.style.color = buttonColor;
 
+            // Sequential Navigation
+            if (parentEventId) {
+                // Hide for sub-events
+                modalPrevBtn.classList.add('hidden');
+                modalNextBtn.classList.add('hidden');
+            } else {
+                if (currentEventIndex > 0) {
+                    modalPrevBtn.classList.remove('hidden');
+                    modalPrevBtn.style.color = buttonColor;
+                    modalPrevBtn.onclick = () => openModal(sortedEventIds[currentEventIndex - 1]);
+                } else {
+                    modalPrevBtn.classList.add('hidden');
+                }
+
+                if (currentEventIndex < sortedEventIds.length - 1) {
+                    modalNextBtn.classList.remove('hidden');
+                    modalNextBtn.style.color = buttonColor;
+                    modalNextBtn.onclick = () => openModal(sortedEventIds[currentEventIndex + 1]);
+                } else {
+                    modalNextBtn.classList.add('hidden');
+                }
+            }
 
             lastFocusedElement = document.activeElement;
             modalBackdrop.classList.remove('hidden');
