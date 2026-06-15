@@ -13,6 +13,14 @@
     <!-- ⚡ Bolt Optimization: Removed duplicate EB Garamond font request and unused Fuse.js CDN link to reduce initial load network requests and parse time -->
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
 
+    <!-- ⚡ Bolt Optimization: Preload critical JSON era data files concurrently with HTML parsing -->
+    <link rel="preload" href="modern-era.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="unification-age.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="mythic-age.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="classical-age.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="ancient-era.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="antediluvian-age.json" as="fetch" crossorigin="anonymous">
+
     <style>
         /* --- Custom Styles --- */
         html {
@@ -693,7 +701,9 @@
 
             let totalResults = 0;
 
-            erasConfig.forEach(era => {
+            // ⚡ Bolt Optimization: Replace erasConfig.forEach with a standard for loop to avoid closure callback overhead
+            for (let e = 0; e < erasConfig.length; e++) {
+                const era = erasConfig[e];
                 const container = cachedContainers[era.id];
 
                 if (container) {
@@ -778,7 +788,7 @@
 
                     totalResults += filteredData.length;
                 }
-            });
+            }
 
             // ⚡ Bolt Optimization: Use hoisted empty state element to avoid querySelector on every search input
             if (!cachedEmptyState) {
