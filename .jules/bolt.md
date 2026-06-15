@@ -51,3 +51,6 @@
 ## 2024-05-18 - Pre-computing Sets for High-Frequency Filtering
 **Learning:** In highly optimized render loops, replacing iterative array lookups (`.includes()`) with pre-computed Set lookups (`.has()`) provides a measurable reduction in main-thread blocking time, particularly when filtering large datasets against multiple tags.
 **Action:** When filtering logic executes O(N*M) operations during user interaction, pre-compute lookup structures (like Sets or Maps) during the initial data fetch and caching phase to convert critical path lookups to O(1).
+## 2026-06-15 - Concurrent Network Requests via Resource Preloading
+**Learning:** Found that the initial load time of the application was degraded because critical data files (e.g. `modern-era.json`, `mythic-age.json`) were being fetched sequentially inside JavaScript execution (`Promise.all(fetch)`) only after the DOM was fully parsed and the `initializeTimeline` function was executed. This created a significant delay before the network requests even started.
+**Action:** Use `<link rel="preload" as="fetch" crossorigin="anonymous">` in the HTML `<head>` for critical dynamic resources. This instructs the browser to initiate network requests concurrently while it is still parsing the HTML document, significantly reducing the critical rendering path and overall Time To Interactive (TTI).
