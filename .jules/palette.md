@@ -1,3 +1,6 @@
+## 2026-05-28 - [Hiding Chronological Navigation in Sub-events]
+**Learning:** Displaying linear, chronological navigation controls (like Previous/Next buttons) on modal dialogs intended to show nested or sub-events creates severe UX confusion. Users clicking "Next" from a sub-event might expect to see another related sub-event, not the next chronologically sorted *main* event in the timeline, breaking the mental model of the hierarchy.
+**Action:** When implementing timeline or linear navigation in components that also support nested sub-views, conditionally hide or disable the chronological navigation controls when displaying sub-level data to maintain clear hierarchical context.
 ## 2026-05-07 - [Off-Canvas Sidebar Keyboard Navigation]
 **Learning:** Adding an off-canvas sidebar menu without a programmatic keyboard escape hatch creates a functional focus trap or requires frustrating reverse-tabbing for keyboard users.
 **Action:** Always implement an `Escape` key listener for off-canvas elements. Crucially, when dismissing via Escape, programmatically return focus to the trigger button (`#sidebar-toggle`) to maintain a logical and continuous focus flow in the DOM.

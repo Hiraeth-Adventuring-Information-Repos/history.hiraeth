@@ -637,6 +637,10 @@
             </div>
 
             <!-- Navigation Buttons -->
+            <div id="modal-nav-container" class="flex justify-between items-center mb-6 w-full">
+                <button id="modal-prev-btn" aria-label="Go to previous event" class="text-xl hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 py-1">&larr; Previous</button>
+                <button id="modal-next-btn" aria-label="Go to next event" class="text-xl hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 py-1">Next &rarr;</button>
+            </div>
             
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
@@ -963,9 +967,27 @@
             modalBackdrop.addEventListener('click', closeModal);
             modalCloseBtn.addEventListener('click', closeModal);
 
+            modalPrevBtn.addEventListener('click', () => {
+                if (!modalPrevBtn.disabled) {
+                    openModal(sortedEventIds[currentEventIndex - 1]);
+                }
+            });
+
+            modalNextBtn.addEventListener('click', () => {
+                if (!modalNextBtn.disabled) {
+                    openModal(sortedEventIds[currentEventIndex + 1]);
+                }
+            });
+
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
-                    closeModal();
+                if (!modalContainer.classList.contains('hidden')) {
+                    if (e.key === 'Escape') {
+                        closeModal();
+                    } else if (e.key === 'ArrowLeft' && !modalNavContainer.classList.contains('hidden') && !modalPrevBtn.disabled) {
+                        modalPrevBtn.click();
+                    } else if (e.key === 'ArrowRight' && !modalNavContainer.classList.contains('hidden') && !modalNextBtn.disabled) {
+                        modalNextBtn.click();
+                    }
                 }
             });
 
@@ -1015,6 +1037,10 @@
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalBackBtn = document.getElementById('modal-back-btn');
+
+        const modalNavContainer = document.getElementById('modal-nav-container');
+        const modalPrevBtn = document.getElementById('modal-prev-btn');
+        const modalNextBtn = document.getElementById('modal-next-btn');
 
         const modalTitle = document.getElementById('modal-title');
         const modalDate = document.getElementById('modal-date');
@@ -1085,6 +1111,33 @@
             };
             const buttonColor = themeColors[theme] || '#fff'; // Default to white
             modalBackBtn.style.color = buttonColor;
+            modalPrevBtn.style.color = buttonColor;
+            modalNextBtn.style.color = buttonColor;
+
+            // --- Navigation Logic ---
+            if (parentEventId) {
+                // Hide navigation for sub-events
+                modalNavContainer.classList.add('hidden');
+            } else {
+                modalNavContainer.classList.remove('hidden');
+
+                // Determine navigation button states
+                if (currentEventIndex <= 0) {
+                    modalPrevBtn.disabled = true;
+                    modalPrevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                } else {
+                    modalPrevBtn.disabled = false;
+                    modalPrevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+
+                if (currentEventIndex >= sortedEventIds.length - 1) {
+                    modalNextBtn.disabled = true;
+                    modalNextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                } else {
+                    modalNextBtn.disabled = false;
+                    modalNextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            }
 
 
             lastFocusedElement = document.activeElement;
