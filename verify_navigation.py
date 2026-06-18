@@ -44,8 +44,9 @@ async def run_verification():
 
             print("Testing 'next' navigation...")
             await next_btn.click() # Correctly awaited action
-            await expect(modal_title).to_have_text('The Stars Fall', timeout=5000)
-            print("Navigation to 'The Stars Fall' successful.")
+            # The next event after '00070' is '02000' because of chronological sorting, which is End of the Dragon Bounty.
+            await expect(modal_title).to_have_text('End of the Dragon Bounty', timeout=5000)
+            print("Navigation to 'End of the Dragon Bounty' successful.")
 
             print("Testing 'previous' navigation...")
             await prev_btn.click() # Correctly awaited action
