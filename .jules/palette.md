@@ -23,3 +23,7 @@
 ## 2024-05-19 - Dynamic Search Announcer
 **Learning:** Screen reader users lose context during real-time filtering if there is no `aria-live` region updating them on the current number of results shown on the page. Only showing an empty state when 0 results are found leaves them guessing when there are 1 or more results.
 **Action:** Always include a visually hidden `aria-live="polite"` announcer for dynamic list filtering, updating it with the count of visible items.
+
+## 2026-05-29 - Accessible anchor link focus management
+**Learning:** When implementing anchor link navigation (e.g., sidebar links to timeline eras), target container elements (like `<section>`) must include `tabindex="-1"` and `focus:outline-none` to ensure keyboard focus is correctly transferred and not dropped to the body. This prevents keyboard-only and screen reader users from having to restart their navigation context from the top of the page.
+**Action:** Always include `tabindex="-1"` and appropriate focus styles (or `focus:outline-none` if focusing the container itself should be invisible, leaving focus on the section structure) on elements acting as targets for intra-page anchor navigation.
