@@ -420,6 +420,13 @@
             opacity: 0.9;
         }
     </style>
+    <!-- ⚡ Bolt Optimization: Preload critical JSON data concurrently with HTML parsing to improve initial render time -->
+    <link rel="preload" href="modern-era.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="unification-age.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="mythic-age.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="classical-age.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="ancient-era.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="antediluvian-age.json" as="fetch" crossorigin="anonymous">
 </head>
 <body class="antialiased">
 
