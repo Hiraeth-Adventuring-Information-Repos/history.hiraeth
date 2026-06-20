@@ -637,6 +637,10 @@
             </div>
 
             <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center mb-6 w-full">
+                <button id="modal-prev-btn" aria-label="Go to previous event" class="text-lg hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 py-1 disabled:opacity-50 disabled:cursor-not-allowed">&larr; Previous</button>
+                <button id="modal-next-btn" aria-label="Go to next event" class="text-lg hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 py-1 disabled:opacity-50 disabled:cursor-not-allowed">Next &rarr;</button>
+            </div>
             
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
@@ -967,6 +971,14 @@
                 if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
                     closeModal();
                 }
+
+                if (!modalContainer.classList.contains('hidden')) {
+                    if (e.key === 'ArrowLeft' && !modalPrevBtn.classList.contains('hidden') && !modalPrevBtn.disabled) {
+                        modalPrevBtn.click();
+                    } else if (e.key === 'ArrowRight' && !modalNextBtn.classList.contains('hidden') && !modalNextBtn.disabled) {
+                        modalNextBtn.click();
+                    }
+                }
             });
 
             function checkUrlForEvent() {
@@ -1015,6 +1027,8 @@
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalBackBtn = document.getElementById('modal-back-btn');
+        const modalPrevBtn = document.getElementById('modal-prev-btn');
+        const modalNextBtn = document.getElementById('modal-next-btn');
 
         const modalTitle = document.getElementById('modal-title');
         const modalDate = document.getElementById('modal-date');
@@ -1085,6 +1099,32 @@
             };
             const buttonColor = themeColors[theme] || '#fff'; // Default to white
             modalBackBtn.style.color = buttonColor;
+            modalPrevBtn.style.color = buttonColor;
+            modalNextBtn.style.color = buttonColor;
+
+            if (subEventId) {
+                modalPrevBtn.classList.add('hidden');
+                modalNextBtn.classList.add('hidden');
+            } else {
+                modalPrevBtn.classList.remove('hidden');
+                modalNextBtn.classList.remove('hidden');
+
+                if (currentEventIndex > 0) {
+                    modalPrevBtn.disabled = false;
+                    modalPrevBtn.onclick = () => openModal(sortedEventIds[currentEventIndex - 1]);
+                } else {
+                    modalPrevBtn.disabled = true;
+                    modalPrevBtn.onclick = null;
+                }
+
+                if (currentEventIndex < sortedEventIds.length - 1 && currentEventIndex >= 0) {
+                    modalNextBtn.disabled = false;
+                    modalNextBtn.onclick = () => openModal(sortedEventIds[currentEventIndex + 1]);
+                } else {
+                    modalNextBtn.disabled = true;
+                    modalNextBtn.onclick = null;
+                }
+            }
 
 
             lastFocusedElement = document.activeElement;
