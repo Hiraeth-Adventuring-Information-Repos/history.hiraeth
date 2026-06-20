@@ -637,6 +637,10 @@
             </div>
 
             <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center mb-6">
+                <button id="modal-prev-btn" aria-label="Previous event" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500">Previous</button>
+                <button id="modal-next-btn" aria-label="Next event" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500">Next</button>
+            </div>
             
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
@@ -964,8 +968,14 @@
             modalCloseBtn.addEventListener('click', closeModal);
 
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
-                    closeModal();
+                if (!modalContainer.classList.contains('hidden')) {
+                    if (e.key === 'Escape') {
+                        closeModal();
+                    } else if (e.key === 'ArrowLeft' && modalPrevBtn.style.display !== 'none' && !modalPrevBtn.disabled) {
+                        modalPrevBtn.click();
+                    } else if (e.key === 'ArrowRight' && modalNextBtn.style.display !== 'none' && !modalNextBtn.disabled) {
+                        modalNextBtn.click();
+                    }
                 }
             });
 
@@ -1015,6 +1025,8 @@
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalBackBtn = document.getElementById('modal-back-btn');
+        const modalPrevBtn = document.getElementById('modal-prev-btn');
+        const modalNextBtn = document.getElementById('modal-next-btn');
 
         const modalTitle = document.getElementById('modal-title');
         const modalDate = document.getElementById('modal-date');
@@ -1046,6 +1058,33 @@
 
 
             currentEventIndex = sortedEventIds.findIndex(id => id == eventId);
+
+            if (parentEventId) {
+                // Hide navigation buttons when viewing a sub-event
+                modalPrevBtn.style.display = 'none';
+                modalNextBtn.style.display = 'none';
+            } else {
+                modalPrevBtn.style.display = '';
+                modalNextBtn.style.display = '';
+
+                // Update Previous button state
+                if (currentEventIndex > 0) {
+                    modalPrevBtn.disabled = false;
+                    modalPrevBtn.onclick = () => openModal(sortedEventIds[currentEventIndex - 1]);
+                } else {
+                    modalPrevBtn.disabled = true;
+                    modalPrevBtn.onclick = null;
+                }
+
+                // Update Next button state
+                if (currentEventIndex < sortedEventIds.length - 1 && currentEventIndex !== -1) {
+                    modalNextBtn.disabled = false;
+                    modalNextBtn.onclick = () => openModal(sortedEventIds[currentEventIndex + 1]);
+                } else {
+                    modalNextBtn.disabled = true;
+                    modalNextBtn.onclick = null;
+                }
+            }
 
             modalTitle.textContent = dataToShow.title;
             modalDate.textContent = dataToShow.date || eventData.date; // Fallback to parent date

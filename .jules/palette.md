@@ -23,3 +23,7 @@
 ## 2024-05-19 - Dynamic Search Announcer
 **Learning:** Screen reader users lose context during real-time filtering if there is no `aria-live` region updating them on the current number of results shown on the page. Only showing an empty state when 0 results are found leaves them guessing when there are 1 or more results.
 **Action:** Always include a visually hidden `aria-live="polite"` announcer for dynamic list filtering, updating it with the count of visible items.
+
+## 2026-05-30 - Accessible Chronological Navigation inside Modals
+**Learning:** Adding previous and next navigation controls inside a modal greatly improves the user experience by avoiding closing and reopening modals sequentially. Coupling this with keyboard shortcuts ('ArrowLeft' and 'ArrowRight') while ensuring proper state checks (`!modalContainer.classList.contains('hidden')`) prevents unintended triggering outside the modal context. Also, conditionally disabling navigation controls (using `disabled` attributes and styling) and hiding them conditionally for sub-events provides clear boundaries.
+**Action:** Always map modal-internal pagination or chronological navigation elements to intuitive keyboard shortcuts. Make sure to apply disabled attributes to navigation bounds, visually style them accordingly, and verify edge cases where these elements shouldn't be active (like inside sub-events).
