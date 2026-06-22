@@ -23,3 +23,6 @@
 ## 2024-05-19 - Dynamic Search Announcer
 **Learning:** Screen reader users lose context during real-time filtering if there is no `aria-live` region updating them on the current number of results shown on the page. Only showing an empty state when 0 results are found leaves them guessing when there are 1 or more results.
 **Action:** Always include a visually hidden `aria-live="polite"` announcer for dynamic list filtering, updating it with the count of visible items.
+## 2026-06-22 - Chronological Modal Navigation
+**Learning:** Adding sequential navigation (Next/Previous) to detail views like modals significantly improves exploratory reading, but requires careful array bounds checking and state management to handle boundaries properly. Also, programmatic sorting based on business logic (like chronological eras) is necessary when IDs don't naturally sort correctly across different categories. Keyboard shortcuts (ArrowLeft/ArrowRight) are crucial complements to visual buttons for accessibility.
+**Action:** Always surface sequential navigation for collection-based UIs, complement it with expected keyboard shortcuts, and ensure edge cases (beginning/end of lists, sub-items) are handled gracefully.
