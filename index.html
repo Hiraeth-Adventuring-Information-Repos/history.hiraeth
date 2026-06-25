@@ -637,6 +637,10 @@
             </div>
 
             <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center mb-4 mt-4" id="modal-nav-container">
+                <button id="modal-prev-btn" aria-label="Previous event" class="text-lg hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 disabled:opacity-50 disabled:cursor-not-allowed">&larr; Previous</button>
+                <button id="modal-next-btn" aria-label="Next event" class="text-lg hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 disabled:opacity-50 disabled:cursor-not-allowed">Next &rarr;</button>
+            </div>
             
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
@@ -925,10 +929,18 @@
                 });
 
                 // --- CRITICAL FIX ---
-                // Sort all events by their order_id ONCE and store the sorted IDs.
+                // Sort all events by their era first (reversed erasConfig order, oldest to newest), then by their order_id ONCE and store the sorted IDs.
                 // This becomes the master list for navigation, immune to filtering.
+                const reversedErasConfigIds = [...erasConfig].reverse().map(e => e.id);
                 sortedEventIds = Object.values(timelineData)
-                    .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''))
+                    .sort((a, b) => {
+                        const eraIndexA = reversedErasConfigIds.indexOf(a.era);
+                        const eraIndexB = reversedErasConfigIds.indexOf(b.era);
+                        if (eraIndexA !== eraIndexB) {
+                            return eraIndexA - eraIndexB;
+                        }
+                        return (a.order_id || '').localeCompare(b.order_id || '');
+                    })
                     .map(event => event.id);
 
 
@@ -1020,6 +1032,9 @@
         const modalDate = document.getElementById('modal-date');
         const modalDescription = document.getElementById('modal-description');
         const modalRumor = document.getElementById('modal-rumor');
+        const modalNavContainer = document.getElementById('modal-nav-container');
+        const modalPrevBtn = document.getElementById('modal-prev-btn');
+        const modalNextBtn = document.getElementById('modal-next-btn');
 
         function openModal(eventId, subEventId = null) {
             const eventData = timelineData[eventId];
@@ -1085,7 +1100,34 @@
             };
             const buttonColor = themeColors[theme] || '#fff'; // Default to white
             modalBackBtn.style.color = buttonColor;
+            modalPrevBtn.style.color = buttonColor;
+            modalNextBtn.style.color = buttonColor;
 
+
+            // --- Navigation Logic ---
+            if (parentEventId) {
+                // Hide navigation when viewing a sub-event
+                modalNavContainer.classList.add('hidden');
+            } else {
+                modalNavContainer.classList.remove('hidden');
+
+                // Update button states
+                modalPrevBtn.disabled = currentEventIndex <= 0;
+                modalNextBtn.disabled = currentEventIndex >= sortedEventIds.length - 1;
+
+                // Setup click handlers
+                modalPrevBtn.onclick = () => {
+                    if (currentEventIndex > 0) {
+                        openModal(sortedEventIds[currentEventIndex - 1]);
+                    }
+                };
+
+                modalNextBtn.onclick = () => {
+                    if (currentEventIndex < sortedEventIds.length - 1) {
+                        openModal(sortedEventIds[currentEventIndex + 1]);
+                    }
+                };
+            }
 
             lastFocusedElement = document.activeElement;
             modalBackdrop.classList.remove('hidden');
