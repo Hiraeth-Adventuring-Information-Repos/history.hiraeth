@@ -51,3 +51,7 @@
 ## 2024-05-18 - Pre-computing Sets for High-Frequency Filtering
 **Learning:** In highly optimized render loops, replacing iterative array lookups (`.includes()`) with pre-computed Set lookups (`.has()`) provides a measurable reduction in main-thread blocking time, particularly when filtering large datasets against multiple tags.
 **Action:** When filtering logic executes O(N*M) operations during user interaction, pre-compute lookup structures (like Sets or Maps) during the initial data fetch and caching phase to convert critical path lookups to O(1).
+
+## 2026-06-26 - Preloading JSON data files for faster render
+**Learning:** Found that initial timeline load was delayed because fetching 6 large JSON files started only after parsing and executing the JavaScript initialization code. This caused unnecessary wait times for the user.
+**Action:** Add `<link rel="preload" href="file.json" as="fetch" crossorigin="anonymous">` tags to the `<head>` of the document to start fetching critical JSON data files concurrently with HTML parsing, significantly reducing the total time to render the application.
