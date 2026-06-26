@@ -10,8 +10,15 @@
     <!-- Google Font: EB Garamond (Greco-Roman serif feel) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- ⚡ Bolt Optimization: Removed duplicate EB Garamond font request and unused Fuse.js CDN link to reduce initial load network requests and parse time -->
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+
+    <!-- ⚡ Bolt Optimization: Preload critical JSON era data files to fetch them concurrently with HTML parsing -->
+    <link rel="preload" href="modern-era.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="unification-age.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="mythic-age.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="classical-age.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="ancient-era.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="antediluvian-age.json" as="fetch" crossorigin="anonymous">
 
     <style>
         /* --- Custom Styles --- */
