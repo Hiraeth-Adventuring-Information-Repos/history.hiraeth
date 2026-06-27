@@ -637,6 +637,10 @@
             </div>
 
             <!-- Navigation Buttons -->
+            <div id="modal-nav-buttons" class="flex justify-between items-center w-full mb-4">
+                <button id="modal-prev-btn" aria-label="Previous event" class="text-sm hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 py-1">&larr; Previous</button>
+                <button id="modal-next-btn" aria-label="Next event" class="text-sm hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 py-1">Next &rarr;</button>
+            </div>
             
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
@@ -927,8 +931,13 @@
                 // --- CRITICAL FIX ---
                 // Sort all events by their order_id ONCE and store the sorted IDs.
                 // This becomes the master list for navigation, immune to filtering.
+                const reversedEras = [...erasConfig].reverse().map(e => e.id);
                 sortedEventIds = Object.values(timelineData)
-                    .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''))
+                    .sort((a, b) => {
+                        const eraDiff = reversedEras.indexOf(a.era) - reversedEras.indexOf(b.era);
+                        if (eraDiff !== 0) return eraDiff;
+                        return (a.order_id || '').localeCompare(b.order_id || '');
+                    })
                     .map(event => event.id);
 
 
@@ -964,8 +973,14 @@
             modalCloseBtn.addEventListener('click', closeModal);
 
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
-                    closeModal();
+                if (!modalContainer.classList.contains('hidden')) {
+                    if (e.key === 'Escape') {
+                        closeModal();
+                    } else if (e.key === 'ArrowLeft' && !modalNavButtons.classList.contains('hidden') && !modalPrevBtn.classList.contains('hidden')) {
+                        modalPrevBtn.click();
+                    } else if (e.key === 'ArrowRight' && !modalNavButtons.classList.contains('hidden') && !modalNextBtn.classList.contains('hidden')) {
+                        modalNextBtn.click();
+                    }
                 }
             });
 
@@ -1015,6 +1030,9 @@
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalBackBtn = document.getElementById('modal-back-btn');
+        const modalNavButtons = document.getElementById('modal-nav-buttons');
+        const modalPrevBtn = document.getElementById('modal-prev-btn');
+        const modalNextBtn = document.getElementById('modal-next-btn');
 
         const modalTitle = document.getElementById('modal-title');
         const modalDate = document.getElementById('modal-date');
@@ -1086,6 +1104,20 @@
             const buttonColor = themeColors[theme] || '#fff'; // Default to white
             modalBackBtn.style.color = buttonColor;
 
+            if (subEventId) {
+                modalNavButtons.classList.add('hidden');
+            } else {
+                modalNavButtons.classList.remove('hidden');
+
+                modalPrevBtn.onclick = () => openModal(sortedEventIds[currentEventIndex - 1]);
+                modalNextBtn.onclick = () => openModal(sortedEventIds[currentEventIndex + 1]);
+
+                modalPrevBtn.classList.toggle('hidden', currentEventIndex <= 0);
+                modalNextBtn.classList.toggle('hidden', currentEventIndex >= sortedEventIds.length - 1);
+
+                modalPrevBtn.style.color = buttonColor;
+                modalNextBtn.style.color = buttonColor;
+            }
 
             lastFocusedElement = document.activeElement;
             modalBackdrop.classList.remove('hidden');
