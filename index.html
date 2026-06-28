@@ -637,6 +637,10 @@
             </div>
 
             <!-- Navigation Buttons -->
+            <div id="modal-navigation" class="flex justify-between items-center mb-6">
+                <button id="modal-prev-btn" aria-label="Previous event" class="text-xl hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 py-1">&larr; Previous <span class="text-sm opacity-70 hidden sm:inline">(Arrow Left)</span></button>
+                <button id="modal-next-btn" aria-label="Next event" class="text-xl hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 py-1">Next &rarr; <span class="text-sm opacity-70 hidden sm:inline">(Arrow Right)</span></button>
+            </div>
             
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
@@ -889,6 +893,7 @@
                     const era = erasConfig[index];
                     eraData.forEach(event => {
                         event.era = era.id; // Assign era id to each event for filtering
+                        event.eraIndex = index; // Store original era index for correct cross-era chronological sorting
 
                         // ⚡ Bolt Optimization: Pre-compute searchable text string to avoid multiple toLowerCase() calls during render
                         event._searchableText = [
@@ -925,10 +930,16 @@
                 });
 
                 // --- CRITICAL FIX ---
-                // Sort all events by their order_id ONCE and store the sorted IDs.
+                // Sort all events chronologically ONCE and store the sorted IDs.
+                // Eras are listed newest to oldest, so sort by b.eraIndex - a.eraIndex first.
                 // This becomes the master list for navigation, immune to filtering.
                 sortedEventIds = Object.values(timelineData)
-                    .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''))
+                    .sort((a, b) => {
+                        if (a.eraIndex !== b.eraIndex) {
+                            return b.eraIndex - a.eraIndex;
+                        }
+                        return (a.order_id || '').localeCompare(b.order_id || '');
+                    })
                     .map(event => event.id);
 
 
@@ -966,6 +977,14 @@
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
                     closeModal();
+                }
+
+                if (!modalContainer.classList.contains('hidden') && !document.getElementById('modal-navigation').classList.contains('hidden')) {
+                    if (e.key === 'ArrowLeft' && !document.getElementById('modal-prev-btn').disabled) {
+                        document.getElementById('modal-prev-btn').click();
+                    } else if (e.key === 'ArrowRight' && !document.getElementById('modal-next-btn').disabled) {
+                        document.getElementById('modal-next-btn').click();
+                    }
                 }
             });
 
@@ -1015,6 +1034,10 @@
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalBackBtn = document.getElementById('modal-back-btn');
+
+        const modalPrevBtn = document.getElementById('modal-prev-btn');
+        const modalNextBtn = document.getElementById('modal-next-btn');
+        const modalNavigation = document.getElementById('modal-navigation');
 
         const modalTitle = document.getElementById('modal-title');
         const modalDate = document.getElementById('modal-date');
@@ -1085,6 +1108,37 @@
             };
             const buttonColor = themeColors[theme] || '#fff'; // Default to white
             modalBackBtn.style.color = buttonColor;
+
+            // Set up Next/Prev navigation
+            if (parentEventId) {
+                // Hide navigation when viewing a sub-event
+                modalNavigation.classList.add('hidden');
+            } else {
+                modalNavigation.classList.remove('hidden');
+
+                modalPrevBtn.style.color = buttonColor;
+                modalNextBtn.style.color = buttonColor;
+
+                if (currentEventIndex > 0) {
+                    modalPrevBtn.disabled = false;
+                    modalPrevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    modalPrevBtn.onclick = () => openModal(sortedEventIds[currentEventIndex - 1]);
+                } else {
+                    modalPrevBtn.disabled = true;
+                    modalPrevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    modalPrevBtn.onclick = null;
+                }
+
+                if (currentEventIndex < sortedEventIds.length - 1) {
+                    modalNextBtn.disabled = false;
+                    modalNextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    modalNextBtn.onclick = () => openModal(sortedEventIds[currentEventIndex + 1]);
+                } else {
+                    modalNextBtn.disabled = true;
+                    modalNextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    modalNextBtn.onclick = null;
+                }
+            }
 
 
             lastFocusedElement = document.activeElement;
