@@ -390,7 +390,9 @@
             border-radius: 4px;
         }
 
-        #modal-back-btn:focus-visible {
+        #modal-back-btn:focus-visible,
+        #modal-prev-btn:focus-visible,
+        #modal-next-btn:focus-visible {
             outline: none;
             box-shadow: 0 0 0 2px #8a63f5;
             border-radius: 4px;
@@ -637,6 +639,10 @@
             </div>
 
             <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center mb-6">
+                <button id="modal-prev-btn" aria-label="Previous event" class="text-xl font-bold hover:underline hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2">&larr; Previous</button>
+                <button id="modal-next-btn" aria-label="Next event" class="text-xl font-bold hover:underline hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2">Next &rarr;</button>
+            </div>
             
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
@@ -925,12 +931,19 @@
                 });
 
                 // --- CRITICAL FIX ---
-                // Sort all events by their order_id ONCE and store the sorted IDs.
+                // Sort all events by chronological era first (oldest to newest), then by order_id ONCE and store the sorted IDs.
                 // This becomes the master list for navigation, immune to filtering.
+                const chronologicalEras = [...erasConfig].reverse().map(era => era.id);
                 sortedEventIds = Object.values(timelineData)
-                    .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''))
+                    .sort((a, b) => {
+                        const eraIndexA = chronologicalEras.indexOf(a.era);
+                        const eraIndexB = chronologicalEras.indexOf(b.era);
+                        if (eraIndexA !== eraIndexB) {
+                            return eraIndexA - eraIndexB;
+                        }
+                        return (a.order_id || '').localeCompare(b.order_id || '');
+                    })
                     .map(event => event.id);
-
 
                 populateTagFilters();
                 renderTimeline(); // Initial render
@@ -964,8 +977,14 @@
             modalCloseBtn.addEventListener('click', closeModal);
 
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
-                    closeModal();
+                if (!modalContainer.classList.contains('hidden')) {
+                    if (e.key === 'Escape') {
+                        closeModal();
+                    } else if (e.key === 'ArrowLeft' && !modalPrevBtn.classList.contains('hidden') && !modalPrevBtn.classList.contains('cursor-not-allowed')) {
+                        modalPrevBtn.click();
+                    } else if (e.key === 'ArrowRight' && !modalNextBtn.classList.contains('hidden') && !modalNextBtn.classList.contains('cursor-not-allowed')) {
+                        modalNextBtn.click();
+                    }
                 }
             });
 
@@ -1015,6 +1034,8 @@
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalBackBtn = document.getElementById('modal-back-btn');
+        const modalPrevBtn = document.getElementById('modal-prev-btn');
+        const modalNextBtn = document.getElementById('modal-next-btn');
 
         const modalTitle = document.getElementById('modal-title');
         const modalDate = document.getElementById('modal-date');
@@ -1085,6 +1106,38 @@
             };
             const buttonColor = themeColors[theme] || '#fff'; // Default to white
             modalBackBtn.style.color = buttonColor;
+            modalPrevBtn.style.color = buttonColor;
+            modalNextBtn.style.color = buttonColor;
+
+            // Handle prev/next buttons
+            if (parentEventId) {
+                // Hide for sub-events
+                modalPrevBtn.classList.add('hidden');
+                modalNextBtn.classList.add('hidden');
+            } else {
+                modalPrevBtn.classList.remove('hidden');
+                modalNextBtn.classList.remove('hidden');
+
+                if (currentEventIndex > 0) {
+                    modalPrevBtn.onclick = () => openModal(sortedEventIds[currentEventIndex - 1]);
+                    modalPrevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    modalPrevBtn.removeAttribute('disabled');
+                } else {
+                    modalPrevBtn.onclick = null;
+                    modalPrevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    modalPrevBtn.setAttribute('disabled', 'true');
+                }
+
+                if (currentEventIndex < sortedEventIds.length - 1) {
+                    modalNextBtn.onclick = () => openModal(sortedEventIds[currentEventIndex + 1]);
+                    modalNextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    modalNextBtn.removeAttribute('disabled');
+                } else {
+                    modalNextBtn.onclick = null;
+                    modalNextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    modalNextBtn.setAttribute('disabled', 'true');
+                }
+            }
 
 
             lastFocusedElement = document.activeElement;

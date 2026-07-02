@@ -23,3 +23,6 @@
 ## 2024-05-19 - Dynamic Search Announcer
 **Learning:** Screen reader users lose context during real-time filtering if there is no `aria-live` region updating them on the current number of results shown on the page. Only showing an empty state when 0 results are found leaves them guessing when there are 1 or more results.
 **Action:** Always include a visually hidden `aria-live="polite"` announcer for dynamic list filtering, updating it with the count of visible items.
+## 2026-07-02 - [Interactive Button Disabled State Accessibility]
+**Learning:** For interactive UI elements (like 'Previous' and 'Next' buttons), simply removing click event handlers and adding visual 'disabled' styles (e.g., opacity, cursor-not-allowed) is insufficient. Screen readers will still announce these elements as active buttons, causing confusion.
+**Action:** Always complement visual 'disabled' states by explicitly setting the `disabled` HTML attribute (or `aria-disabled="true"`) on the element to ensure accurate representation to assistive technologies.
