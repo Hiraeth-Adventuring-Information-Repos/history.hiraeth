@@ -13,6 +13,14 @@
     <!-- ⚡ Bolt Optimization: Removed duplicate EB Garamond font request and unused Fuse.js CDN link to reduce initial load network requests and parse time -->
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
 
+    <!-- Preload critical JSON era data files -->
+    <link rel="preload" href="modern-era.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="unification-age.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="mythic-age.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="classical-age.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="ancient-era.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="antediluvian-age.json" as="fetch" crossorigin="anonymous">
+
     <style>
         /* --- Custom Styles --- */
         html {
