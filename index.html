@@ -637,6 +637,10 @@
             </div>
 
             <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center mb-4">
+                <button id="modal-prev-btn" aria-label="Previous event" title="Previous event (Left Arrow)" class="text-3xl hover:scale-110 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2">&larr;</button>
+                <button id="modal-next-btn" aria-label="Next event" title="Next event (Right Arrow)" class="text-3xl hover:scale-110 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2">&rarr;</button>
+            </div>
             
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
@@ -927,9 +931,13 @@
                 // --- CRITICAL FIX ---
                 // Sort all events by their order_id ONCE and store the sorted IDs.
                 // This becomes the master list for navigation, immune to filtering.
-                sortedEventIds = Object.values(timelineData)
-                    .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''))
-                    .map(event => event.id);
+                // Because order_ids are namespaced per era, and eraDataMap events are sorted newest-to-oldest,
+                // we must reverse the eras and the events within them to get a true oldest-to-newest list.
+                const oldestToNewestEras = [...erasConfig].reverse();
+                sortedEventIds = oldestToNewestEras.flatMap(era => {
+                    const eventsInEra = eraDataMap[era.id] || [];
+                    return [...eventsInEra].reverse().map(event => event.id);
+                });
 
 
                 populateTagFilters();
@@ -964,8 +972,14 @@
             modalCloseBtn.addEventListener('click', closeModal);
 
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
-                    closeModal();
+                if (!modalContainer.classList.contains('hidden')) {
+                    if (e.key === 'Escape') {
+                        closeModal();
+                    } else if (e.key === 'ArrowLeft' && !modalPrevBtn.disabled && !modalPrevBtn.classList.contains('hidden')) {
+                        modalPrevBtn.click();
+                    } else if (e.key === 'ArrowRight' && !modalNextBtn.disabled && !modalNextBtn.classList.contains('hidden')) {
+                        modalNextBtn.click();
+                    }
                 }
             });
 
@@ -1015,6 +1029,8 @@
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalBackBtn = document.getElementById('modal-back-btn');
+        const modalPrevBtn = document.getElementById('modal-prev-btn');
+        const modalNextBtn = document.getElementById('modal-next-btn');
 
         const modalTitle = document.getElementById('modal-title');
         const modalDate = document.getElementById('modal-date');
@@ -1085,9 +1101,46 @@
             };
             const buttonColor = themeColors[theme] || '#fff'; // Default to white
             modalBackBtn.style.color = buttonColor;
+            modalPrevBtn.style.color = buttonColor;
+            modalNextBtn.style.color = buttonColor;
 
+            // Handle Prev/Next buttons logic
+            if (subEventId) {
+                // Hide sequential navigation on sub-events
+                modalPrevBtn.classList.add('hidden');
+                modalNextBtn.classList.add('hidden');
+            } else {
+                modalPrevBtn.classList.remove('hidden');
+                modalNextBtn.classList.remove('hidden');
 
-            lastFocusedElement = document.activeElement;
+                // Disable buttons at boundaries, enable otherwise
+                modalPrevBtn.disabled = currentEventIndex <= 0;
+                modalNextBtn.disabled = currentEventIndex >= sortedEventIds.length - 1;
+
+                // Adjust opacity/cursor based on disabled state for better UX
+                modalPrevBtn.style.opacity = modalPrevBtn.disabled ? '0.3' : '1';
+                modalPrevBtn.style.cursor = modalPrevBtn.disabled ? 'not-allowed' : 'pointer';
+
+                modalNextBtn.style.opacity = modalNextBtn.disabled ? '0.3' : '1';
+                modalNextBtn.style.cursor = modalNextBtn.disabled ? 'not-allowed' : 'pointer';
+
+                // Assign navigation handlers
+                modalPrevBtn.onclick = () => {
+                    if (currentEventIndex > 0) {
+                        openModal(sortedEventIds[currentEventIndex - 1]);
+                    }
+                };
+                modalNextBtn.onclick = () => {
+                    if (currentEventIndex < sortedEventIds.length - 1) {
+                        openModal(sortedEventIds[currentEventIndex + 1]);
+                    }
+                };
+            }
+
+            // Fix memory issue: only store lastFocusedElement on initial open
+            if (modalContainer.classList.contains('hidden')) {
+                lastFocusedElement = document.activeElement;
+            }
             modalBackdrop.classList.remove('hidden');
             modalContainer.classList.remove('hidden');
 
