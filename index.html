@@ -390,6 +390,14 @@
             border-radius: 4px;
         }
 
+
+        #modal-prev-btn:focus-visible,
+        #modal-next-btn:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 2px #8a63f5;
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+        }
         #modal-back-btn:focus-visible {
             outline: none;
             box-shadow: 0 0 0 2px #8a63f5;
@@ -637,6 +645,11 @@
             </div>
 
             <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center mb-4">
+                <button id="modal-prev-btn" aria-label="Previous event" class="text-lg hover:underline hidden">&larr; Previous</button>
+                <button id="modal-next-btn" aria-label="Next event" class="text-lg hover:underline hidden">Next &rarr;</button>
+            </div>
+
             
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
@@ -925,11 +938,17 @@
                 });
 
                 // --- CRITICAL FIX ---
-                // Sort all events by their order_id ONCE and store the sorted IDs.
+                // Sort all events chronologically (oldest to newest) and store the sorted IDs.
                 // This becomes the master list for navigation, immune to filtering.
-                sortedEventIds = Object.values(timelineData)
-                    .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''))
-                    .map(event => event.id);
+                // Eras are newest to oldest, and events in eraDataMap are newest to oldest.
+                // So we reverse the eras, and for each era we reverse the events.
+                sortedEventIds = [];
+                [...erasConfig].reverse().forEach(era => {
+                    const eraEvents = eraDataMap[era.id] || [];
+                    [...eraEvents].reverse().forEach(event => {
+                        sortedEventIds.push(event.id);
+                    });
+                });
 
 
                 populateTagFilters();
@@ -963,9 +982,30 @@
             modalBackdrop.addEventListener('click', closeModal);
             modalCloseBtn.addEventListener('click', closeModal);
 
+            const modalPrevBtn = document.getElementById('modal-prev-btn');
+            const modalNextBtn = document.getElementById('modal-next-btn');
+
+            modalPrevBtn.addEventListener('click', () => {
+                if (currentEventIndex > 0) {
+                    openModal(sortedEventIds[currentEventIndex - 1]);
+                }
+            });
+
+            modalNextBtn.addEventListener('click', () => {
+                if (currentEventIndex < sortedEventIds.length - 1 && currentEventIndex !== -1) {
+                    openModal(sortedEventIds[currentEventIndex + 1]);
+                }
+            });
+
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
-                    closeModal();
+                if (!modalContainer.classList.contains('hidden')) {
+                    if (e.key === 'Escape') {
+                        closeModal();
+                    } else if (e.key === 'ArrowLeft' && currentEventIndex > 0 && modalBackBtn.classList.contains('hidden')) {
+                        openModal(sortedEventIds[currentEventIndex - 1]);
+                    } else if (e.key === 'ArrowRight' && currentEventIndex < sortedEventIds.length - 1 && currentEventIndex !== -1 && modalBackBtn.classList.contains('hidden')) {
+                        openModal(sortedEventIds[currentEventIndex + 1]);
+                    }
                 }
             });
 
@@ -1086,8 +1126,36 @@
             const buttonColor = themeColors[theme] || '#fff'; // Default to white
             modalBackBtn.style.color = buttonColor;
 
+            // Handle Next/Prev buttons
+            const modalPrevBtn = document.getElementById('modal-prev-btn');
+            const modalNextBtn = document.getElementById('modal-next-btn');
 
-            lastFocusedElement = document.activeElement;
+            if (parentEventId) {
+                // Hide sequential navigation for sub-events
+                modalPrevBtn.classList.add('hidden');
+                modalNextBtn.classList.add('hidden');
+            } else {
+                modalPrevBtn.style.color = buttonColor;
+                modalNextBtn.style.color = buttonColor;
+
+                if (currentEventIndex > 0) {
+                    modalPrevBtn.classList.remove('hidden');
+                } else {
+                    modalPrevBtn.classList.add('hidden');
+                }
+
+                if (currentEventIndex < sortedEventIds.length - 1 && currentEventIndex !== -1) {
+                    modalNextBtn.classList.remove('hidden');
+                } else {
+                    modalNextBtn.classList.add('hidden');
+                }
+            }
+
+
+            // Store element that opened the modal ONLY on initial open
+            if (modalContainer.classList.contains('hidden')) {
+                lastFocusedElement = document.activeElement;
+            }
             modalBackdrop.classList.remove('hidden');
             modalContainer.classList.remove('hidden');
 

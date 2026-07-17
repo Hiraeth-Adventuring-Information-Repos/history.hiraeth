@@ -23,3 +23,11 @@
 ## 2024-05-19 - Dynamic Search Announcer
 **Learning:** Screen reader users lose context during real-time filtering if there is no `aria-live` region updating them on the current number of results shown on the page. Only showing an empty state when 0 results are found leaves them guessing when there are 1 or more results.
 **Action:** Always include a visually hidden `aria-live="polite"` announcer for dynamic list filtering, updating it with the count of visible items.
+
+## 2026-07-17 - [Sequential Navigation in Detail Views]
+**Learning:** For collection-based UIs with detail views (like timeline modals), omitting sequential navigation (Next/Previous buttons) forces users to repeatedly close the modal, locate their next target, and reopen it, causing severe interaction fatigue. Furthermore, programmatic lists must be rigorously sorted (e.g., truly oldest-to-newest across chunks) independent of visual rendering (newest-to-oldest containers) to maintain an expected reading flow.
+**Action:** Always surface sequential navigation (Next/Previous buttons) alongside keyboard shortcuts (`ArrowRight`/`ArrowLeft`) for modal detail views when browsing collections, ensuring the underlying data array perfectly matches the user's expected chronological or sequential reading order.
+
+## 2026-07-17 - [Accessible Modal Focus Management]
+**Learning:** When managing focus inside a dynamic modal (especially one tracking `lastFocusedElement` to restore upon close), capturing the focused element on *every* interaction inside the modal (e.g., clicking sub-events) inadvertently overwrites the true external trigger element. This traps keyboard focus inside the modal upon closure, severely degrading accessibility.
+**Action:** When implementing focus traps for modal dialogs, ensure `lastFocusedElement` is strictly captured only on the initial modal opening by checking if the modal container is currently hidden or inactive, preserving the original return-focus target.
