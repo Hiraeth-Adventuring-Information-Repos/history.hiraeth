@@ -637,6 +637,10 @@
             </div>
 
             <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center mb-6">
+                <button id="modal-prev-btn" aria-label="Previous event" class="text-sm font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 py-1">&larr; Previous</button>
+                <button id="modal-next-btn" aria-label="Next event" class="text-sm font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded px-2 py-1">Next &rarr;</button>
+            </div>
             
             <p id="modal-date" class="text-lg mb-6">Event Date</p>
             <p id="modal-description" class="text-lg leading-relaxed">Full event description goes here.</p>
@@ -927,9 +931,13 @@
                 // --- CRITICAL FIX ---
                 // Sort all events by their order_id ONCE and store the sorted IDs.
                 // This becomes the master list for navigation, immune to filtering.
-                sortedEventIds = Object.values(timelineData)
-                    .sort((a, b) => (a.order_id || '').localeCompare(b.order_id || ''))
-                    .map(event => event.id);
+                sortedEventIds = [];
+                [...erasConfig].reverse().forEach(era => {
+                    const eraData = eraDataMap[era.id] || [];
+                    [...eraData].reverse().forEach(event => {
+                        sortedEventIds.push(event.id);
+                    });
+                });
 
 
                 populateTagFilters();
@@ -966,6 +974,10 @@
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
                     closeModal();
+                } else if (e.key === 'ArrowLeft' && !modalContainer.classList.contains('hidden') && !modalPrevBtn.disabled && !modalPrevBtn.classList.contains('hidden')) {
+                    modalPrevBtn.click();
+                } else if (e.key === 'ArrowRight' && !modalContainer.classList.contains('hidden') && !modalNextBtn.disabled && !modalNextBtn.classList.contains('hidden')) {
+                    modalNextBtn.click();
                 }
             });
 
@@ -1015,6 +1027,8 @@
         const modalContent = document.getElementById('modal-content');
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const modalBackBtn = document.getElementById('modal-back-btn');
+        const modalPrevBtn = document.getElementById('modal-prev-btn');
+        const modalNextBtn = document.getElementById('modal-next-btn');
 
         const modalTitle = document.getElementById('modal-title');
         const modalDate = document.getElementById('modal-date');
@@ -1085,9 +1099,39 @@
             };
             const buttonColor = themeColors[theme] || '#fff'; // Default to white
             modalBackBtn.style.color = buttonColor;
+            modalPrevBtn.style.color = buttonColor;
+            modalNextBtn.style.color = buttonColor;
+
+            // --- Sub-event/Navigation Check ---
+            // Hide next/prev buttons for sub-events
+            if (parentEventId) {
+                modalPrevBtn.classList.add('hidden');
+                modalNextBtn.classList.add('hidden');
+            } else {
+                modalPrevBtn.classList.remove('hidden');
+                modalNextBtn.classList.remove('hidden');
+
+                if (currentEventIndex <= 0) {
+                    modalPrevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    modalPrevBtn.disabled = true;
+                } else {
+                    modalPrevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    modalPrevBtn.disabled = false;
+                }
+
+                if (currentEventIndex >= sortedEventIds.length - 1) {
+                    modalNextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    modalNextBtn.disabled = true;
+                } else {
+                    modalNextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    modalNextBtn.disabled = false;
+                }
+            }
 
 
-            lastFocusedElement = document.activeElement;
+            if (modalContainer.classList.contains('hidden')) {
+                lastFocusedElement = document.activeElement;
+            }
             modalBackdrop.classList.remove('hidden');
             modalContainer.classList.remove('hidden');
 
@@ -1106,6 +1150,18 @@
                 modalCloseBtn.focus();
             }, 10);
         }
+
+        modalPrevBtn.addEventListener('click', () => {
+            if (currentEventIndex > 0) {
+                openModal(sortedEventIds[currentEventIndex - 1]);
+            }
+        });
+
+        modalNextBtn.addEventListener('click', () => {
+            if (currentEventIndex < sortedEventIds.length - 1) {
+                openModal(sortedEventIds[currentEventIndex + 1]);
+            }
+        });
 
         function closeModal() {
             modalBackdrop.classList.remove('opacity-100');
